@@ -1,4 +1,4 @@
-package org.example.ceciestuntest;
+package eni.projet.vae.application;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;

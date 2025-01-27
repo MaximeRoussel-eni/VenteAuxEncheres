@@ -1,13 +1,13 @@
-package org.example.ceciestuntest;
+package eni.projet.vae.application;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class CeciEstUnTestApplication {
+public class VenteMain {
 
     public static void main(String[] args) {
-        SpringApplication.run(CeciEstUnTestApplication.class, args);
+        SpringApplication.run(VenteMain.class, args);
     }
 
 }
