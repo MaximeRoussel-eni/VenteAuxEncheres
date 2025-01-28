@@ -1,7 +1,7 @@
-package service;
+package application.service;
 
-import bo.Utilisateur;
-import dal.UtilisateurDao;
+import application.bo.Utilisateur;
+import application.dal.UtilisateurDao;
 import org.springframework.context.annotation.Primary;
 import org.springframework.stereotype.Service;
 
