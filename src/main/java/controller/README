@@ -1,0 +1,12 @@
+2 controllers :
+
+utilisateurController
+/encheres/profilUtilisateur  ---> profile-detail.html
+/encheres/connexion  ---> login.html
+/encheres/inscription  ---> register.html
+
+
+articleVenduController
+/encheres  ---> auctions.html
+/encheres/creer  ---> auction-create.html
+/encheres/detail  ---> auction-detail.html
