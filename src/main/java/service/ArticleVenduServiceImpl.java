@@ -9,21 +9,24 @@ public class ArticleVenduServiceImpl implements ArticleVenduService {
 
     private ArticleVenduDao articleVenduDao;
 
-    public ArticleVenduServiceImpl( ArticleVenduDao articleVendudao){ this.articleVenduDao = articleVendudao; }
+    public ArticleVenduServiceImpl( ArticleVenduDao articleVendudao){
+        this.articleVenduDao = articleVendudao;
+    }
 
     @Override
-    public void addArticleVendu(ArticleVendu articleVendu) { articleVenduDao.create(articleVendu);
+    public void addArticleVendu(ArticleVendu articleVendu) {
+        articleVenduDao.create(articleVendu);
 
     }
 
     @Override
-    public void removeArticleVendu(int noArticle) { articleVenduDao.delete(noArticle);
-
+    public void removeArticleVendu(int noArticle) {
+        articleVenduDao.delete(noArticle);
     }
 
     @Override
     public List<ArticleVendu> getAllArticleVendu() {
-        return articleVenduDao.read();
+        return articleVenduDao.readAll();
     }
 
     @Override

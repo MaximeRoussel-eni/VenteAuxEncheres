@@ -12,16 +12,18 @@ public class UtilisateurServiceImpl implements UtilisateurService {
 
     private UtilisateurDao utilisateurDAo ;
 
-    public UtilisateurServiceImpl(UtilisateurDao daoUtilisateur) { this.utilisateurDAo = utilisateurDAo; }
-
-    @Override
-    public void addUtilisateur(Utilisateur utilisateur) { utilisateurDAo.create(utilisateur);
-
+    public UtilisateurServiceImpl(UtilisateurDao daoUtilisateur) {
+        this.utilisateurDAo = utilisateurDAo;
     }
 
     @Override
-    public void deleteUtilisateur( int noUtilisateur) { utilisateurDAo.delete();
+    public void addUtilisateur(Utilisateur utilisateur) {
+        utilisateurDAo.create(utilisateur);
+    }
 
+    @Override
+    public void deleteUtilisateur(int noUtilisateur) {
+        utilisateurDAo.delete(noUtilisateur);
     }
 
     @Override

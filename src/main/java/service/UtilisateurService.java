@@ -6,7 +6,6 @@ public interface UtilisateurService {
 
     void addUtilisateur(Utilisateur utilisateur);
 
-
     Utilisateur getUtilisateur(int noUtilisateur);
 
     void updateUtilisateur(Utilisateur utilisateur);
