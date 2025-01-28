@@ -25,7 +25,7 @@ public class ArticleVendu {
 
     public ArticleVendu() {}
 
-    public ArticleVendu(String nomArticle, String description, LocalDate dateDebutEncheres, LocalDate cheres, LocalDate dateFinEncheres, int miseAPrix, int prixVente, EtatVente etatVente, Categorie categorie, Retrait newRetrait, Utilisateur utilisateurVendeur, Utilisateur utilisateurAcheteur, List<Enchere> encheres) {
+    public ArticleVendu(String nomArticle, String description, LocalDate dateDebutEncheres, LocalDate dateFinEncheres, int miseAPrix, int prixVente, EtatVente etatVente, Categorie categorie, Retrait newRetrait, Utilisateur utilisateurVendeur, Utilisateur utilisateurAcheteur, List<Enchere> encheres) {
         this.nomArticle = nomArticle;
         this.description = description;
         this.dateDebutEncheres = dateDebutEncheres;
