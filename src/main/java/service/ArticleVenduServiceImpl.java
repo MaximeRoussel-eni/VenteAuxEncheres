@@ -1,14 +1,18 @@
 package service;
 
 import bo.ArticleVendu;
+import org.springframework.context.annotation.Primary;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 
+
+@Service
 public class ArticleVenduServiceImpl implements ArticleVenduService {
 
     private ArticleVenduDao articleVenduDao;
 
-    public ArticleVenduServiceImpl(ArticleVenduDao articleVenduDao){ this.ArticleVendudao = articleVenduDao; }
+    public ArticleVenduServiceImpl(ArticleVenduDao articleVenduDao){ this.ArticleVenduDao = articleVenduDao; }
 
     @Override
     public void addArticleVendu(ArticleVendu articleVendu) { articleVenduDao.create(articleVendu);
