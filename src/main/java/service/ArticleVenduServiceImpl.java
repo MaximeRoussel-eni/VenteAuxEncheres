@@ -6,9 +6,9 @@ import java.util.List;
 
 public class ArticleVenduServiceImpl implements ArticleVenduService {
 
-    private ArticleVenduDao articleVenduDaorticleVendu;
+    private ArticleVenduDao articleVenduDao;
 
-    public ArticleVenduServiceImpl(DaoArticleVendu articleVendudao){ this.ArticleVendudao = articleVendudao; }
+    public ArticleVenduServiceImpl(ArticleVenduDao articleVenduDao){ this.ArticleVendudao = articleVenduDao; }
 
     @Override
     public void addArticleVendu(ArticleVendu articleVendu) { articleVenduDao.create(articleVendu);
@@ -22,17 +22,17 @@ public class ArticleVenduServiceImpl implements ArticleVenduService {
 
     @Override
     public List<ArticleVendu> getAllArticleVendu() {
-        return articleVendudao.read();
+        return articleVenduDao.read();
     }
 
     @Override
     public ArticleVendu getArticleVendu(int noArticle) {
-        return articleVendudao.read(noArticle);
+        return articleVenduDao.read(noArticle);
     }
 
     @Override
     public void updateArticleVendu(ArticleVendu articleVendu) {
-        articleVendudao.update(articleVendu);
+        articleVenduDao.update(articleVendu);
 
     }
 }
