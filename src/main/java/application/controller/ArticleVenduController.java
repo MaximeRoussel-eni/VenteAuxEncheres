@@ -1,10 +1,10 @@
-package controller;
+package application.controller;
 
-import bo.ArticleVendu;
+import application.bo.ArticleVendu;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-import service.ArticleVenduService;
+import application.service.ArticleVenduService;
 
 import java.util.List;
 
@@ -15,9 +15,7 @@ public class ArticleVenduController {
 
     private ArticleVenduService articleVenduService;
 
-    public ArticleVenduController(ArticleVenduService articleVenduService) {
-        this.articleVenduService = articleVenduService;
-    }
+    public ArticleVenduController(ArticleVenduService articleVenduService) {this.articleVenduService = articleVenduService;}
 
     @GetMapping("/")
     public String afficherEncheres(Model model){

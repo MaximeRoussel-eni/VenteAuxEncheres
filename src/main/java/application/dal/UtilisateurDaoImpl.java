@@ -1,6 +1,6 @@
-package dal;
+package application.dal;
 
-import bo.Utilisateur;
+import application.bo.Utilisateur;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;

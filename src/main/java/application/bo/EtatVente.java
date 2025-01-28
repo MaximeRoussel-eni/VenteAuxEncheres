@@ -1,4 +1,4 @@
-package bo;
+package application.bo;
 
 public enum EtatVente {
     NON_COMMENCE,EN_COURS,TERMINE

@@ -1,6 +1,7 @@
-package service;
+package application.service;
 
-import bo.Utilisateur;
+import application.bo.Utilisateur;
+import application.dal.UtilisateurDao;
 import org.springframework.context.annotation.Primary;
 import org.springframework.stereotype.Service;
 
@@ -19,7 +20,7 @@ public class UtilisateurServiceImpl implements UtilisateurService {
     }
 
     @Override
-    public void deleteUtilisateur( int noUtilisateur) { utilisateurDao.delete();
+    public void deleteUtilisateur( int noUtilisateur) { utilisateurDao.delete(noUtilisateur);
 
     }
 

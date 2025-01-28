@@ -1,8 +1,6 @@
-package dal;
+package application.dal;
 
-import bo.ArticleVendu;
-import bo.Categorie;
-import bo.Utilisateur;
+import application.bo.ArticleVendu;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;

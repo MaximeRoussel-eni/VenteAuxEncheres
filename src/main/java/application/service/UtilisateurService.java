@@ -1,6 +1,6 @@
-package service;
+package application.service;
 
-import bo.Utilisateur;
+import application.bo.Utilisateur;
 
 public interface UtilisateurService {
 
