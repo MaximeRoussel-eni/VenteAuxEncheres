@@ -8,7 +8,7 @@ public class ArticleVendu {
     private int noArticle;
     private String nomArticle;
     private String description;
-    private LocalDate dateDebutE,cheres;
+    private LocalDate dateDebutEncheres;
     private LocalDate dateFinEncheres;
     private int miseAPrix;
     private int prixVente;
@@ -25,11 +25,10 @@ public class ArticleVendu {
 
     public ArticleVendu() {}
 
-    public ArticleVendu(String nomArticle, String description, LocalDate dateDebutE, LocalDate cheres, LocalDate dateFinEncheres, int miseAPrix, int prixVente, EtatVente etatVente, Categorie categorie, Retrait newRetrait, Utilisateur utilisateurVendeur, Utilisateur utilisateurAcheteur, List<Enchere> encheres) {
+    public ArticleVendu(String nomArticle, String description, LocalDate dateDebutEncheres, LocalDate cheres, LocalDate dateFinEncheres, int miseAPrix, int prixVente, EtatVente etatVente, Categorie categorie, Retrait newRetrait, Utilisateur utilisateurVendeur, Utilisateur utilisateurAcheteur, List<Enchere> encheres) {
         this.nomArticle = nomArticle;
         this.description = description;
-        this.dateDebutE = dateDebutE;
-        this.cheres = cheres;
+        this.dateDebutEncheres = dateDebutEncheres;
         this.dateFinEncheres = dateFinEncheres;
         this.miseAPrix = miseAPrix;
         this.prixVente = prixVente;
@@ -70,21 +69,14 @@ public class ArticleVendu {
         this.description = description;
     }
 
-    public LocalDate getDateDebutE() {
-        return dateDebutE;
+    public LocalDate getDateDebutEncheres() {
+        return dateDebutEncheres;
     }
 
-    public void setDateDebutE(LocalDate dateDebutE) {
-        this.dateDebutE = dateDebutE;
+    public void setDateDebutEncheres(LocalDate dateDebutEncheres) {
+        this.dateDebutEncheres = dateDebutEncheres;
     }
 
-    public LocalDate getCheres() {
-        return cheres;
-    }
-
-    public void setCheres(LocalDate cheres) {
-        this.cheres = cheres;
-    }
 
     public LocalDate getDateFinEncheres() {
         return dateFinEncheres;
@@ -166,8 +158,7 @@ public class ArticleVendu {
                 "noArticle=" + noArticle +
                 ", nomArticle='" + nomArticle + '\'' +
                 ", description='" + description + '\'' +
-                ", dateDebutE=" + dateDebutE +
-                ", cheres=" + cheres +
+                ", dateDebutEncheres=" + dateDebutEncheres +
                 ", dateFinEncheres=" + dateFinEncheres +
                 ", miseAPrix=" + miseAPrix +
                 ", prixVente=" + prixVente +
