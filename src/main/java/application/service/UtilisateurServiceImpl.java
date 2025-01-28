@@ -7,7 +7,6 @@ import org.springframework.stereotype.Service;
 
 
 @Service
-@Primary
 public class UtilisateurServiceImpl implements UtilisateurService {
 
     private UtilisateurDao utilisateurDao ;
