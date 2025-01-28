@@ -25,11 +25,11 @@ public class UtilisateurServiceImpl implements UtilisateurService {
 
     @Override
     public Utilisateur getUtilisateur(int noUtilisateur) {
-        return null;
+        return daoUtilisateur.read(noUtilisateur);
     }
 
     @Override
     public void updateUtilisateur(Utilisateur utilisateur) {
-
+        daoUtilisateur.update(utilisateur);
     }
 }
