@@ -9,11 +9,11 @@
     <link rel="stylesheet" href="../static/style.css">
 
 </head>
+
+
 <body>
-<header>
-    <h4>Eni-Enchères</h4>
-    <a href=login.html>S'inscrire - Se connecter</a>
-</header>
+<div data-th-replace="~{Fragments.html :: header}"></div>
+
 
 <main>
     <section><h1>Liste des enchères</h1></section>
@@ -24,20 +24,23 @@
             <input class="barrerecherche" type="search" value="Le nom de l'article Contient">
             <div class="catégorie">
                 <p>Catégories</p>
-            <select class="selectionbouton">
-                <option>Toutes</option>
-               <option>Informatiques</option>
-                <option>Ameublement</option>
-                <option>Vetements</option>
-                <option>Sport et Loisir</option>
-            </select>
+                <select class="selectionbouton">
+                    <option>Toutes</option>
+                    <option>Informatiques</option>
+                    <option>Ameublement</option>
+                    <option>Vetements</option>
+                    <option>Sport et Loisir</option>
+                </select>
             </div>
         </section>
-        <section class="RechercherFiltre"><button class="rechercherFiltreBouton"><a href="login.html">Rechercher</a></button></section>
+        <section class="RechercherFiltre">
+            <button class="rechercherFiltreBouton"><a href="login.html">Rechercher</a></button>
+        </section>
     </div>
     <div class="Articles">
-        <section class="dansArticles">Article 1</section>
-        <section class="dansArticles">Article 2</section>
+        <section class="dansArticles"></section>
+        <section class="dansArticles"
+                 data-th-text="${Enchere.Enchere}"></section>
     </div>
 </main>
 
