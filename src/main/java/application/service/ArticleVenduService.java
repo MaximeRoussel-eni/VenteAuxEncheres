@@ -1,7 +1,6 @@
-package service;
+package application.service;
 
-import bo.ArticleVendu;
-import bo.Utilisateur;
+import application.bo.ArticleVendu;
 
 import java.util.List;
 

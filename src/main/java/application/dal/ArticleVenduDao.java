@@ -1,7 +1,6 @@
-package dal;
+package application.dal;
 
-import bo.ArticleVendu;
-import bo.Utilisateur;
+import application.bo.ArticleVendu;
 
 import java.util.List;
 

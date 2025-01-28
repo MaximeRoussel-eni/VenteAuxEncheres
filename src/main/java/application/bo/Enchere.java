@@ -1,7 +1,6 @@
-package bo;
+package application.bo;
 
 import java.time.LocalDate;
-import java.util.Locale;
 
 public class Enchere {
     private LocalDate dateEnchère;
