@@ -1,10 +1,50 @@
-<!DOCTYPE html>
-<html lang="en">
+<!doctype html>
+<html lang="fr" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Accueil</title>
+    <link rel="stylesheet" href="../static/style.css">
+
 </head>
+
+
 <body>
+<div data-th-replace="~{Fragments.html :: header}"></div>
+
+
+<main>
+    <section><h1>Liste des enchères</h1></section>
+    <div class="Filtres">
+        <section class="Filtres1">
+            <div>Filtres:</div>
+
+            <input class="barrerecherche" type="search" value="Le nom de l'article Contient">
+            <div class="catégorie">
+                <p>Catégories</p>
+                <select class="selectionbouton">
+                    <option>Toutes</option>
+                    <option>Informatiques</option>
+                    <option>Ameublement</option>
+                    <option>Vetements</option>
+                    <option>Sport et Loisir</option>
+                </select>
+            </div>
+        </section>
+        <section class="RechercherFiltre">
+            <button class="rechercherFiltreBouton"><a href="login.html">Rechercher</a></button>
+        </section>
+    </div>
+    <div class="Articles">
+        <section class="dansArticles"></section>
+        <section class="dansArticles"
+                 data-th-text="${Enchere.Enchere}"></section>
+    </div>
+</main>
+
+<footer></footer>
 
 </body>
 </html>

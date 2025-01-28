@@ -1,0 +1,30 @@
+header{
+    display: flex;flex-direction: row;justify-content: space-around;
+}
+h1{
+    display: flex;justify-content: center;
+}
+.Articles{
+    display: flex;flex-direction: row;justify-content: space-evenly;border: solid;
+}
+.dansArticles{
+    height: 15vh;width: 20vw;border:solid;
+}
+.Filtres{display: flex;flex-direction: row;justify-content: space-evenly;margin-bottom: 70px}
+.Filtres1{height: 15vh;width: 25vw;display: flex;flex-direction: column;justify-content: space-evenly}
+.RechercherFiltre{height: 15vh;width: 20vw}
+.catégorie{
+    display: flex;flex-direction: row; gap: 5px;
+}
+select{width: 15vw}
+
+.rechercherFiltreBouton{
+    width: 25vw;
+    height: 10vh;
+}
+.barrerecherche{
+    width: 20vw;height: 3vh;border-radius: 6px;border: solid;border-width: 2px;
+}
+.selectionbouton{
+    width: 17vw;height: 3vh;
+}
