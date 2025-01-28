@@ -1,4 +1,4 @@
-package bo;
+package application.bo;
 
 public class Retrait {
     private String rue;

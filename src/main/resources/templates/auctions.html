@@ -6,13 +6,16 @@
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Accueil</title>
-    <link rel="stylesheet" href="../static/style.css">
+    <link rel="stylesheet" data-th-href="@{css/style.css}">
+    <link rel="shortcut icon" type="image/x-icon" data-th-href="@{img/logo.webp}" />
 
 </head>
 
 
 <body>
-<div data-th-replace="~{Fragments.html :: header}"></div>
+<header>
+    <button><a href="/encheres/connexion"> <img th:src="@{img/logo.webp}" alt="logo enchères" height="150" width="150"/></a></button>
+</header>
 
 
 <main>
@@ -34,13 +37,13 @@
             </div>
         </section>
         <section class="RechercherFiltre">
-            <button class="rechercherFiltreBouton"><a href="login.html">Rechercher</a></button>
+            <button class="rechercherFiltreBouton"></button>
+            <a href="login.html">Rechercher</a>
         </section>
     </div>
     <div class="Articles">
         <section class="dansArticles"></section>
-        <section class="dansArticles"
-                 data-th-text="${Enchere.Enchere}"></section>
+        <section class="dansArticles"></section>
     </div>
 </main>
 

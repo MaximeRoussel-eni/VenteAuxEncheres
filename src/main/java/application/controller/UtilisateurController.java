@@ -1,10 +1,10 @@
-package controller;
+package application.controller;
 
-import bo.Utilisateur;
+import application.bo.Utilisateur;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-import service.UtilisateurService;
+import application.service.UtilisateurService;
 
 @Controller
 @RequestMapping("/encheres")
@@ -13,9 +13,7 @@ public class UtilisateurController {
 
     private UtilisateurService utilisateurService;
 
-    public UtilisateurController(UtilisateurService utilisateurService) {
-        this.utilisateurService = utilisateurService;
-    }
+    public UtilisateurController(UtilisateurService utilisateurService) {this.utilisateurService = utilisateurService;}
 
     @GetMapping("/profilUtilisateur")
     public String afficherProfilUtilisateur(Model model, @RequestParam(name = "noUtilisateur") int noUtilisateur) {

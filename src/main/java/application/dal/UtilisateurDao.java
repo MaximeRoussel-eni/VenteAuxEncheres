@@ -1,6 +1,6 @@
-package dal;
+package application.dal;
 
-import bo.Utilisateur;
+import application.bo.Utilisateur;
 
 import java.util.List;
 

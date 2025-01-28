@@ -1,10 +1,12 @@
-package service;
+package application.service;
 
-import bo.ArticleVendu;
-import dal.ArticleVenduDao;
+import application.bo.ArticleVendu;
+import application.dal.ArticleVenduDao;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 
+@Service
 public class ArticleVenduServiceImpl implements ArticleVenduService {
 
     private ArticleVenduDao articleVenduDao;
@@ -17,8 +19,8 @@ public class ArticleVenduServiceImpl implements ArticleVenduService {
     }
 
     @Override
-    public void removeArticleVendu(int noArticle) { articleVenduDao.delete(noArticle);
-
+    public void removeArticleVendu(int noArticle) {
+        articleVenduDao.delete(noArticle);
     }
 
     @Override
