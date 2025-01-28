@@ -1,7 +1,6 @@
 package service;
 
 import bo.ArticleVendu;
-import dal.ArticleVenduDao;
 
 import java.util.List;
 
@@ -9,24 +8,21 @@ public class ArticleVenduServiceImpl implements ArticleVenduService {
 
     private ArticleVenduDao articleVenduDao;
 
-    public ArticleVenduServiceImpl( ArticleVenduDao articleVendudao){
-        this.articleVenduDao = articleVendudao;
+    public ArticleVenduServiceImpl(ArticleVenduDao articleVenduDao){ this.ArticleVendudao = articleVenduDao; }
+
+    @Override
+    public void addArticleVendu(ArticleVendu articleVendu) { articleVenduDao.create(articleVendu);
+
     }
 
     @Override
-    public void addArticleVendu(ArticleVendu articleVendu) {
-        articleVenduDao.create(articleVendu);
+    public void removeArticleVendu(int noArticle) { articleVenduDao.delete(noArticle);
 
-    }
-
-    @Override
-    public void removeArticleVendu(int noArticle) {
-        articleVenduDao.delete(noArticle);
     }
 
     @Override
     public List<ArticleVendu> getAllArticleVendu() {
-        return articleVenduDao.readAll();
+        return articleVenduDao.read();
     }
 
     @Override

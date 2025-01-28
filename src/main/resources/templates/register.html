@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Formulaire d'Inscription</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="static/css/styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <script src="./static/css/js/script.js"></script>
+</head>
+<body>
+<button class="theme-toggle">
+    <i class="fas fa-moon"></i> <!-- Icône de lune pour le thème sombre -->
+</button>
+<div class="container mt-5">
+    <h2>Formulaire d'Inscription</h2>
+    <form th:action="@{/inscription}" method="post" th:object="${utilisateur}">
+        <!-- Pseudo -->
+        <div class="form-group">
+            <label for="pseudo">Pseudo :</label>
+            <input type="text" class="form-control" id="pseudo" th:field="*{pseudo}" required>
+        </div>
+
+        <!-- Nom -->
+        <div class="form-group">
+            <label for="nom">Nom :</label>
+            <input type="text" class="form-control" id="nom" th:field="*{nom}" required>
+        </div>
+
+        <!-- Prénom -->
+        <div class="form-group">
+            <label for="prenom">Prénom :</label>
+            <input type="text" class="form-control" id="prenom" th:field="*{prenom}" required>
+        </div>
+
+        <!-- Email -->
+        <div class="form-group">
+            <label for="email">Email :</label>
+            <input type="email" class="form-control" id="email" th:field="*{email}" required>
+        </div>
+
+        <!-- Téléphone -->
+        <div class="form-group">
+            <label for="telephone">Téléphone :</label>
+            <input type="tel" class="form-control" id="telephone" th:field="*{telephone}" required>
+        </div>
+
+        <!-- Rue -->
+        <div class="form-group">
+            <label for="rue">Rue :</label>
+            <input type="text" class="form-control" id="rue" th:field="*{rue}" required>
+        </div>
+
+        <!-- Code Postal -->
+        <div class="form-group">
+            <label for="codePostal">Code Postal :</label>
+            <input type="text" class="form-control" id="codePostal" th:field="*{codePostal}" required>
+        </div>
+
+        <!-- Ville -->
+        <div class="form-group">
+            <label for="ville">Ville :</label>
+            <input type="text" class="form-control" id="ville" th:field="*{ville}" required>
+        </div>
+
+        <!-- Mot de passe -->
+        <div class="form-group">
+            <label for="motDePasse">Mot de passe :</label>
+            <input type="password" class="form-control" id="motDePasse" th:field="*{motDePasse}" required>
+        </div>
+
+        <!-- Bouton de soumission -->
+        <button type="submit" class="btn btn-primary">S'inscrire</button>
+    </form>
+</div>
+</body>
+</html>

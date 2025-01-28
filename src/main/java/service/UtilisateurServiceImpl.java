@@ -1,7 +1,6 @@
 package service;
 
 import bo.Utilisateur;
-import dal.UtilisateurDao;
 import org.springframework.context.annotation.Primary;
 import org.springframework.stereotype.Service;
 
@@ -10,29 +9,27 @@ import org.springframework.stereotype.Service;
 @Primary
 public class UtilisateurServiceImpl implements UtilisateurService {
 
-    private UtilisateurDao utilisateurDAo ;
+    private UtilisateurDao utilisateurDao ;
 
-    public UtilisateurServiceImpl(UtilisateurDao daoUtilisateur) {
-        this.utilisateurDAo = utilisateurDAo;
+    public UtilisateurServiceImpl(UtilisateurDao utilisateurDAo) { this.utilisateurDao = utilisateurDao; }
+
+    @Override
+    public void addUtilisateur(Utilisateur utilisateur) { utilisateurDao.create(utilisateur);
+
     }
 
     @Override
-    public void addUtilisateur(Utilisateur utilisateur) {
-        utilisateurDAo.create(utilisateur);
-    }
+    public void deleteUtilisateur( int noUtilisateur) { utilisateurDao.delete();
 
-    @Override
-    public void deleteUtilisateur(int noUtilisateur) {
-        utilisateurDAo.delete(noUtilisateur);
     }
 
     @Override
     public Utilisateur getUtilisateur(int noUtilisateur) {
-        return utilisateurDAo.read(noUtilisateur);
+        return utilisateurDao.read(noUtilisateur);
     }
 
     @Override
     public void updateUtilisateur(Utilisateur utilisateur) {
-        utilisateurDAo.update(utilisateur);
+        utilisateurDao.update(utilisateur);
     }
 }
