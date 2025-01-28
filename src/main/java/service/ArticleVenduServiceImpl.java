@@ -6,33 +6,33 @@ import java.util.List;
 
 public class ArticleVenduServiceImpl implements ArticleVenduService {
 
-    private DaoArticleVendu daoArticleVendu;
+    private ArticleVenduDao articleVenduDaorticleVendu;
 
-    public ArticleVenduServiceImpl(DaoArticleVendu articleVendu){ this.daoArticleVendu = articleVendu; }
+    public ArticleVenduServiceImpl(DaoArticleVendu articleVendudao){ this.ArticleVendudao = articleVendudao; }
 
     @Override
-    public void addArticleVendu(ArticleVendu articleVendu) { daoArticleVendu.create(articleVendu);
+    public void addArticleVendu(ArticleVendu articleVendu) { articleVenduDao.create(articleVendu);
 
     }
 
     @Override
-    public void removeArticleVendu(int noArticle) { daoArticleVendu.delete(noArticle);
+    public void removeArticleVendu(int noArticle) { articleVenduDao.delete(noArticle);
 
     }
 
     @Override
     public List<ArticleVendu> getAllArticleVendu() {
-        return daoArticleVendu.read();
+        return articleVendudao.read();
     }
 
     @Override
     public ArticleVendu getArticleVendu(int noArticle) {
-        return daoArticleVendu.read(noArticle);
+        return articleVendudao.read(noArticle);
     }
 
     @Override
     public void updateArticleVendu(ArticleVendu articleVendu) {
-        daoArticleVendu.update(articleVendu);
+        articleVendudao.update(articleVendu);
 
     }
 }
