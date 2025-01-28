@@ -1,10 +1,47 @@
-<!DOCTYPE html>
-<html lang="en">
+<!doctype html>
+<html lang="fr" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Accueil</title>
+    <link rel="stylesheet" href="../static/style.css">
+
 </head>
 <body>
+<header>
+    <h4>Eni-Enchères</h4>
+    <a href=login.html>S'inscrire - Se connecter</a>
+</header>
+
+<main>
+    <section><h1>Liste des enchères</h1></section>
+    <div class="Filtres">
+        <section class="Filtres1">
+            <div>Filtres</div>
+
+            <input type="search">
+            <div class="catégorie">
+                <p>Catégories</p>
+            <select>
+                <option>Toutes</option>
+               <option>Informatiques</option>
+                <option>Ameublement</option>
+                <option>Vetements</option>
+                <option>Sport et Loisir</option>
+            </select>
+            </div>
+        </section>
+        <section class="RechercherFiltre"><button><a href="login.html">Rechercher</a></button></section>
+    </div>
+    <div class="Articles">
+        <section class="dansArticles">Article 1</section>
+        <section class="dansArticles">Article 2</section>
+    </div>
+</main>
+
+<footer></footer>
 
 </body>
 </html>

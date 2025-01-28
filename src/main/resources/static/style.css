@@ -1,0 +1,19 @@
+header{
+    display: flex;flex-direction: row;justify-content: space-around;
+}
+h1{
+    display: flex;justify-content: center;
+}
+.Articles{
+    display: flex;flex-direction: row;justify-content: space-evenly;border: solid;
+}
+.dansArticles{
+    height: 15vh;width: 20vw;border:solid;
+}
+.Filtres{display: flex;flex-direction: row;justify-content: space-evenly;margin-bottom: 70px}
+.Filtres1{height: 15vh;width: 20vw;border:solid;display: flex;flex-direction: column;justify-content: space-evenly}
+.RechercherFiltre{height: 15vh;width: 20vw;border: solid}
+.catégorie{
+    display: flex;flex-direction: row; gap: 2px;
+}
+select{width: 15vw}
