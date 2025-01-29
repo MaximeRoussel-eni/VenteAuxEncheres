@@ -25,8 +25,8 @@ public class ArticleVenduDaoImpl implements ArticleVenduDao {
     private final String UPDATE_ARTICLE = "UPDATE ARTICLES_VENDUS SET nom_article = :nom_article, description =:description, " +
             "date_debut_encheres=:date_debut_encheres, date_fin_encheres=:date_fin_encheres, prix_initial=:prix_initial, no_categorie=:no_categorie WHERE no_article = :no_article";
     private final String DELETE_ARTICLE = "DELETE FROM ARTICLES_VENDUS WHERE no_article = :no_article";
-    private final String READ_ARTICLE_BY_NOARTICLE = "SELECT * FROM ARTICLES WHERE no_article = :no_article";
-    private final String READ_ALL_ARTICLES ="SELECT * FROM ARTICLES";
+    private final String READ_ARTICLE_BY_NOARTICLE = "SELECT * FROM ARTICLES_VENDUS WHERE no_article = :no_article";
+    private final String READ_ALL_ARTICLES ="SELECT * FROM ARTICLES_VENDUS";
 
     private final String INSERT_ENCHERE = "INSERT INTO ENCHERES (no_utilisateur, no_article, date_enchere, montant_enchere)" +
             "VALUES (:no_utilisateur, :no_article, :date_enchere, :montant_enchere)";
