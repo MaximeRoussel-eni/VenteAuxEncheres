@@ -15,7 +15,7 @@ public class Utilisateur {
     private String ville;
     private String motDePasse;
     private int credit;
-    private boolean admin;
+    private boolean admin=false;
     private List<ArticleVendu> ventes = new ArrayList<ArticleVendu>();
     private List<ArticleVendu> achats = new ArrayList<ArticleVendu>();
     private List<Enchere> encheres = new ArrayList<Enchere>();

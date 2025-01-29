@@ -11,7 +11,7 @@ public class UtilisateurServiceImpl implements UtilisateurService {
 
     private UtilisateurDao utilisateurDao ;
 
-    public UtilisateurServiceImpl(UtilisateurDao utilisateurDAo) {
+    public UtilisateurServiceImpl(UtilisateurDao utilisateurDao) {
         this.utilisateurDao = utilisateurDao;
     }
 
