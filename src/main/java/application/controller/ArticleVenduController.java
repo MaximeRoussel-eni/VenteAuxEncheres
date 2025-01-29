@@ -1,6 +1,7 @@
 package application.controller;
 
 import application.bo.ArticleVendu;
+import application.bo.Categorie;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
