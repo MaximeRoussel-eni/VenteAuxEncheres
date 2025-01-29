@@ -21,7 +21,6 @@ public class ArticleVenduController {
     public String afficherEncheres(Model model){
         //List<ArticleVendu> articleVenduList = articleVenduService.getAllArticleVendu();
         //model.addAttribute("articleVenduList", articleVenduList);
-        System.out.println("coucou");
         return "auctions";
     }
 
@@ -35,7 +34,7 @@ public class ArticleVenduController {
     @PostMapping("/creer")
     public String creerArticleVendu(@ModelAttribute("articleVendu") ArticleVendu articleVendu){
         articleVenduService.addArticleVendu(articleVendu);
-        return "redirect:/auctions";
+        return "redirect:/encheres";
     }
 
     @GetMapping("/detail")
