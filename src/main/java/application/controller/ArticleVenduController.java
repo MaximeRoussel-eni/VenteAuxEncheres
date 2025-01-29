@@ -35,7 +35,10 @@ public class ArticleVenduController {
 
     @GetMapping("/creer")
     public String afficherCreerArticleVendu(Model model){
+        List<Categorie> listCategories = categorieService.getAllCategories();
+        model.addAttribute("listeCategories", listCategories);
         model.addAttribute("articleVendu", new ArticleVendu());
+
         return "auction-create";
     }
 
