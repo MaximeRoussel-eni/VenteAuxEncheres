@@ -1,5 +1,5 @@
 header{
-    display: flex;flex-direction: row;justify-content: space-around;
+    display: flex;flex-direction: row;justify-content: space-between;
 }
 h1{
     display: flex;justify-content: center;
