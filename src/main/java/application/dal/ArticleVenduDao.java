@@ -12,7 +12,6 @@ public interface ArticleVenduDao {
 
    void update(ArticleVendu articleVendu);
 
-
    void delete(int noArticle);
 
    ArticleVendu read(int noArticle);

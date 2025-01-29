@@ -11,11 +11,13 @@ public class ArticleVenduServiceImpl implements ArticleVenduService {
 
     private ArticleVenduDao articleVenduDao;
 
-    public ArticleVenduServiceImpl(ArticleVenduDao articleVenduDao){ this.articleVenduDao = articleVenduDao; }
+    public ArticleVenduServiceImpl(ArticleVenduDao articleVenduDao){
+        this.articleVenduDao = articleVenduDao;
+    }
 
     @Override
-    public void addArticleVendu(ArticleVendu articleVendu) { articleVenduDao.create(articleVendu);
-
+    public void addArticleVendu(ArticleVendu articleVendu) {
+        articleVenduDao.create(articleVendu);
     }
 
     @Override
@@ -36,6 +38,5 @@ public class ArticleVenduServiceImpl implements ArticleVenduService {
     @Override
     public void updateArticleVendu(ArticleVendu articleVendu) {
         articleVenduDao.update(articleVendu);
-
     }
 }
