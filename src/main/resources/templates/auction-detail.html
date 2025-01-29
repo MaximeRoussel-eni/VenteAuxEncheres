@@ -1,10 +1,21 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fr" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
+    <link rel="stylesheet" data-th-href="@{css/detail.css}">
 </head>
 <body>
-
+<header>
+    <button>
+        <a href="/encheres/connexion"> <img th:src="@{img/logo.webp}" alt="logo enchères" height="150" width="150"/></a>
+    </button>
+    <div class="detailenchere">
+        <section>Image</section>
+        <section>
+            <h1>Detail Vente</h1>
+        </section>
+    </div>
+</header>
 </body>
 </html>
