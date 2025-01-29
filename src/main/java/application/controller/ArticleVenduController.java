@@ -2,6 +2,7 @@ package application.controller;
 
 import application.bo.ArticleVendu;
 import application.bo.Categorie;
+import application.service.CategorieService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -15,11 +16,17 @@ import java.util.List;
 public class ArticleVenduController {
 
     private ArticleVenduService articleVenduService;
+    private CategorieService categorieService;
 
-    public ArticleVenduController(ArticleVenduService articleVenduService) {this.articleVenduService = articleVenduService;}
+    public ArticleVenduController(ArticleVenduService articleVenduService,CategorieService categorieService) {
+        this.articleVenduService = articleVenduService;
+        this.categorieService = categorieService;
+    }
 
     @GetMapping()
     public String afficherEncheres(Model model){
+        List<Categorie> listCategories = categorieService.getAllCategories();
+        model.addAttribute("listeCategories", listCategories);
         //List<ArticleVendu> articleVenduList = articleVenduService.getAllArticleVendu();
         //model.addAttribute("articleVenduList", articleVenduList);
         return "auctions";
