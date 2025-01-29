@@ -19,8 +19,7 @@ public class UtilisateurDaoImpl implements UtilisateurDao {
     @Autowired
     private JdbcTemplate jdbcTemplate;
 
-    private final String INSERT_UTILISATEUR ="INSERT INTO UTILISATEUR (pseudo, nom, prenom, email, telephone, rue, codePostal, ville, motDePasse) " +
-            "VALUES (:pseudo, :nom, :prenom, :email, :telephone, :rue, :codePostal, :ville, :motDePasse)";
+    private final String INSERT_UTILISATEUR ="INSERT INTO UTILISATEUR (pseudo, nom, prenom, email, telephone, rue, codePostal, ville, motDePasse) VALUES (:pseudo, :nom, :prenom, :email, :telephone, :rue, :codePostal, :ville, :motDePasse)";
     private final String UPDATE_UTILISATEUR = "UPDATE UTILISATEUR SET pseudo = :pseudo, nom = :nom, prenom = :prenom, email= :email, " +
             "telephone=:telephone, rue=:rue, codePostal=:codePostal, ville=:ville, motDePasse= :motDePasse WHERE noUtilisateur = :noUtilisateur";
     private final String DELETE_UTILISATEUR = "DELETE FROM UTILISATEUR WHERE pseudo = :pseudo";

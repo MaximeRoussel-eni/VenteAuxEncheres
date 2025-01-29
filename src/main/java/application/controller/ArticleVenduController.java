@@ -19,8 +19,8 @@ public class ArticleVenduController {
 
     @GetMapping()
     public String afficherEncheres(Model model){
-        //List<ArticleVendu> articleVenduList = articleVenduService.getAllArticleVendu();
-        //model.addAttribute("articleVenduList", articleVenduList);
+        List<ArticleVendu> articleVenduList = articleVenduService.getAllArticleVendu();
+        model.addAttribute("articleVenduList", articleVenduList);
         System.out.println("coucou");
         return "auctions";
     }
