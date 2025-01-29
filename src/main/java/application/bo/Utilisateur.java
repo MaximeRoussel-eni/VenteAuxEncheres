@@ -44,6 +44,8 @@ public class Utilisateur {
         this.encheres = encheres;
     }
 
+
+
     //getter setter
 
 

@@ -6,6 +6,7 @@ import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
+import org.springframework.jdbc.support.GeneratedKeyHolder;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -19,15 +20,20 @@ public class UtilisateurDaoImpl implements UtilisateurDao {
     @Autowired
     private JdbcTemplate jdbcTemplate;
 
+
     private final String INSERT_UTILISATEUR ="INSERT INTO UTILISATEURS (pseudo, nom, prenom, email, telephone, rue, code_postal, ville, mot_de_passe, credit, administrateur) " +
             "VALUES (:pseudo, :nom, :prenom, :email, :telephone, :rue, :code_postal, :ville, :mot_de_passe,:credit, :administrateur)";
 
     private final String UPDATE_UTILISATEUR = "UPDATE UTILISATEURS SET pseudo = :pseudo, nom = :nom, prenom = :prenom, email= :email, " +
-            "telephone=:telephone, rue=:rue, code_postal=:code_postal, ville=:ville, motDePasse= :motDePasse WHERE noUtilisateur = :noUtilisateur";
+            "telephone=:telephone, rue=:rue, code_postal=:code_postal, ville=:ville, motDePasse= :motDePasse WHERE no_utilisateur = :no_utilisateur";
 
     private final String DELETE_UTILISATEUR = "DELETE FROM UTILISATEURS WHERE pseudo = :pseudo";
-    private final String READ_UTILISATEUR_BY_NOUTILISATEUR = "SELECT * FROM UTILISATEURS WHERE noUtilisateur = :noUtilisateur";
+
+    private final String READ_UTILISATEUR_BY_NOUTILISATEUR = "SELECT * FROM UTILISATEURS WHERE no_utilisateur = :no_utilisateur";
+
     private final String READ_ALL_UTILISATEURS = "SELECT * FROM UTILISATEURS";
+
+//    private final String;
 
 
     @Override
@@ -71,12 +77,14 @@ public class UtilisateurDaoImpl implements UtilisateurDao {
     @Override
     public void deleteByPseudo(Utilisateur utilisateur) {
         jdbcTemplate.update(DELETE_UTILISATEUR, utilisateur.getPseudo());
-
     }
 
     @Override
     public Utilisateur read(int noUtilisateur) {
-        return jdbcTemplate.queryForObject(READ_UTILISATEUR_BY_NOUTILISATEUR, BeanPropertyRowMapper.newInstance(Utilisateur.class), noUtilisateur);
+        MapSqlParameterSource namedParameters = new MapSqlParameterSource();
+        namedParameters.addValue("no_utilisateur", noUtilisateur);
+        return namedParameterJdbcTemplate.queryForObject(READ_UTILISATEUR_BY_NOUTILISATEUR, namedParameters, new BeanPropertyRowMapper<>(Utilisateur.class));
+//
     }
 
     @Override
