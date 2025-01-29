@@ -19,12 +19,15 @@ public class UtilisateurDaoImpl implements UtilisateurDao {
     @Autowired
     private JdbcTemplate jdbcTemplate;
 
-    private final String INSERT_UTILISATEUR ="INSERT INTO UTILISATEUR (pseudo, nom, prenom, email, telephone, rue, codePostal, ville, motDePasse) VALUES (:pseudo, :nom, :prenom, :email, :telephone, :rue, :codePostal, :ville, :motDePasse)";
-    private final String UPDATE_UTILISATEUR = "UPDATE UTILISATEUR SET pseudo = :pseudo, nom = :nom, prenom = :prenom, email= :email, " +
-            "telephone=:telephone, rue=:rue, codePostal=:codePostal, ville=:ville, motDePasse= :motDePasse WHERE noUtilisateur = :noUtilisateur";
-    private final String DELETE_UTILISATEUR = "DELETE FROM UTILISATEUR WHERE pseudo = :pseudo";
-    private final String READ_UTILISATEUR_BY_NOUTILISATEUR = "SELECT * FROM UTILISATEUR WHERE noUtilisateur = :noUtilisateur";
-    private final String READ_ALL_UTILISATEURS = "SELECT * FROM UTILISATEUR";
+    private final String INSERT_UTILISATEUR ="INSERT INTO UTILISATEURS (pseudo, nom, prenom, email, telephone, rue, code_postal, ville, mot_de_passe, credit, administrateur) " +
+            "VALUES (:pseudo, :nom, :prenom, :email, :telephone, :rue, :code_postal, :ville, :mot_de_passe,:credit, :administrateur)";
+
+    private final String UPDATE_UTILISATEUR = "UPDATE UTILISATEURS SET pseudo = :pseudo, nom = :nom, prenom = :prenom, email= :email, " +
+            "telephone=:telephone, rue=:rue, code_postal=:code_postal, ville=:ville, motDePasse= :motDePasse WHERE noUtilisateur = :noUtilisateur";
+
+    private final String DELETE_UTILISATEUR = "DELETE FROM UTILISATEURS WHERE pseudo = :pseudo";
+    private final String READ_UTILISATEUR_BY_NOUTILISATEUR = "SELECT * FROM UTILISATEURS WHERE noUtilisateur = :noUtilisateur";
+    private final String READ_ALL_UTILISATEURS = "SELECT * FROM UTILISATEURS";
 
 
     @Override
@@ -36,9 +39,11 @@ public class UtilisateurDaoImpl implements UtilisateurDao {
         namedParameters.addValue("email", utilisateur.getEmail());
         namedParameters.addValue("telephone", utilisateur.getTelephone());
         namedParameters.addValue("rue", utilisateur.getRue());
-        namedParameters.addValue("codePostal", utilisateur.getCodePostal());
+        namedParameters.addValue("code_postal", utilisateur.getCodePostal());
         namedParameters.addValue("ville", utilisateur.getVille());
-        namedParameters.addValue("motDePasse", utilisateur.getMotDePasse());
+        namedParameters.addValue("mot_de_passe", utilisateur.getMotDePasse());
+        namedParameters.addValue("administrateur", false);
+        namedParameters.addValue("credit", 0);
         namedParameterJdbcTemplate.update(INSERT_UTILISATEUR, namedParameters);
     }
 
@@ -51,9 +56,9 @@ public class UtilisateurDaoImpl implements UtilisateurDao {
         namedParameters.addValue("email", utilisateur.getEmail());
         namedParameters.addValue("telephone", utilisateur.getTelephone());
         namedParameters.addValue("rue", utilisateur.getRue());
-        namedParameters.addValue("codePostal", utilisateur.getCodePostal());
+        namedParameters.addValue("code_postal", utilisateur.getCodePostal());
         namedParameters.addValue("ville", utilisateur.getVille());
-        namedParameters.addValue("motDePasse", utilisateur.getMotDePasse());
+        namedParameters.addValue("mot_de_passe", utilisateur.getMotDePasse());
         namedParameterJdbcTemplate.update(UPDATE_UTILISATEUR, namedParameters);
     }
 

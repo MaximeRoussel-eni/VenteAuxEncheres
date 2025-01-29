@@ -46,7 +46,6 @@ public class UtilisateurController {
     @PostMapping("/inscription")
     public String insctiption(@ModelAttribute("utilisateur") Utilisateur utilisateur) {
         utilisateurService.addUtilisateur(utilisateur);
-        System.out.println("utilisateur");
         return "redirect:/encheres";
     }
 }
