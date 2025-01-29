@@ -43,9 +43,10 @@ public class UtilisateurController {
     }
 
     //TEMPORAIRE A VOIR AVEC SPRING SECURITY
-    @PostMapping("inscription")
-    public String inscription(Model model) {
-        model.addAttribute("utilisateur", new Utilisateur());
+    @PostMapping("/inscription")
+    public String insctiption(@ModelAttribute("utilisateur") Utilisateur utilisateur) {
+        utilisateurService.addUtilisateur(utilisateur);
+        System.out.println("utilisateur");
         return "redirect:/encheres";
     }
 }
