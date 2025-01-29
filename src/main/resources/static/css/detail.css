@@ -1,0 +1,16 @@
+.createEnchere {
+    display: flex;
+    flex-direction: row;
+    gap: 20px;
+}
+
+.imageArticle {
+    height: 20vh;
+    width: 10vw;
+    background-color: #121212;
+}
+
+.createArticle {
+    height: 50vh;
+    width: 50vw;
+}
