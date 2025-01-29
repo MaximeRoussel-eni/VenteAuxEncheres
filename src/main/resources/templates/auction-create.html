@@ -1,10 +1,53 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fr" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
+    <link rel="stylesheet" data-th-href="@{/css/detail.css}">
 </head>
 <body>
+<header>
 
+    <div class="createEnchere">
+        <section class="imageArticle">Image</section>
+        <section class="createArticle">
+
+            <form th-object="${ArticleVendu}" class="formulaireVente">
+                <div class="TitreVente">Nouvelle Vente</div>
+                <p>Article<input th-field="*{nomArticle}" type="text" required></p>
+                <p>Description<input type="text" required></p>
+
+                <p>Catégorie <select>
+                    <option>Type d'article</option>
+                    <option>Informatique</option>
+                    <option>Ameublement</option>
+                    <option>Vetement</option>
+                    <option>Sport & Loisir</option>
+                </select></p>
+                <p>Photo de l'article <input type="file" id="avatar" name="avatar" accept="image/png, image/jpeg"/>
+                </p>
+                <p>Mise à prix<input type="number" id="age" min="0" step="1" value="310" required onchange="changerAge()">
+                </p>
+                <p>Début de l'enchère<input type="date" id="start" name="trip-start" value="2025-07-22" min="2025-01-29"
+                                            max="2100-12-31"></p>
+                </p>
+                <p>Fin de l'enchère<input type="date" id="start" name="trip-start" value="2025-07-22" min="2025-01-01"
+                                          max="2100-12-31"></p>
+                </p>
+                <div class="retrait">Retrait
+                    <p>Rue<input type="text" required></p>
+                    <p>Code Postale<input type="text" maxlength="5" required></p>
+                    <p>Ville<input type="text" required></p>
+                </div>
+                <div class="boutonsActions">
+                    <button class="boutonActions1"><input type="submit"></button>
+                    <button class="boutonActions1"><input type="reset"></button>
+                    <button class="boutonActions1"><a th:href="@{/encheres}">Annuler la Vente</a></button>
+                </div>
+            </form>
+        </section>
+
+    </div>
+</header>
 </body>
 </html>
