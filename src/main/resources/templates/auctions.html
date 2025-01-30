@@ -29,11 +29,7 @@
             <div class="catégorie">
                 <p>Catégories</p>
                 <select class="selectionbouton">
-                    <option>Toutes</option>
-                    <option>Informatiques</option>
-                    <option>Ameublement</option>
-                    <option>Vetements</option>
-                    <option>Sport et Loisir</option>
+                    <option data-th-each="c : ${listeCategories}" data-th-text="${c.libelle}" data-th-value="${c.noCategorie}"></option>
                 </select>
             </div>
         </section>
