@@ -17,5 +17,20 @@
         </section>
     </div>
 </header>
+<form method="post" data-th-object="${articleVendu}" class="formulaireVente">
+    <p>Article<input data-th-text="*{nomArticle}" type="text" readonly></p>
+    <p>Description<input type="text" data-th-text="*{description}" readonly></p>
+    <p>Catégorie<input type="text" data-th-text="*{categorie}" readonly></p>
+    <p>Meilleure offre<input type="text" data-th-text="*{miseAPrix}" readonly></p>
+    <p>Mise à prix<input type="text" data-th-text="*{miseAPrix}" readonly></p>
+    <p>Fin de l'enchère<input type="text" data-th-text="*{dateFinEncheres}" readonly></p>
+    <p>Retrait<input type="text" data-th-text="*{utilisateurVendeur.ville}" readonly></p>
+    <p>Vendeur<input type="text" data-th-text="*{utilisateurVendeur}" readonly></p>
+    <p>Ma proposition<input type="text" data-th-min="*{miseAPrix}" ></p>
+
+
+
+
+</form>
 </body>
 </html>
