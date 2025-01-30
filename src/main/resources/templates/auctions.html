@@ -1,4 +1,9 @@
-<html data-th-replace="~{fragments/layout::layout(title=~{::title}, main=~{::main})}">
+<html data-th-replace="~{fragments/layout::layout(title=~{::title}, main=~{::main})}"
+
+<head>
+
+</head>
+
 
 <title>Les enchères</title>
 
@@ -13,7 +18,8 @@
             <div class="catégorie">
                 <p>Catégories</p>
                 <select class="selectionbouton">
-                    <option data-th-each="c : ${listeCategories}" data-th-text="${c.libelle}" data-th-value="${c.noCategorie}"></option>
+                    <option data-th-each="c : ${listeCategories}" data-th-text="${c.libelle}"
+                            data-th-value="${c.noCategorie}"></option>
                 </select>
             </div>
         </section>
