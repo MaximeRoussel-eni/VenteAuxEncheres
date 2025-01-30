@@ -44,7 +44,9 @@ public class ArticleVenduDaoImpl implements ArticleVenduDao {
         namedParameters.addValue("date_fin_encheres", articleVendu.getDateFinEncheres());
         namedParameters.addValue("prix_initial", articleVendu.getMiseAPrix());
         namedParameters.addValue("prix_vente", articleVendu.getMiseAPrix());
+
         namedParameters.addValue("no_utilisateur",articleVendu.getUtilisateurVendeur().getNoUtilisateur());
+        System.out.println(articleVendu.getUtilisateurVendeur().getNoUtilisateur());
         namedParameters.addValue("no_categorie", articleVendu.getCategorie().getNoCategorie());
         namedParameterJdbcTemplate.update(INSERT_ARTICLE, namedParameters);
 

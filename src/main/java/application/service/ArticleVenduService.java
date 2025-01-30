@@ -1,12 +1,13 @@
 package application.service;
 
 import application.bo.ArticleVendu;
+import application.bo.Utilisateur;
 
 import java.util.List;
 
 public interface ArticleVenduService {
 
-        void addArticleVendu(ArticleVendu articleVendu);
+        void addArticleVendu(ArticleVendu articleVendu, Utilisateur utilisateurEnSession);
 
         void removeArticleVendu(int noArticle);
 
