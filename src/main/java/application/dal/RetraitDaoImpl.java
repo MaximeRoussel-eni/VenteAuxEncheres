@@ -26,5 +26,6 @@ public class RetraitDaoImpl implements RetraitDao {
         namedParameters.addValue("rue", retrait.getRue());
         namedParameters.addValue("code_postal", retrait.getCodePostal());
         namedParameters.addValue("ville", retrait.getVille());
+        namedParameterJdbcTemplate.update(INSERT_RETRAIT, namedParameters);
     }
 }
