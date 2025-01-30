@@ -33,7 +33,7 @@ public class UtilisateurDaoImpl implements UtilisateurDao {
 
     private final String READ_ALL_UTILISATEURS = "SELECT * FROM UTILISATEURS";
 
-//    private final String;
+
 
 
     @Override
@@ -84,7 +84,6 @@ public class UtilisateurDaoImpl implements UtilisateurDao {
         MapSqlParameterSource namedParameters = new MapSqlParameterSource();
         namedParameters.addValue("no_utilisateur", noUtilisateur);
         return namedParameterJdbcTemplate.queryForObject(READ_UTILISATEUR_BY_NOUTILISATEUR, namedParameters, new BeanPropertyRowMapper<>(Utilisateur.class));
-//
     }
 
     @Override
