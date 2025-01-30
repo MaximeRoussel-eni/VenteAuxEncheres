@@ -1,13 +1,8 @@
-<!DOCTYPE html>
-<html lang="fr" xmlns:th="http://www.thymeleaf.org">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-    <link rel="stylesheet" data-th-href="@{/css/detail.css}">
-</head>
-<body>
-<header>
+<html data-th-replace="~{fragments/layout::layout(title=~{::title}, main=~{::main})}">
 
+<title>Création d'enchère</title>
+
+<main>
     <div class="createEnchere">
         <section class="imageArticle">Image</section>
         <section class="createArticle">
@@ -47,6 +42,8 @@
         </section>
 
     </div>
-</header>
-</body>
+
+</main>
+
+
 </html>
