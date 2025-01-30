@@ -2,7 +2,9 @@ package application.controller;
 
 import application.bo.ArticleVendu;
 import application.bo.Categorie;
+import application.bo.Utilisateur;
 import application.service.CategorieService;
+import application.service.UtilisateurService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -13,15 +15,20 @@ import java.util.List;
 
 @Controller
 @RequestMapping("/encheres")
+@SessionAttributes("utilisateurEnSession")
 public class ArticleVenduController {
 
     private ArticleVenduService articleVenduService;
     private CategorieService categorieService;
+    private UtilisateurService utilisateurService;
 
-    public ArticleVenduController(ArticleVenduService articleVenduService,CategorieService categorieService) {
+    public ArticleVenduController(ArticleVenduService articleVenduService,CategorieService categorieService,UtilisateurService utilisateurService ) {
         this.articleVenduService = articleVenduService;
         this.categorieService = categorieService;
+        this.utilisateurService = utilisateurService;
     }
+
+
 
     @GetMapping()
     public String afficherEncheres(Model model){
@@ -32,19 +39,22 @@ public class ArticleVenduController {
         return "auctions";
     }
 
+    @ModelAttribute("utilisateurEnSession")
+    public Utilisateur getUtilisateurEnSession() {
+        return utilisateurService.getUtilisateur(1);
+    }
 
     @GetMapping("/creer")
-    public String afficherCreerArticleVendu(Model model){
+    public String afficherCreerArticleVendu(Model model, @ModelAttribute("utilisateurEnSession") Utilisateur utilisateurEnSession){
         List<Categorie> listCategories = categorieService.getAllCategories();
         model.addAttribute("listeCategories", listCategories);
         model.addAttribute("articleVendu", new ArticleVendu());
-
         return "auction-create";
     }
 
     @PostMapping("/creer")
-    public String creerArticleVendu(@ModelAttribute("articleVendu") ArticleVendu articleVendu){
-        articleVenduService.addArticleVendu(articleVendu);
+    public String creerArticleVendu(@ModelAttribute("articleVendu") ArticleVendu articleVendu, @ModelAttribute("utilisateurEnSession") Utilisateur utilisateurEnSession){
+        articleVenduService.addArticleVendu(articleVendu, utilisateurEnSession);
         return "redirect:/encheres";
     }
 
