@@ -13,7 +13,8 @@
                 <p>Description<input data-th-field="*{description}" type="text" required></p>
 
                 <p>Catégorie <select data-th-field="*{categorie}">
-                    <option data-th-each="c : ${listeCategories}" data-th-text="${c.libelle}" data-th-value="${c.noCategorie}"></option>
+                    <option data-th-each="c : ${listeCategories}" data-th-text="${c.libelle}"
+                            data-th-value="${c.noCategorie}"></option>
                 </select></p>
                 <p>Photo de l'article <input type="file" id="avatar" name="avatar" accept="image/png, image/jpeg"/>
                 </p>
@@ -29,7 +30,7 @@
                                           max="2100-12-31"></p>
 
                 <div class="retrait">Retrait
-                    <p>Rue<input  type="text" required></p>
+                    <p>Rue<input type="text" required></p>
                     <p>Code Postale<input type="text" maxlength="5" required></p>
                     <p>Ville<input type="text" required></p>
                 </div>
