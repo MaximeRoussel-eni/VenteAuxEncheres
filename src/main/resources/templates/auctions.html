@@ -1,22 +1,6 @@
-<!doctype html>
-<html lang="fr" xmlns:th="http://www.thymeleaf.org">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport"
-          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Accueil</title>
-    <link rel="stylesheet" data-th-href="@{/css/style.css}">
-    <link rel="shortcut icon" type="image/x-icon" data-th-href="@{img/logo.webp}" />
+<html data-th-replace="~{fragments/layout::layout(title=~{::title}, main=~{::main})}">
 
-</head>
-
-
-<body>
-<header>
-    <button><a th:href="@{/encheres/connexion}"> <img th:src="@{img/logo.webp}" alt="logo enchères" height="150" width="150"/></a></button>
-    <a th:href="@{/encheres/connexion}">S'inscrire - Se connecter</a>
-</header>
+<title>Les enchères</title>
 
 
 <main>
@@ -43,8 +27,4 @@
         <section class="dansArticles"></section>
     </div>
 </main>
-
-<footer></footer>
-
-</body>
 </html>

@@ -1,36 +1,25 @@
-<!DOCTYPE html>
-<html lang="fr" xmlns:th="http://www.thymeleaf.org">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-    <link rel="stylesheet" data-th-href="@{css/detail.css}">
-</head>
-<body>
-<header>
-    <button>
-        <a href="/encheres/connexion"> <img th:src="@{img/logo.webp}" alt="logo enchères" height="150" width="150"/></a>
-    </button>
+<html data-th-replace="~{fragments/layout::layout(title=~{::title}, main=~{::main})}">
+
+<title>Detail de l'enchère</title>
+
+<main>
     <div class="detailenchere">
         <section>Image</section>
         <section>
             <h1>Detail Vente</h1>
         </section>
     </div>
-</header>
-<form method="post" data-th-object="${articleVendu}" class="formulaireVente">
-    <p>Article<input data-th-text="*{nomArticle}" type="text" readonly></p>
-    <p>Description<input type="text" data-th-text="*{description}" readonly></p>
-    <p>Catégorie<input type="text" data-th-text="*{categorie}" readonly></p>
-    <p>Meilleure offre<input type="text" data-th-text="*{miseAPrix}" readonly></p>
-    <p>Mise à prix<input type="text" data-th-text="*{miseAPrix}" readonly></p>
-    <p>Fin de l'enchère<input type="text" data-th-text="*{dateFinEncheres}" readonly></p>
-    <p>Retrait<input type="text" data-th-text="*{utilisateurVendeur.ville}" readonly></p>
-    <p>Vendeur<input type="text" data-th-text="*{utilisateurVendeur}" readonly></p>
-    <p>Ma proposition<input type="text" data-th-min="*{miseAPrix}" ></p>
+    <form method="post" data-th-object="${articleVendu}" class="formulaireVente">
+        <p>Article<input data-th-text="*{nomArticle}" type="text" readonly></p>
+        <p>Description<input type="text" data-th-text="*{description}" readonly></p>
+        <p>Catégorie<input type="text" data-th-text="*{categorie}" readonly></p>
+        <p>Meilleure offre<input type="text" data-th-text="*{miseAPrix}" readonly></p>
+        <p>Mise à prix<input type="text" data-th-text="*{miseAPrix}" readonly></p>
+        <p>Fin de l'enchère<input type="text" data-th-text="*{dateFinEncheres}" readonly></p>
+        <p>Retrait<input type="text" data-th-text="*{utilisateurVendeur.ville}" readonly></p>
+        <p>Vendeur<input type="text" data-th-text="*{utilisateurVendeur}" readonly></p>
+        <p>Ma proposition<input type="text" data-th-min="*{miseAPrix}" ></p>
+    </form>
+</main>
 
-
-
-
-</form>
-</body>
 </html>
