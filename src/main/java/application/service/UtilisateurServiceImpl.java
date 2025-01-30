@@ -2,7 +2,9 @@ package application.service;
 
 import application.bo.Utilisateur;
 import application.dal.UtilisateurDao;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Primary;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 
@@ -34,4 +36,5 @@ public class UtilisateurServiceImpl implements UtilisateurService {
     public void updateUtilisateur(Utilisateur utilisateur) {
         utilisateurDao.update(utilisateur);
     }
+
 }
