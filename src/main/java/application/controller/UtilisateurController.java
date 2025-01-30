@@ -15,6 +15,8 @@ public class UtilisateurController {
 
     public UtilisateurController(UtilisateurService utilisateurService) {this.utilisateurService = utilisateurService;}
 
+
+
     @GetMapping("/profilUtilisateur")
     public String afficherProfilUtilisateur(Model model, @RequestParam(name = "noUtilisateur") int noUtilisateur) {
         Utilisateur utilisateur = utilisateurService.getUtilisateur(noUtilisateur);
