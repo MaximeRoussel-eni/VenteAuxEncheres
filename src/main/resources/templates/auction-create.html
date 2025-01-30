@@ -1,13 +1,8 @@
-<!DOCTYPE html>
-<html lang="fr" xmlns:th="http://www.thymeleaf.org">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-    <link rel="stylesheet" data-th-href="@{/css/detail.css}">
-</head>
-<body>
-<header>
+<html data-th-replace="~{fragments/layout::layout(title=~{::title}, main=~{::main})}">
 
+<title>Création d'enchère</title>
+
+<main>
     <div class="createEnchere">
         <section class="imageArticle">Image</section>
         <section class="createArticle">
@@ -17,7 +12,7 @@
                 <p>Article<input data-th-field="*{nomArticle}" type="text" required></p>
                 <p>Description<input data-th-field="*{description}" type="text" required></p>
 
-                <p>Catégorie <select data-th-field="listeCategories">
+                <p>Catégorie <select data-th-field="*{categorie}">
                     <option data-th-each="c : ${listeCategories}" data-th-text="${c.libelle}" data-th-value="${c.noCategorie}"></option>
                 </select></p>
                 <p>Photo de l'article <input type="file" id="avatar" name="avatar" accept="image/png, image/jpeg"/>
@@ -47,6 +42,8 @@
         </section>
 
     </div>
-</header>
-</body>
+
+</main>
+
+
 </html>
