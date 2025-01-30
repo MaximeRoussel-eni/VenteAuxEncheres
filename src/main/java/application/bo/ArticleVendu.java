@@ -14,7 +14,7 @@ public class ArticleVendu {
     private int prixVente;
     private EtatVente etatVente;
     private Categorie categorie;
-    private Retrait newRetrait;
+    private Retrait retrait;
     private Utilisateur utilisateurVendeur;
     private Utilisateur utilisateurAcheteur;
     private List<Enchere> encheres = new ArrayList<Enchere>();
@@ -25,7 +25,7 @@ public class ArticleVendu {
 
     public ArticleVendu() {}
 
-    public ArticleVendu(String nomArticle, String description, LocalDate dateDebutEncheres, LocalDate dateFinEncheres, int miseAPrix, int prixVente, EtatVente etatVente, Categorie categorie, Retrait newRetrait, Utilisateur utilisateurVendeur, Utilisateur utilisateurAcheteur, List<Enchere> encheres) {
+    public ArticleVendu(String nomArticle, String description, LocalDate dateDebutEncheres, LocalDate dateFinEncheres, int miseAPrix, int prixVente, EtatVente etatVente, Categorie categorie, Retrait retrait, Utilisateur utilisateurVendeur, Utilisateur utilisateurAcheteur, List<Enchere> encheres) {
         this.nomArticle = nomArticle;
         this.description = description;
         this.dateDebutEncheres = dateDebutEncheres;
@@ -34,7 +34,7 @@ public class ArticleVendu {
         this.prixVente = prixVente;
         this.etatVente = etatVente;
         this.categorie = categorie;
-        this.newRetrait = newRetrait;
+        this.retrait = retrait;
         this.utilisateurVendeur = utilisateurVendeur;
         this.utilisateurAcheteur = utilisateurAcheteur;
         this.encheres = encheres;
@@ -118,12 +118,12 @@ public class ArticleVendu {
         this.categorie = categorie;
     }
 
-    public Retrait getNewRetrait() {
-        return newRetrait;
+    public Retrait getRetrait() {
+        return retrait;
     }
 
-    public void setNewRetrait(Retrait newRetrait) {
-        this.newRetrait = newRetrait;
+    public void setRetrait(Retrait newRetrait) {
+        this.retrait = newRetrait;
     }
 
     public Utilisateur getUtilisateurVendeur() {
@@ -164,7 +164,7 @@ public class ArticleVendu {
                 ", prixVente=" + prixVente +
                 ", etatVente=" + etatVente +
                 ", categorie=" + categorie +
-                ", newRetrait=" + newRetrait +
+                ", retrait=" + retrait +
                 ", utilisateurVendeur=" + utilisateurVendeur +
                 ", utilisateurAcheteur=" + utilisateurAcheteur +
                 ", encheres=" + encheres +

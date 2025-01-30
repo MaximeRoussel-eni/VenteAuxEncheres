@@ -2,16 +2,16 @@ package application.bo;
 
 public class Retrait {
     private String rue;
-    private String code_postal;
+    private String codePostal;
     private String ville;
 
 //constructor
     public Retrait() {
     }
 
-    public Retrait(String rue, String code_postal, String ville) {
+    public Retrait(String rue, String codePostal, String ville) {
         this.rue = rue;
-        this.code_postal = code_postal;
+        this.codePostal = codePostal;
         this.ville = ville;
     }
 
@@ -25,12 +25,12 @@ public class Retrait {
         this.rue = rue;
     }
 
-    public String getCode_postal() {
-        return code_postal;
+    public String getCodePostal() {
+        return codePostal;
     }
 
-    public void setCode_postal(String code_postal) {
-        this.code_postal = code_postal;
+    public void setCodePostal(String code_postal) {
+        this.codePostal = codePostal;
     }
 
     public String getVille() {
@@ -45,7 +45,7 @@ public class Retrait {
     public String toString() {
         return "Retrait{" +
                 "rue='" + rue + '\'' +
-                ", code_postal='" + code_postal + '\'' +
+                ", codePostal='" + codePostal + '\'' +
                 ", ville='" + ville + '\'' +
                 '}';
     }
