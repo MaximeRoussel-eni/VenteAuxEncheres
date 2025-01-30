@@ -28,8 +28,7 @@ public class ArticleVenduDaoImpl implements ArticleVenduDao {
     private final String READ_ARTICLE_BY_NOARTICLE = "SELECT * FROM ARTICLES_VENDUS WHERE no_article = :no_article";
     private final String READ_ALL_ARTICLES ="SELECT * FROM ARTICLES_VENDUS";
 
-    private final String INSERT_ENCHERE = "INSERT INTO ENCHERES (no_utilisateur, no_article, date_enchere, montant_enchere)" +
-            "VALUES (:no_utilisateur, :no_article, :date_enchere, :montant_enchere)";
+
 
     private final String INSERT_RETRAIT = "INSERT INTO RETRAIT (no_article, rue, code_postal, ville)" +
             "VALUES (:no_article, :rue, :code_postal, :ville)";
@@ -48,18 +47,7 @@ public class ArticleVenduDaoImpl implements ArticleVenduDao {
         namedParameters.addValue("no_utilisateur",articleVendu.getUtilisateurVendeur().getNoUtilisateur());
         namedParameters.addValue("no_categorie", articleVendu.getCategorie().getNoCategorie());
         namedParameterJdbcTemplate.update(INSERT_ARTICLE, namedParameters);
-        MapSqlParameterSource namedParameters1 = new MapSqlParameterSource();
-        namedParameters1.addValue("no_utilisateur", articleVendu.getUtilisateurVendeur().getNoUtilisateur());
-        namedParameters1.addValue("no_article", articleVendu.getNoArticle());
-        namedParameters1.addValue("date_enchere", articleVendu.getDateDebutEncheres());
-        namedParameters1.addValue("montant_enchere", articleVendu.getMiseAPrix());
-        namedParameterJdbcTemplate.update(INSERT_ENCHERE, namedParameters1);
-        MapSqlParameterSource namedParameters2 = new MapSqlParameterSource();
-        namedParameters2.addValue("no_article", articleVendu.getNoArticle());
-        namedParameters2.addValue("rue", articleVendu.getRetrait().getRue());
-        namedParameters2.addValue("code_postal", articleVendu.getRetrait().getCodePostal());
-        namedParameters2.addValue("ville", articleVendu.getRetrait().getVille());
-        namedParameterJdbcTemplate.update(INSERT_RETRAIT, namedParameters2);
+
     }
 
     @Override
