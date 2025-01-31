@@ -14,7 +14,7 @@
 </button>
 <div class="container mt-5">
     <h2>Connexion</h2>
-    <form method="post">
+    <form method="post" action ="/encheres/connexion">
         <!-- Pseudo -->
         <div class="form-group">
             <label for="pseudo">Pseudo :</label>
@@ -29,6 +29,7 @@
 
         <!-- Bouton de connexion -->
         <button type="submit" class="btn btn-primary">Se connecter</button>
+        <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
     </form>
 
     <!-- Lien vers la page d'inscription -->
@@ -43,6 +44,9 @@
     <div th:if="${param.logout}" class="alert alert-success mt-3">
         Vous avez été déconnecté avec succès.
     </div>
+
+
 </div>
 </body>
 </html>
+
