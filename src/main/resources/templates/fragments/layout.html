@@ -7,18 +7,17 @@
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title data-th-replace="${title}"></title>
-    <link rel="stylesheet" data-th-href="@{/css/style.css}">
-    <link rel="stylesheet" data-th-href="@{/css/detail.css}">
     <link rel="shortcut icon" type="image/x-icon" data-th-href="@{/img/logo.webp}" />
+    <link rel="stylesheet" href="/css/style.css">
 </head>
 
 <body>
     <header>
         <nav>
-            <ul>
-                <li><button><a th:href="@{/encheres/connexion}"> <img th:src="@{/img/logo.webp}" alt="logo enchères" height="150" width="150"/></a></button></li>
-                <li><a th:href="@{/encheres/connexion}">S'inscrire - Se connecter</a></li>
-            </ul>
+            <div>
+                <button><a th:href="@{/encheres/connexion}"> <img th:src="@{/img/logo.webp}" alt="logo enchères" height="150" width="150"/></a></button>
+               <a th:href="@{/encheres/connexion}">S'inscrire - Se connecter</a>
+            </div>
         </nav>
     </header>
 
