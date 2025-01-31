@@ -29,9 +29,9 @@
                                           max="2100-12-31"></p>
 
                 <div class="retrait">Retrait
-                    <p>Rue<input  type="text"></p>
-                    <p>Code Postale<input type="text" maxlength="5" ></p>
-                    <p>Ville<input type="text"></p>
+                    <p>Rue<input data-th-field="*{retrait.rue}" type="text"></p>
+                    <p>Code Postal<input data-th-field="*{retrait.codePostal}" type="text" maxlength="5" ></p>
+                    <p>Ville<input data-th-field="*{retrait.ville}" type="text"></p>
                 </div>
                 <div class="boutonsActions">
                     <button class="boutonActions1"><input type="submit"></button>

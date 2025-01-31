@@ -8,7 +8,7 @@ import java.util.List;
 
 public interface ArticleVenduDao {
 
-   void create(ArticleVendu articleVendu);
+   void create(ArticleVendu articleVendu, int noRetrait);
 
    void update(ArticleVendu articleVendu);
 

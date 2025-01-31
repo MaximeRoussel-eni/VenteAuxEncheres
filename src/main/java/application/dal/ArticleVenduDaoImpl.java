@@ -37,7 +37,7 @@ public class ArticleVenduDaoImpl implements ArticleVenduDao {
 
 
     @Override
-    public void create(ArticleVendu articleVendu) {
+    public void create(ArticleVendu articleVendu, int noRetrait) {
         MapSqlParameterSource namedParameters = new MapSqlParameterSource();
         namedParameters.addValue("nom_article", articleVendu.getNomArticle());
         namedParameters.addValue("description", articleVendu.getDescription());
@@ -45,11 +45,13 @@ public class ArticleVenduDaoImpl implements ArticleVenduDao {
         namedParameters.addValue("date_fin_encheres", articleVendu.getDateFinEncheres());
         namedParameters.addValue("prix_initial", articleVendu.getMiseAPrix());
         namedParameters.addValue("prix_vente", articleVendu.getMiseAPrix());
-
         namedParameters.addValue("no_utilisateur",articleVendu.getUtilisateurVendeur().getNoUtilisateur());
         System.out.println(articleVendu.getUtilisateurVendeur().getNoUtilisateur());
         namedParameters.addValue("no_categorie", articleVendu.getCategorie().getNoCategorie());
         namedParameterJdbcTemplate.update(INSERT_ARTICLE, namedParameters);
+
+
+
         MapSqlParameterSource namedParameters1 = new MapSqlParameterSource();
         namedParameters1.addValue("no_utilisateur", articleVendu.getUtilisateurVendeur().getNoUtilisateur());
         namedParameters1.addValue("no_article", articleVendu.getNoArticle());
