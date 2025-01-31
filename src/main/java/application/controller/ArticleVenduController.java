@@ -35,8 +35,8 @@ public class ArticleVenduController {
     public String afficherEncheres(Model model){
         List<Categorie> listCategories = categorieService.getAllCategories();
         model.addAttribute("listeCategories", listCategories);
-        //List<ArticleVendu> articleVenduList = articleVenduService.getAllArticleVendu();
-        //model.addAttribute("articleVenduList", articleVenduList);
+        List<ArticleVendu> articleVenduList = articleVenduService.getAllArticleVendu();
+        model.addAttribute("articleVenduList", articleVenduList);;
         return "auctions";
     }
 
@@ -70,6 +70,7 @@ public class ArticleVenduController {
     public String detailArticleVendu(Model model, @RequestParam(name = "noArticleVendu") int noArticleVendu){
         ArticleVendu articleVendu = articleVenduService.getArticleVendu(noArticleVendu);
         model.addAttribute("articleVendu", articleVendu);
+        System.out.println(articleVendu);
         return "auction-detail";
     }
 }

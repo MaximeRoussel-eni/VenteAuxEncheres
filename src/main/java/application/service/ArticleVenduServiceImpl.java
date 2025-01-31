@@ -6,6 +6,7 @@ import application.bo.Retrait;
 import application.bo.Utilisateur;
 import application.dal.ArticleVenduDao;
 import application.dal.CategorieDao;
+import application.dal.CategorieDao;
 import application.dal.RetraitDao;
 import org.springframework.stereotype.Service;
 
@@ -22,8 +23,8 @@ public class ArticleVenduServiceImpl implements ArticleVenduService {
     public ArticleVenduServiceImpl(ArticleVenduDao articleVenduDao, UtilisateurService utilisateurService, RetraitDao retraitDao, CategorieDao categorieDao) {
         this.articleVenduDao = articleVenduDao;
         this.utilisateurService = utilisateurService;
-        this.retraitDao = retraitDao;
         this.categorieDao = categorieDao;
+        this.retraitDao = retraitDao;
     }
 
     @Override
@@ -46,7 +47,9 @@ public class ArticleVenduServiceImpl implements ArticleVenduService {
 
     @Override
     public ArticleVendu getArticleVendu(int noArticle) {
-        return articleVenduDao.read(noArticle);
+        var article = articleVenduDao.read(noArticle);
+        System.out.println(article);
+        return article;
     }
 
     @Override
