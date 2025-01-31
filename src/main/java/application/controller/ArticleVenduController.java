@@ -4,7 +4,6 @@ import application.bo.ArticleVendu;
 import application.bo.Categorie;
 import application.bo.Retrait;
 import application.bo.Utilisateur;
-import application.dal.RetraitDao;
 import application.service.CategorieService;
 import application.service.UtilisateurService;
 import org.springframework.stereotype.Controller;
@@ -12,6 +11,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import application.service.ArticleVenduService;
 
+import java.time.LocalDate;
 import java.util.List;
 
 
@@ -31,7 +31,6 @@ public class ArticleVenduController {
     }
 
 
-
     @GetMapping()
     public String afficherEncheres(Model model){
         List<Categorie> listCategories = categorieService.getAllCategories();
@@ -48,7 +47,9 @@ public class ArticleVenduController {
 
     @GetMapping("/creer")
     public String afficherCreerArticleVendu(Model model, @ModelAttribute("utilisateurEnSession") Utilisateur utilisateurEnSession) {
+        LocalDate date = LocalDate.now();
         List<Categorie> listCategories = categorieService.getAllCategories();
+        model.addAttribute("localdate", date);
         model.addAttribute("listeCategories", listCategories);
         model.addAttribute("articleVendu", new ArticleVendu());
         model.addAttribute("retrait", new Retrait());
