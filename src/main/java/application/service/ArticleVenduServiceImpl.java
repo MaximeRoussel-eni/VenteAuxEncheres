@@ -30,6 +30,7 @@ public class ArticleVenduServiceImpl implements ArticleVenduService {
     @Override
     public void addArticleVendu(ArticleVendu articleVendu, Utilisateur utilisateurEnSession, Retrait retrait, int noCategorie) {
         articleVendu.setUtilisateurVendeur(utilisateurEnSession);
+        System.out.println(utilisateurEnSession);
         int noRetrait = retraitDao.createRetrait(retrait);
         categorieDao.getCategorieById(noCategorie);
         articleVenduDao.create(articleVendu,noRetrait,noCategorie);

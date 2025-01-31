@@ -24,8 +24,8 @@ public class ArticleVenduDaoImpl implements ArticleVenduDao {
     private JdbcTemplate jdbcTemplate;
 
 
-    private final String INSERT_ARTICLE ="INSERT INTO ARTICLES_VENDUS (nom_article, description, date_debut_encheres, date_fin_encheres, prix_initial, prix_vente, no_utilisateur, no_categorie) " +
-            "VALUES (:nom_article, :description, :date_debut_encheres, :date_fin_encheres, :prix_initial,:prix_vente, :no_utilisateur, :no_categorie)";
+    private final String INSERT_ARTICLE ="INSERT INTO ARTICLES_VENDUS (nom_article, description, date_debut_encheres, date_fin_encheres, prix_initial, prix_vente, no_categorie, no_retrait, no_utilisateur) " +
+            "VALUES (:nom_article, :description, :date_debut_encheres, :date_fin_encheres, :prix_initial,:prix_vente, :no_categorie, :no_retrait, :no_utilisateur)";
     private final String UPDATE_ARTICLE = "UPDATE ARTICLES_VENDUS SET nom_article = :nom_article, description =:description, " +
             "date_debut_encheres=:date_debut_encheres, date_fin_encheres=:date_fin_encheres, prix_initial=:prix_initial, no_categorie=:no_categorie WHERE no_article = :no_article";
     private final String DELETE_ARTICLE = "DELETE FROM ARTICLES_VENDUS WHERE no_article = :no_article";
@@ -79,6 +79,7 @@ public class ArticleVenduDaoImpl implements ArticleVenduDao {
         namedParameters.addValue("date_fin_encheres", articleVendu.getDateFinEncheres());
         namedParameters.addValue("prix_initial", articleVendu.getPrixInitial());
         namedParameters.addValue("prix_vente", articleVendu.getPrixVente());
+        namedParameters.addValue("no_utilisateur", articleVendu.getUtilisateurVendeur().getNoUtilisateur());
         namedParameters.addValue("no_categorie",noCategorie);
         namedParameters.addValue("no_retrait",noRetrait);
         namedParameterJdbcTemplate.update(INSERT_ARTICLE, namedParameters);
