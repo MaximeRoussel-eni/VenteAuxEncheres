@@ -48,7 +48,6 @@ public class EnchereDaoImpl implements EnchereDao {
         namedParameters.addValue("date_enchere", enchere.getDateEnchere());
         namedParameters.addValue("montant_enchere", enchere.getMontantEnchere());
         namedParameterJdbcTemplate.update(UPDATE_ENCHERE, namedParameters);
-
     }
 
     @Override
