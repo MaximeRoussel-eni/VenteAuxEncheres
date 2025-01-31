@@ -3,6 +3,7 @@ package application.service;
 import application.bo.ArticleVendu;
 import application.bo.Utilisateur;
 import application.dal.ArticleVenduDao;
+import application.dal.CategorieDao;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -12,10 +13,12 @@ public class ArticleVenduServiceImpl implements ArticleVenduService {
 
     private final UtilisateurService utilisateurService;
     private ArticleVenduDao articleVenduDao;
+    private CategorieDao categorieDao;
 
-    public ArticleVenduServiceImpl(ArticleVenduDao articleVenduDao, UtilisateurService utilisateurService){
+    public ArticleVenduServiceImpl(ArticleVenduDao articleVenduDao, UtilisateurService utilisateurService, CategorieDao categorieDao) {
         this.articleVenduDao = articleVenduDao;
         this.utilisateurService = utilisateurService;
+        this.categorieDao = categorieDao;
     }
 
     @Override
@@ -37,7 +40,9 @@ public class ArticleVenduServiceImpl implements ArticleVenduService {
 
     @Override
     public ArticleVendu getArticleVendu(int noArticle) {
-        return articleVenduDao.read(noArticle);
+        var article = articleVenduDao.read(noArticle);
+        System.out.println(article);
+        return article;
     }
 
     @Override
