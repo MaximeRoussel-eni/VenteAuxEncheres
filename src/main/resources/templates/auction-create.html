@@ -1,7 +1,7 @@
 <html data-th-replace="~{fragments/layout::layout(title=~{::title}, main=~{::main})}">
-
+<head>
 <title>Création d'enchère</title>
-
+<script src="../static/js/date.js" defer></script></head>
 <main>
     <div class="createEnchere">
         <section class="imageArticle">Image</section>
@@ -10,7 +10,7 @@
             <form data-th-object="${articleVendu}" method="post" data-th-action="creer" class="formulaireVente">
                 <div class="TitreVente">Nouvelle Vente</div>
                 <p>Article<input data-th-field="*{nomArticle}" type="text" required></p>
-                <p>Description<input data-th-field="*{description}" type="text" required></p>
+                <p>Description<input data-th-field="*{description}" type="text" minlength="5" maxlength="300" required></p>
 
                 <p>Catégorie <select name="noCategorie">
                     <option  data-th-each="c : ${listeCategories}" data-th-text="${c.libelle}" data-th-value="${c.noCategorie}"></option>
@@ -20,12 +20,15 @@
                 <p>Mise à prix<input data-th-field="*{miseAPrix}" type="number" id="age" min="0" step="1" value="310"
                                      required onchange="changerAge()">
                 </p>
+                <div id="date"></div>
+                <div id="dateEnchere"></div>
+                <div id="dateFinEnchere"></div>
                 <p>Début de l'enchère<input data-th-field="*{dateDebutEncheres}" type="date" id="start"
-                                            name="trip-start" value="2025-07-22" min="2025-01-29"
+                                            name="trip-start" value="2025-07-22" data-th-min="${}"
                                             max="2100-12-31"></p>
                 </p>
                 <p>Fin de l'enchère<input data-th-field="*{dateFinEncheres}" type="date" id="end" name="trip-start"
-                                          value="2025-07-22" min="2025-01-01"
+                                          value="2025-07-22" min="2025-07-28"
                                           max="2100-12-31"></p>
 
                 <div data-th-object="${retrait}" class="retrait">Retrait
