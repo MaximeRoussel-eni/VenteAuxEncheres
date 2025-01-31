@@ -17,6 +17,12 @@ public class Retrait {
         this.ville = ville;
     }
 
+    public Retrait(String rue, String codePostal, String ville) {
+        this.rue = rue;
+        this.codePostal = codePostal;
+        this.ville = ville;
+    }
+
     // getter setter
 
 
@@ -40,7 +46,7 @@ public class Retrait {
         return codePostal;
     }
 
-    public void setCodePostal(String code_postal) {
+    public void setCodePostal(String codePostal) {
         this.codePostal = codePostal;
     }
 

@@ -63,6 +63,7 @@ public class ArticleVenduController {
                                     @RequestParam(name = "noCategorie") String categorie){
         int noCategorie = Integer.parseInt(categorie);
         articleVenduService.addArticleVendu(articleVendu, utilisateurEnSession, retrait, noCategorie);
+
         return "redirect:/encheres";
     }
 
