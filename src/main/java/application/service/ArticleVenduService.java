@@ -9,7 +9,7 @@ import java.util.List;
 
 public interface ArticleVenduService {
 
-        void addArticleVendu(ArticleVendu articleVendu, Utilisateur utilisateurEnSession, Retrait retrait);
+        void addArticleVendu(ArticleVendu articleVendu, Utilisateur utilisateurEnSession, Retrait retrait, int no_categorie);
 
         void removeArticleVendu(int noArticle);
 

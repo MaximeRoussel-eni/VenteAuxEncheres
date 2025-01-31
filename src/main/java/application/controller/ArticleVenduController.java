@@ -57,8 +57,11 @@ public class ArticleVenduController {
 
     @PostMapping("/creer")
     public String creerArticleVendu(@ModelAttribute("articleVendu") ArticleVendu articleVendu,
-                                    @ModelAttribute("utilisateurEnSession") Utilisateur utilisateurEnSession, @ModelAttribute("retrait") Retrait retrait){
-        articleVenduService.addArticleVendu(articleVendu, utilisateurEnSession, retrait);
+                                    @ModelAttribute("utilisateurEnSession") Utilisateur utilisateurEnSession,
+                                    @ModelAttribute("retrait") Retrait retrait,
+                                    @RequestParam(name = "noCategorie") String categorie){
+        int noCategorie = Integer.parseInt(categorie);
+        articleVenduService.addArticleVendu(articleVendu, utilisateurEnSession, retrait, noCategorie);
         return "redirect:/encheres";
     }
 

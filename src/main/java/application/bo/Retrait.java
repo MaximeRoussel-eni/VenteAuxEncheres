@@ -40,7 +40,7 @@ public class Retrait {
         return codePostal;
     }
 
-    public void setCodePostal(String code_postal) {
+    public void setCodePostal(String codePostal) {
         this.codePostal = codePostal;
     }
 

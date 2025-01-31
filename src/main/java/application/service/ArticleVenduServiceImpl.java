@@ -1,9 +1,11 @@
 package application.service;
 
 import application.bo.ArticleVendu;
+import application.bo.Categorie;
 import application.bo.Retrait;
 import application.bo.Utilisateur;
 import application.dal.ArticleVenduDao;
+import application.dal.CategorieDao;
 import application.dal.RetraitDao;
 import org.springframework.stereotype.Service;
 
@@ -15,18 +17,21 @@ public class ArticleVenduServiceImpl implements ArticleVenduService {
     private UtilisateurService utilisateurService;
     private RetraitDao retraitDao;
     private ArticleVenduDao articleVenduDao;
+    private CategorieDao categorieDao;
 
-    public ArticleVenduServiceImpl(ArticleVenduDao articleVenduDao, UtilisateurService utilisateurService, RetraitDao retraitDao){
+    public ArticleVenduServiceImpl(ArticleVenduDao articleVenduDao, UtilisateurService utilisateurService, RetraitDao retraitDao, CategorieDao categorieDao) {
         this.articleVenduDao = articleVenduDao;
         this.utilisateurService = utilisateurService;
         this.retraitDao = retraitDao;
+        this.categorieDao = categorieDao;
     }
 
     @Override
-    public void addArticleVendu(ArticleVendu articleVendu, Utilisateur utilisateurEnSession, Retrait retrait) {
+    public void addArticleVendu(ArticleVendu articleVendu, Utilisateur utilisateurEnSession, Retrait retrait, int noCategorie) {
         articleVendu.setUtilisateurVendeur(utilisateurEnSession);
         int noRetrait = retraitDao.createRetrait(retrait);
-        articleVenduDao.create(articleVendu,noRetrait);
+        categorieDao.getCategorieById(noCategorie);
+        articleVenduDao.create(articleVendu,noRetrait,noCategorie);
     }
 
     @Override
