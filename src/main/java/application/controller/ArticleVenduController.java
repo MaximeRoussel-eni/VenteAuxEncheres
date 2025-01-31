@@ -2,7 +2,9 @@ package application.controller;
 
 import application.bo.ArticleVendu;
 import application.bo.Categorie;
+import application.bo.Retrait;
 import application.bo.Utilisateur;
+import application.dal.RetraitDao;
 import application.service.CategorieService;
 import application.service.UtilisateurService;
 import org.springframework.stereotype.Controller;
@@ -45,16 +47,21 @@ public class ArticleVenduController {
     }
 
     @GetMapping("/creer")
-    public String afficherCreerArticleVendu(Model model, @ModelAttribute("utilisateurEnSession") Utilisateur utilisateurEnSession){
+    public String afficherCreerArticleVendu(Model model, @ModelAttribute("utilisateurEnSession") Utilisateur utilisateurEnSession) {
         List<Categorie> listCategories = categorieService.getAllCategories();
         model.addAttribute("listeCategories", listCategories);
         model.addAttribute("articleVendu", new ArticleVendu());
+        model.addAttribute("retrait", new Retrait());
         return "auction-create";
     }
 
     @PostMapping("/creer")
-    public String creerArticleVendu(@ModelAttribute("articleVendu") ArticleVendu articleVendu, @ModelAttribute("utilisateurEnSession") Utilisateur utilisateurEnSession){
-        articleVenduService.addArticleVendu(articleVendu, utilisateurEnSession);
+    public String creerArticleVendu(@ModelAttribute("articleVendu") ArticleVendu articleVendu,
+                                    @ModelAttribute("utilisateurEnSession") Utilisateur utilisateurEnSession,
+                                    @ModelAttribute("retrait") Retrait retrait,
+                                    @RequestParam(name = "noCategorie") String categorie){
+        int noCategorie = Integer.parseInt(categorie);
+        articleVenduService.addArticleVendu(articleVendu, utilisateurEnSession, retrait, noCategorie);
         return "redirect:/encheres";
     }
 
