@@ -21,8 +21,8 @@ public class UtilisateurDaoImpl implements UtilisateurDao {
     private JdbcTemplate jdbcTemplate;
 
 
-    private final String INSERT_UTILISATEUR ="INSERT INTO UTILISATEURS (pseudo, nom, prenom, email, telephone, rue, code_postal, ville, mot_de_passe, credit, administrateur) " +
-            "VALUES (:pseudo, :nom, :prenom, :email, :telephone, :rue, :code_postal, :ville, :mot_de_passe,:credit, :administrateur)";
+    private final String INSERT_UTILISATEUR ="INSERT INTO UTILISATEURS (pseudo, nom, prenom, email, telephone, rue, code_postal, ville, mot_de_passe, credit, administrateur, enabled) " +
+            "VALUES (:pseudo, :nom, :prenom, :email, :telephone, :rue, :code_postal, :ville, :mot_de_passe,:credit, :administrateur, :enabled)";
 
     private final String UPDATE_UTILISATEUR = "UPDATE UTILISATEURS SET pseudo = :pseudo, nom = :nom, prenom = :prenom, email= :email, " +
             "telephone=:telephone, rue=:rue, code_postal=:code_postal, ville=:ville, motDePasse= :motDePasse WHERE no_utilisateur = :no_utilisateur";
@@ -50,6 +50,7 @@ public class UtilisateurDaoImpl implements UtilisateurDao {
         namedParameters.addValue("mot_de_passe", utilisateur.getMotDePasse());
         namedParameters.addValue("administrateur", false);
         namedParameters.addValue("credit", 0);
+        namedParameters.addValue("enabled", true);
         namedParameterJdbcTemplate.update(INSERT_UTILISATEUR, namedParameters);
     }
 

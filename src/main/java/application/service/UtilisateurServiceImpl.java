@@ -11,15 +11,20 @@ import org.springframework.stereotype.Service;
 @Service
 public class UtilisateurServiceImpl implements UtilisateurService {
 
-    private UtilisateurDao utilisateurDao ;
 
-    public UtilisateurServiceImpl(UtilisateurDao utilisateurDao) {
+    private UtilisateurDao utilisateurDao ;
+    private PasswordEncoder passwordEncoder;
+
+    public UtilisateurServiceImpl(UtilisateurDao utilisateurDao, PasswordEncoder passwordEncoder) {
         this.utilisateurDao = utilisateurDao;
+        this.passwordEncoder = passwordEncoder;
     }
 
     @Override
     public void addUtilisateur(Utilisateur utilisateur) {
+        utilisateur.setMotDePasse(passwordEncoder.encode(utilisateur.getMotDePasse()));
         utilisateurDao.create(utilisateur);
+        System.out.println(utilisateur);
     }
 
     @Override

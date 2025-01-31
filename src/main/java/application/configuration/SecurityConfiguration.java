@@ -55,7 +55,7 @@ public class SecurityConfiguration {
                 .loginPage("/encheres/connexion")
                 .loginProcessingUrl("/encheres/connexion")
                 .defaultSuccessUrl("/encheres", true)
-                .failureUrl("/encheres/connexion?error=true")
+                .failureUrl("/encheres/error")
                 .permitAll()
         );
 
@@ -69,8 +69,9 @@ public class SecurityConfiguration {
     }
     @Bean
     public PasswordEncoder passwordEncoder() {
-        return NoOpPasswordEncoder.getInstance(); // Désactive le hashage des mots de passe
+        return new BCryptPasswordEncoder();
     }
+
 
     @Bean
     public AuthenticationManager authenticationManager(UserDetailsService userDetailsService, PasswordEncoder passwordEncoder) {

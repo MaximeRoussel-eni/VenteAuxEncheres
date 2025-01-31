@@ -14,7 +14,7 @@
 </button>
 <div class="container mt-5">
     <h2>Formulaire d'Inscription</h2>
-    <form method="post" th:object="${utilisateur}">
+    <form method="post" th:action="@{/encheres/inscription}" th:object="${utilisateur}">
         <!-- Pseudo -->
         <div class="form-group">
             <label for="pseudo">Pseudo :</label>
