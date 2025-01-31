@@ -10,14 +10,14 @@ public class ArticleVendu {
     private String description;
     private LocalDate dateDebutEncheres;
     private LocalDate dateFinEncheres;
-    private int miseAPrix;
+    private int prixInitial;
     private int prixVente;
-    private EtatVente etatVente;
+    private Utilisateur utilisateurVendeur;
     private Categorie categorie;
     private Retrait retrait;
-    private Utilisateur utilisateurVendeur;
     private Utilisateur utilisateurAcheteur;
     private List<Enchere> encheres = new ArrayList<Enchere>();
+    private EtatVente etatVente;
 
 
     //constructor
@@ -25,19 +25,35 @@ public class ArticleVendu {
 
     public ArticleVendu() {}
 
-    public ArticleVendu(String nomArticle, String description, LocalDate dateDebutEncheres, LocalDate dateFinEncheres, int miseAPrix, int prixVente, EtatVente etatVente, Categorie categorie, Retrait retrait, Utilisateur utilisateurVendeur, Utilisateur utilisateurAcheteur, List<Enchere> encheres) {
+    public ArticleVendu(int noArticle, String nomArticle, String description, LocalDate dateDebutEncheres, LocalDate dateFinEncheres, int prixInitial, int prixVente, Utilisateur utilisateurVendeur, Categorie categorie, Retrait retrait, Utilisateur utilisateurAcheteur, List<Enchere> encheres, EtatVente etatVente) {
+        this.noArticle = noArticle;
         this.nomArticle = nomArticle;
         this.description = description;
         this.dateDebutEncheres = dateDebutEncheres;
         this.dateFinEncheres = dateFinEncheres;
-        this.miseAPrix = miseAPrix;
+        this.prixInitial = prixInitial;
         this.prixVente = prixVente;
-        this.etatVente = etatVente;
+        this.utilisateurVendeur = utilisateurVendeur;
         this.categorie = categorie;
         this.retrait = retrait;
-        this.utilisateurVendeur = utilisateurVendeur;
         this.utilisateurAcheteur = utilisateurAcheteur;
         this.encheres = encheres;
+        this.etatVente = etatVente;
+    }
+
+    public ArticleVendu(String nomArticle, String description, LocalDate dateDebutEncheres, LocalDate dateFinEncheres, int prixInitial, int prixVente, Utilisateur utilisateurVendeur, Categorie categorie, Retrait retrait, Utilisateur utilisateurAcheteur, List<Enchere> encheres, EtatVente etatVente) {
+        this.nomArticle = nomArticle;
+        this.description = description;
+        this.dateDebutEncheres = dateDebutEncheres;
+        this.dateFinEncheres = dateFinEncheres;
+        this.prixInitial = prixInitial;
+        this.prixVente = prixVente;
+        this.utilisateurVendeur = utilisateurVendeur;
+        this.categorie = categorie;
+        this.retrait = retrait;
+        this.utilisateurAcheteur = utilisateurAcheteur;
+        this.encheres = encheres;
+        this.etatVente = etatVente;
     }
 
 
@@ -86,12 +102,12 @@ public class ArticleVendu {
         this.dateFinEncheres = dateFinEncheres;
     }
 
-    public int getMiseAPrix() {
-        return miseAPrix;
+    public int getPrixInitial() {
+        return prixInitial;
     }
 
-    public void setMiseAPrix(int miseAPrix) {
-        this.miseAPrix = miseAPrix;
+    public void setPrixInitial(int prixInitial) {
+        this.prixInitial = prixInitial;
     }
 
     public int getPrixVente() {
@@ -160,14 +176,14 @@ public class ArticleVendu {
                 ", description='" + description + '\'' +
                 ", dateDebutEncheres=" + dateDebutEncheres +
                 ", dateFinEncheres=" + dateFinEncheres +
-                ", miseAPrix=" + miseAPrix +
+                ", prixInitial=" + prixInitial +
                 ", prixVente=" + prixVente +
-                ", etatVente=" + etatVente +
+                ", utilisateurVendeur=" + utilisateurVendeur +
                 ", categorie=" + categorie +
                 ", retrait=" + retrait +
-                ", utilisateurVendeur=" + utilisateurVendeur +
                 ", utilisateurAcheteur=" + utilisateurAcheteur +
                 ", encheres=" + encheres +
+                ", etatVente=" + etatVente +
                 '}';
     }
 }

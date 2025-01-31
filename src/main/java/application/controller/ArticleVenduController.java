@@ -2,6 +2,7 @@ package application.controller;
 
 import application.bo.ArticleVendu;
 import application.bo.Categorie;
+import application.bo.Retrait;
 import application.bo.Utilisateur;
 import application.service.CategorieService;
 import application.service.UtilisateurService;
@@ -10,6 +11,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import application.service.ArticleVenduService;
 
+import java.time.LocalDate;
 import java.util.List;
 
 
@@ -29,13 +31,12 @@ public class ArticleVenduController {
     }
 
 
-
     @GetMapping()
     public String afficherEncheres(Model model){
         List<Categorie> listCategories = categorieService.getAllCategories();
         model.addAttribute("listeCategories", listCategories);
-        //List<ArticleVendu> articleVenduList = articleVenduService.getAllArticleVendu();
-        //model.addAttribute("articleVenduList", articleVenduList);
+        List<ArticleVendu> articleVenduList = articleVenduService.getAllArticleVendu();
+        model.addAttribute("articleVenduList", articleVenduList);;
         return "auctions";
     }
 
@@ -45,16 +46,23 @@ public class ArticleVenduController {
     }
 
     @GetMapping("/creer")
-    public String afficherCreerArticleVendu(Model model, @ModelAttribute("utilisateurEnSession") Utilisateur utilisateurEnSession){
+    public String afficherCreerArticleVendu(Model model, @ModelAttribute("utilisateurEnSession") Utilisateur utilisateurEnSession) {
+        LocalDate date = LocalDate.now();
         List<Categorie> listCategories = categorieService.getAllCategories();
+        model.addAttribute("localdate", date);
         model.addAttribute("listeCategories", listCategories);
         model.addAttribute("articleVendu", new ArticleVendu());
+        model.addAttribute("retrait", new Retrait());
         return "auction-create";
     }
 
     @PostMapping("/creer")
-    public String creerArticleVendu(@ModelAttribute("articleVendu") ArticleVendu articleVendu, @ModelAttribute("utilisateurEnSession") Utilisateur utilisateurEnSession){
-        articleVenduService.addArticleVendu(articleVendu, utilisateurEnSession);
+    public String creerArticleVendu(@ModelAttribute("articleVendu") ArticleVendu articleVendu,
+                                    @ModelAttribute("utilisateurEnSession") Utilisateur utilisateurEnSession,
+                                    @ModelAttribute("retrait") Retrait retrait,
+                                    @RequestParam(name = "noCategorie") String categorie){
+        int noCategorie = Integer.parseInt(categorie);
+        articleVenduService.addArticleVendu(articleVendu, utilisateurEnSession, retrait, noCategorie);
         return "redirect:/encheres";
     }
 
@@ -62,6 +70,7 @@ public class ArticleVenduController {
     public String detailArticleVendu(Model model, @RequestParam(name = "noArticleVendu") int noArticleVendu){
         ArticleVendu articleVendu = articleVenduService.getArticleVendu(noArticleVendu);
         model.addAttribute("articleVendu", articleVendu);
+        System.out.println(articleVendu);
         return "auction-detail";
     }
 }

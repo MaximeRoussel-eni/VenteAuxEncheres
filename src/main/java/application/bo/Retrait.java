@@ -1,6 +1,7 @@
 package application.bo;
 
 public class Retrait {
+    private int noRetrait;
     private String rue;
     private String codePostal;
     private String ville;
@@ -9,13 +10,23 @@ public class Retrait {
     public Retrait() {
     }
 
-    public Retrait(String rue, String codePostal, String ville) {
+    public Retrait(int noRetrait,String rue, String codePostal, String ville) {
+        this.noRetrait = noRetrait;
         this.rue = rue;
         this.codePostal = codePostal;
         this.ville = ville;
     }
 
     // getter setter
+
+
+    public int getNoRetrait() {
+        return noRetrait;
+    }
+
+    public void setNoRetrait(int noRetrait) {
+        this.noRetrait = noRetrait;
+    }
 
     public String getRue() {
         return rue;
@@ -44,7 +55,8 @@ public class Retrait {
     @Override
     public String toString() {
         return "Retrait{" +
-                "rue='" + rue + '\'' +
+                "noRetrait=" + noRetrait +
+                ", rue='" + rue + '\'' +
                 ", codePostal='" + codePostal + '\'' +
                 ", ville='" + ville + '\'' +
                 '}';

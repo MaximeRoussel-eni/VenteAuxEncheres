@@ -1,13 +1,15 @@
 package application.service;
 
 import application.bo.ArticleVendu;
+import application.bo.Retrait;
 import application.bo.Utilisateur;
+import application.dal.RetraitDao;
 
 import java.util.List;
 
 public interface ArticleVenduService {
 
-        void addArticleVendu(ArticleVendu articleVendu, Utilisateur utilisateurEnSession);
+        void addArticleVendu(ArticleVendu articleVendu, Utilisateur utilisateurEnSession, Retrait retrait, int no_categorie);
 
         void removeArticleVendu(int noArticle);
 
