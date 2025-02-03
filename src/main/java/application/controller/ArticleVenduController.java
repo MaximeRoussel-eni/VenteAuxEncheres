@@ -22,31 +22,38 @@ import java.util.List;
 @SessionAttributes("utilisateurEnSession")
 public class ArticleVenduController {
 
-    private ArticleVenduService articleVenduService;
-    private CategorieService categorieService;
-    private UtilisateurService utilisateurService;
+    private final ArticleVenduService articleVenduService;
+    private final CategorieService categorieService;
+    private final UtilisateurService utilisateurService;
 
-    public ArticleVenduController(ArticleVenduService articleVenduService,CategorieService categorieService,UtilisateurService utilisateurService ) {
+    // Constructor injection
+    public ArticleVenduController(ArticleVenduService articleVenduService,
+                                  CategorieService categorieService,
+                                  UtilisateurService utilisateurService) {
         this.articleVenduService = articleVenduService;
         this.categorieService = categorieService;
         this.utilisateurService = utilisateurService;
     }
 
-
-    @GetMapping()
-    public String afficherEncheres(Model model){
-        List<Categorie> listCategories = categorieService.getAllCategories();
-        model.addAttribute("listeCategories", listCategories);
-        List<ArticleVendu> articleVenduList = articleVenduService.getAllArticleVendu();
-        model.addAttribute("articleVenduList", articleVenduList);;
-        return "auctions";
-    }
-
     @ModelAttribute("utilisateurEnSession")
     public Utilisateur getUtilisateurEnSession() {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-        String pseudo = authentication.getName();
-        return utilisateurService.getUtilisateurByPseudo(pseudo);
+
+        // Vérifie si l'utilisateur est authentifié
+        if (authentication != null && authentication.isAuthenticated() && !"anonymousUser".equals(authentication.getName())) {
+            String pseudo = authentication.getName();
+            return utilisateurService.getUtilisateurByPseudo(pseudo);
+        }
+        return null;
+    }
+
+    @GetMapping()
+    public String afficherEncheres(Model model) {
+        List<Categorie> listCategories = categorieService.getAllCategories();
+        model.addAttribute("listeCategories", listCategories);
+        List<ArticleVendu> articleVenduList = articleVenduService.getAllArticleVendu();
+        model.addAttribute("articleVenduList", articleVenduList);
+        return "auctions";
     }
 
     @GetMapping("/creer")
@@ -64,7 +71,7 @@ public class ArticleVenduController {
     public String creerArticleVendu(@ModelAttribute("articleVendu") ArticleVendu articleVendu,
                                     @ModelAttribute("utilisateurEnSession") Utilisateur utilisateurEnSession,
                                     @ModelAttribute("retrait") Retrait retrait,
-                                    @RequestParam(name = "noCategorie") String categorie){
+                                    @RequestParam(name = "noCategorie") String categorie) {
         int noCategorie = Integer.parseInt(categorie);
         articleVenduService.addArticleVendu(articleVendu, utilisateurEnSession, retrait, noCategorie);
 
@@ -72,10 +79,11 @@ public class ArticleVenduController {
     }
 
     @GetMapping("/detail")
-    public String detailArticleVendu(Model model, @RequestParam(name = "noArticleVendu") int noArticleVendu){
+    public String detailArticleVendu(Model model, @RequestParam(name = "noArticleVendu") int noArticleVendu) {
         ArticleVendu articleVendu = articleVenduService.getArticleVendu(noArticleVendu);
         model.addAttribute("articleVendu", articleVendu);
         System.out.println(articleVendu);
         return "auction-detail";
     }
 }
+
