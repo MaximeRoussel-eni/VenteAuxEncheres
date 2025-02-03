@@ -22,12 +22,10 @@
                 </p>
                 <p>Début de l'enchère<input data-th-field="*{dateDebutEncheres}" type="date" id="start"
                                             name="trip-start" value="2025-07-22" data-th-min="${localdate.now()}"
-                                            data-th-max="${localdate.now()}"
                                             max="2100-12-31"></p>
                 </p>
                 <p>Fin de l'enchère<input data-th-field="*{dateFinEncheres}" type="date" id="end" name="trip-start"
-                                          value="2025-07-22" data-th-min="${localdate.now()}"
-                                          max="2100-12-31"></p>
+                                          value="2025-07-22" data-th-min="${localdate.now()}"></p>
 
                 <div data-th-object="${retrait}" class="retrait">Retrait
                     <p>Rue<input data-th-field="*{rue}" type="text"></p>

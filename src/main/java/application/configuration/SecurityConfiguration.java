@@ -15,6 +15,7 @@ import org.springframework.security.provisioning.JdbcUserDetailsManager;
 import org.springframework.security.provisioning.UserDetailsManager;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
 import javax.sql.DataSource;
 
@@ -46,8 +47,8 @@ public class SecurityConfiguration {
         http.authorizeHttpRequests(auth -> {
             auth.requestMatchers(HttpMethod.GET, "/encheres").permitAll();
             auth.requestMatchers("/css/*", "/js/*", "/img/*").permitAll();
-            auth.requestMatchers("/encheres/profilUtilisateur","/encheres/creer").authenticated();
-            auth.requestMatchers("/encheres" , "/encheres/connexion", "/encheres/inscription", "/encheres/detail").permitAll();
+            auth.requestMatchers("/encheres/profilUtilisateur", "/encheres/creer", "/encheres/detail").authenticated();
+            auth.requestMatchers("/encheres", "/encheres/connexion", "/encheres/inscription","/encheres/logout","/encheres/error").permitAll();
             auth.anyRequest().denyAll();
         });
 
@@ -60,13 +61,18 @@ public class SecurityConfiguration {
         );
 
         http.logout(logout -> logout
-                .logoutUrl("/encheres/deconnexion")
-                .logoutSuccessUrl("/encheres/connexion?logout=true")
+                .invalidateHttpSession(true)
+                .clearAuthentication(true)
+                .deleteCookies("JSESSIONID")
+                .logoutUrl("/encheres/logout")
+                .logoutSuccessUrl("/encheres")
                 .permitAll()
         );
 
         return http.build();
     }
+
+
     @Bean
     public PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
