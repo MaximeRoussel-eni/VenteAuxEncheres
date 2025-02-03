@@ -46,8 +46,8 @@ public class SecurityConfiguration {
         http.authorizeHttpRequests(auth -> {
             auth.requestMatchers(HttpMethod.GET, "/encheres").permitAll();
             auth.requestMatchers("/css/*", "/js/*", "/img/*").permitAll();
-            auth.requestMatchers("/encheres/profilUtilisateur").authenticated();
-            auth.requestMatchers("/encheres" , "/encheres/connexion", "/encheres/inscription").permitAll();
+            auth.requestMatchers("/encheres/profilUtilisateur","/encheres/creer").authenticated();
+            auth.requestMatchers("/encheres" , "/encheres/connexion", "/encheres/inscription", "/encheres/detail").permitAll();
             auth.anyRequest().denyAll();
         });
 

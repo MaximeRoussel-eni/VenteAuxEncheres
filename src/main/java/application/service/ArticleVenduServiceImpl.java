@@ -1,15 +1,13 @@
 package application.service;
 
-import application.bo.ArticleVendu;
-import application.bo.Categorie;
-import application.bo.Retrait;
-import application.bo.Utilisateur;
+import application.bo.*;
 import application.dal.ArticleVenduDao;
 import application.dal.CategorieDao;
 import application.dal.CategorieDao;
 import application.dal.RetraitDao;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
 import java.util.List;
 
 @Service
@@ -49,7 +47,9 @@ public class ArticleVenduServiceImpl implements ArticleVenduService {
     @Override
     public ArticleVendu getArticleVendu(int noArticle) {
         var article = articleVenduDao.read(noArticle);
-        System.out.println(article);
+        if (article.getDateFinEncheres().isBefore(LocalDate.now())) article.setEtatVente(EtatVente.TERMINE);
+        if (article.getDateFinEncheres().isAfter(LocalDate.now()) && article.getDateDebutEncheres().isBefore(LocalDate.now())) article.setEtatVente(EtatVente.EN_COURS);
+        if (article.getDateDebutEncheres().isAfter(LocalDate.now())) article.setEtatVente(EtatVente.NON_COMMENCE);
         return article;
     }
 

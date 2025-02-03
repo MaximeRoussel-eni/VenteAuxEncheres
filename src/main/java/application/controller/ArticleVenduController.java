@@ -6,11 +6,15 @@ import application.bo.Retrait;
 import application.bo.Utilisateur;
 import application.service.CategorieService;
 import application.service.UtilisateurService;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContext;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import application.service.ArticleVenduService;
 
+import java.security.Principal;
 import java.time.LocalDate;
 import java.util.List;
 
@@ -68,10 +72,11 @@ public class ArticleVenduController {
     }
 
     @GetMapping("/detail")
-    public String detailArticleVendu(Model model, @RequestParam(name = "noArticleVendu") int noArticleVendu){
+    public String detailArticleVendu(Model model,@RequestParam(name = "noArticleVendu") int noArticleVendu, Principal principal){
         ArticleVendu articleVendu = articleVenduService.getArticleVendu(noArticleVendu);
+        //Utilisateur utilisateurEnSession = utilisateurService.getUtilisateurByPseudo(principal.getName());
         model.addAttribute("articleVendu", articleVendu);
-        System.out.println(articleVendu);
+        //model.addAttribute("utilisateurEnSession", utilisateurEnSession);
         return "auction-detail";
     }
 }
