@@ -14,7 +14,9 @@ public interface UtilisateurDao {
 
     void deleteByPseudo(Utilisateur utilisateur);
 
-    Utilisateur read(int id);
+    Utilisateur read(int noUtilisateur);
+
+    Utilisateur readByPseudo (String pseudo);
 
     List<Utilisateur> readAll();
 

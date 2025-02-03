@@ -1,4 +1,5 @@
-<html data-th-replace="~{fragments/layout::layout(title=~{::title}, main=~{::main})}">
+<html data-th-replace="~{fragments/layout::layout(title=~{::title}, main=~{::main})}"
+      xmlns:sec="http://www.w3.org/1999/xhtml">
 
 <title>Detail de l'enchère</title>
 
@@ -9,16 +10,16 @@
             <h1>Detail Vente</h1>
         </section>
     </div>
-    <form method="post" data-th-object="${articleVendu}" class="formulaireVente">
-        <p>Article<input data-th-text="*{nomArticle}" type="text" readonly></p>
-        <p>Description<input type="text" data-th-text="*{description}" readonly></p>
-        <p>Catégorie<input type="text" data-th-text="*{categorie.getLibelle()}" readonly></p>
-        <p>Meilleure offre<input type="text" data-th-text="*{prixVente}" readonly></p>
-        <p>Mise à prix<input type="text" data-th-text="*{prixInitial}" readonly></p>
-        <p>Fin de l'enchère<input type="text" data-th-text="*{dateFinEncheres}" readonly></p>
+    <form method="post" class="formulaireVente">
+        <p>Article<input data-th-text="${nomArticle}" type="text" readonly></p>
+        <p>Description<input type="text" data-th-text="${description}" readonly></p>
+        <p>Catégorie<input type="text" data-th-text="${categorie.getLibelle()}" readonly></p>
+        <p>Meilleure offre<input type="text" data-th-text="${prixVente}" readonly></p>
+        <p>Mise à prix<input type="text" data-th-text="${prixInitial}" readonly></p>
+        <p>Fin de l'enchère<input type="text" data-th-text="${dateFinEncheres}" readonly></p>
        <!-- <p>Retrait<input type="text" data-th-text="*{utilisateurVendeur.ville}" readonly></p>
         <p>Vendeur<input type="text" data-th-text="*{utilisateurVendeur}" readonly></p> -->
-        <p>Ma proposition<input type="text" data-th-min="*{prixVente}" ></p>
+        <p>Ma proposition<input type="text" data-th-min="${prixVente}" ></p>
     </form>
 </main>
 

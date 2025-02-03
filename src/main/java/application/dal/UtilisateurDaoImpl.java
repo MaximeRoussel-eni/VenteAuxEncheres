@@ -33,6 +33,8 @@ public class UtilisateurDaoImpl implements UtilisateurDao {
 
     private final String READ_ALL_UTILISATEURS = "SELECT * FROM UTILISATEURS";
 
+    private final String READ_UTILISATEUR_BY_PSEUDO = "SELECT * FROM UTILISATEURS WHERE pseudo = :pseudo";
+
 
 
 
@@ -86,6 +88,14 @@ public class UtilisateurDaoImpl implements UtilisateurDao {
         namedParameters.addValue("no_utilisateur", noUtilisateur);
         return namedParameterJdbcTemplate.queryForObject(READ_UTILISATEUR_BY_NOUTILISATEUR, namedParameters, new BeanPropertyRowMapper<>(Utilisateur.class));
     }
+
+    @Override
+    public Utilisateur readByPseudo(String pseudo) {
+        MapSqlParameterSource namedParameters = new MapSqlParameterSource();
+        namedParameters.addValue("pseudo", pseudo);
+        return namedParameterJdbcTemplate.queryForObject(READ_UTILISATEUR_BY_PSEUDO, namedParameters, new BeanPropertyRowMapper<>(Utilisateur.class));
+    }
+
 
     @Override
     public List<Utilisateur> readAll() {
