@@ -6,6 +6,8 @@ import application.bo.Retrait;
 import application.bo.Utilisateur;
 import application.service.CategorieService;
 import application.service.UtilisateurService;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -42,7 +44,9 @@ public class ArticleVenduController {
 
     @ModelAttribute("utilisateurEnSession")
     public Utilisateur getUtilisateurEnSession() {
-        return utilisateurService.getUtilisateur(1);
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        String pseudo = authentication.getName();
+        return utilisateurService.getUtilisateurByPseudo(pseudo);
     }
 
     @GetMapping("/creer")

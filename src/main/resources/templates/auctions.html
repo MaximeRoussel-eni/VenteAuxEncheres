@@ -28,9 +28,9 @@
             <a href="login.html">Rechercher</a>
         </section>
     </div>
-    <div class="Articles">
-        <section class="dansArticles"></section>
-        <section class="dansArticles"></section>
+    <div  data-th-each="a : ${articleVenduList}" data-th-value="*{a.noArticle}"class="Articles">
+        <section  data-th-text="*{a.getNomArticle()}"  class="dansArticles"></section>
+        <a data-th-href="@{/encheres/detail(noArticle=${a.noArticle})}">Detail</a>
     </div>
 </main>
 </html>
