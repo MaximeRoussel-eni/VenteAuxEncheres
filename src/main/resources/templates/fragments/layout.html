@@ -15,10 +15,26 @@
     <header>
         <nav>
             <div>
-                <button><a th:href="@{/encheres/connexion}"> <img th:src="@{/img/logo.webp}" alt="logo enchères" height="150" width="150"/></a></button>
-               <a th:href="@{/encheres/connexion}">S'inscrire - Se connecter</a>
+                <button><a th:href="@{/encheres/connexion}">
+                    <img th:src="@{/img/logo.webp}" alt="logo enchères" height="150" width="150"/>
+                </a></button>
             </div>
+
+            <!-- Lien pour "Se connecter" -->
+            <li data-th-if="${!#authorization.expression('isAuthenticated()')}">
+                <a th:href="@{/login}">Se connecter</a>
+            </li>
+
+            <!-- Formulaire pour "Se déconnecter" -->
+            <li data-th-if="${#authorization.expression('isAuthenticated()')}">
+                <form th:action="@{/encheres/logout}" method="post" style="display:inline;">
+                    <button type="submit" style="background:none;border:none;color:blue;text-decoration:underline;cursor:pointer;">
+                        Se déconnecter
+                    </button>
+                </form>
+            </li>
         </nav>
+
     </header>
 
     <main data-th-replace="${main}"></main>
