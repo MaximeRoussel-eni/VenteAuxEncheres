@@ -35,8 +35,8 @@ public class RetraitDaoImpl implements RetraitDao {
         namedParameters.addValue("code_postal", retrait.getCodePostal());
         namedParameters.addValue("ville", retrait.getVille());
         var keyHolder = new GeneratedKeyHolder();
-        System.out.println(retrait);
         namedParameterJdbcTemplate.update(INSERT_RETRAIT, namedParameters, keyHolder);
+        System.out.println(retrait);
         return keyHolder.getKey().intValue();
     }
 

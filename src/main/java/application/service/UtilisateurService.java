@@ -8,8 +8,12 @@ public interface UtilisateurService {
 
     Utilisateur getUtilisateur(int noUtilisateur);
 
+    Utilisateur getUtilisateurByPseudo(String pseudo);
+
     void updateUtilisateur(Utilisateur utilisateur);
 
     void deleteUtilisateur(int noUtilisateur);
+
+
 
 }
