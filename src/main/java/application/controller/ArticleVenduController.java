@@ -76,7 +76,18 @@ public class ArticleVenduController {
         ArticleVendu articleVendu = articleVenduService.getArticleVendu(noArticleVendu);
         //Utilisateur utilisateurEnSession = utilisateurService.getUtilisateurByPseudo(principal.getName());
         model.addAttribute("articleVendu", articleVendu);
+        model.addAttribute("retrait", articleVendu.getRetrait());
         //model.addAttribute("utilisateurEnSession", utilisateurEnSession);
         return "auction-detail";
+    }
+
+    @PostMapping("/detail")
+    public String updateArticleVendu(@ModelAttribute("articleVendu") ArticleVendu articleVendu,
+                                     @ModelAttribute("retrait") Retrait retrait,
+                                     @RequestParam(name="noCategorie") String categorie){
+        articleVendu.setRetrait(retrait);
+        articleVendu.getCategorie().setNoCategorie(Integer.parseInt(categorie));
+        articleVenduService.updateArticleVendu(articleVendu);
+        return "redirect:/encheres";
     }
 }

@@ -20,7 +20,6 @@
             <p>Lieu de retrait  <input type="text" data-th-value="${articleVendu.retrait.rue} + ' ' + ${articleVendu.retrait.codePostal} + ' ' + ${articleVendu.retrait.ville}" readonly></p>
             <p>Prix initial <input type="text" data-th-value="${articleVendu.prixInitial} + ' crédits'"></p>
             <p>Prix actuel <input type="text" data-th-value="${articleVendu.prixVente} + ' crédits'" ></p>
-            <p data-th-text="${#authentication.getName()}"></p>
         </form>
         <p>Vendeur <a th:text="${articleVendu.utilisateurVendeur.pseudo}" th:href="@{/encheres/profilUtilisateur(noUtilisateur=${articleVendu.utilisateurVendeur.noUtilisateur})}"></a> </p>
     </div>

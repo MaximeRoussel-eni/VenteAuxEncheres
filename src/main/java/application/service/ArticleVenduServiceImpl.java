@@ -55,6 +55,7 @@ public class ArticleVenduServiceImpl implements ArticleVenduService {
 
     @Override
     public void updateArticleVendu(ArticleVendu articleVendu) {
+        retraitDao.updateRetrait(articleVendu.getRetrait());
         articleVenduDao.update(articleVendu);
     }
 }
