@@ -18,4 +18,10 @@ public interface ArticleVenduDao {
 
    List<ArticleVendu> readAll();
 
+   List<ArticleVendu> readByNoCategorieAndNomArticle( String nomArticle, int noCategorie);
+
+   List<ArticleVendu> readByNoCategorie(int noCategorie);
+
+   List<ArticleVendu> readByNomArticle(String nomArticle);
+
 }
