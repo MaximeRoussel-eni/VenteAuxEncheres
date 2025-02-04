@@ -3,10 +3,11 @@ package application.bo;
 import java.time.LocalDate;
 
 public class Enchere {
-    private LocalDate dateEnchere;
-    private int montantEnchere;
     private Utilisateur utilisateur;
     ArticleVendu articleVendu;
+    private LocalDate dateEnchere;
+    private int montantEnchere;
+
 
     //constructor
 
@@ -14,32 +15,18 @@ public class Enchere {
     public Enchere() {
     }
 
-    public Enchere(LocalDate dateEnchere, int montantEnchere, Utilisateur utilisateur, ArticleVendu articleVendu) {
-        this.dateEnchere = dateEnchere;
-        this.montantEnchere = montantEnchere;
+    public Enchere(Utilisateur utilisateur, ArticleVendu articleVendu, LocalDate dateEnchere,int montantEnchere) {
         this.utilisateur = utilisateur;
         this.articleVendu=articleVendu;
+        this.dateEnchere = dateEnchere;
+        this.montantEnchere = montantEnchere;
+
+
     }
 
 
     //getter setter
 
-
-    public LocalDate getDateEnchere() {
-        return dateEnchere;
-    }
-
-    public void setDateEnchere(LocalDate dateEnchere) {
-        this.dateEnchere = dateEnchere;
-    }
-
-    public int getMontantEnchere() {
-        return montantEnchere;
-    }
-
-    public void setMontantEnchere(int montantEnchere) {
-        this.montantEnchere = montantEnchere;
-    }
 
     public Utilisateur getUtilisateur() {
         return utilisateur;
@@ -57,12 +44,29 @@ public class Enchere {
         this.articleVendu = articleVendu;
     }
 
+    public LocalDate getDateEnchere() {
+        return dateEnchere;
+    }
+
+    public void setDateEnchere(LocalDate dateEnchere) {
+        this.dateEnchere = dateEnchere;
+    }
+
+    public int getMontantEnchere() {
+        return montantEnchere;
+    }
+
+    public void setMontantEnchere(int montantEnchere) {
+        this.montantEnchere = montantEnchere;
+    }
+
     @Override
     public String toString() {
         return "Enchere{" +
-                "dateEnchère=" + dateEnchere +
+                "utilisateur=" + utilisateur +
+                ", articleVendu=" + articleVendu +
+                ", dateEnchere=" + dateEnchere +
                 ", montantEnchere=" + montantEnchere +
-                ", utilisateur=" + utilisateur +
                 '}';
     }
 }

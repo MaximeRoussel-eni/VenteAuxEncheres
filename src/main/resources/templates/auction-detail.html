@@ -31,10 +31,17 @@
             <p>Lieu de retrait  <input type="text" data-th-value="${articleVendu.retrait.rue} + ' ' + ${articleVendu.retrait.codePostal} + ' ' + ${articleVendu.retrait.ville}" readonly></p>
 
             <!-- Prix de l'article -->
-            <p>Prix initial <input type="text" data-th-value="${articleVendu.prixInitial} + ' crédits'"></p>
-            <p>Prix actuel <input type="text" data-th-value="${articleVendu.prixVente} + ' crédits'" ></p>
+            <p>Prix initial <input type="text" data-th-value="${articleVendu.prixInitial} + ' crédits'" readonly></p>
+            <p>Offre la plus élevée <input type="text" data-th-value="${articleVendu.prixVente} + ' crédits'" readonly></p>
 
-            <p>Etat de la vente :<input type="text" data-th-value="${articleVendu.etatVente}"></p>
+            <p>Etat de la vente :<input type="text" data-th-value="${articleVendu.etatVente}" readonly></p>
+        </form>
+
+        <!--Formulaire de création d'offre ssi l'utilisateur connecté n'est pas lié à l'article && etatVente == EN_COURS -->
+        <form method="post" th:if="${articleVendu.etatVente.EN_COURS}" th:action="@{/encheres/detail/offre(noArticleVendu=${articleVendu.noArticle})}" th:object="${enchere}">
+            <h3>Faire une offre :</h3>
+            <p>Votre prix : <input type="number" data-th-min="${articleVendu.prixVente}" data-th-field="*{montantEnchere}"></p>
+            <button type="submit">Enchérir</button>
         </form>
 
         <!-- Lien vers les détails de l'utilisateur vendeur -->
@@ -45,7 +52,7 @@
     <!-- Formulaire modifiable ssi l'utilisateur connecté est l'utilisateur vendeur -->
 
     <div data-th-if="${utilisateurEnSession.noUtilisateur==articleVendu.utilisateurVendeur.noUtilisateur}">
-        <form method="post" data-th-object="${articleVendu}" data-th-action="@{/encheres/detail(noArticleVendu=${articleVendu.noArticle})}">
+        <form method="post" data-th-object="${articleVendu}" data-th-action="@{/encheres/detail/modifier(noArticleVendu=${articleVendu.noArticle})}">
 
             <!-- Infos base article -->
             <p>Article <input type="text" data-th-field="*{nomArticle}"></p>
