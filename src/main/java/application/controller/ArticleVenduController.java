@@ -26,7 +26,7 @@ public class ArticleVenduController {
     private final CategorieService categorieService;
     private final UtilisateurService utilisateurService;
 
-    // Constructor injection
+
     public ArticleVenduController(ArticleVenduService articleVenduService,
                                   CategorieService categorieService,
                                   UtilisateurService utilisateurService) {
@@ -39,7 +39,6 @@ public class ArticleVenduController {
     public Utilisateur getUtilisateurEnSession() {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 
-        // Vérifie si l'utilisateur est authentifié
         if (authentication != null && authentication.isAuthenticated() && !"anonymousUser".equals(authentication.getName())) {
             String pseudo = authentication.getName();
             return utilisateurService.getUtilisateurByPseudo(pseudo);
@@ -48,10 +47,19 @@ public class ArticleVenduController {
     }
 
     @GetMapping()
-    public String afficherEncheres(Model model) {
+    public String afficherEncheres(@RequestParam(name = "nomArticle", required = false) String nomArticle,
+                                   @RequestParam(name = "categorie", required = false) Integer noCategorie,
+                                   Model model) {
         List<Categorie> listCategories = categorieService.getAllCategories();
         model.addAttribute("listeCategories", listCategories);
         List<ArticleVendu> articleVenduList = articleVenduService.getAllArticleVendu();
+       if ((nomArticle != null && !nomArticle.isEmpty()) || noCategorie != null) {
+            articleVenduList = articleVenduService.getArticlesFiltres(nomArticle, noCategorie);
+        } else {
+            // Aucun filtre -> afficher tous les articles
+         articleVenduList = articleVenduService.getAllArticleVendu();
+       }
+
         model.addAttribute("articleVenduList", articleVenduList);
         return "auctions";
     }
@@ -82,7 +90,6 @@ public class ArticleVenduController {
     public String detailArticleVendu(Model model, @RequestParam(name = "noArticleVendu") int noArticleVendu) {
         ArticleVendu articleVendu = articleVenduService.getArticleVendu(noArticleVendu);
         model.addAttribute("articleVendu", articleVendu);
-        System.out.println(articleVendu);
         return "auction-detail";
     }
 }

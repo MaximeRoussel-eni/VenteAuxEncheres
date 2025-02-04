@@ -19,5 +19,8 @@ public interface ArticleVenduService {
 
         void updateArticleVendu(ArticleVendu articleVendu);
 
+        List<ArticleVendu> getArticlesFiltres(String nomArticle, Integer noCategorie);
+
+
 
 }

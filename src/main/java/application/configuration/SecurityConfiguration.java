@@ -51,6 +51,8 @@ public class SecurityConfiguration {
             auth.requestMatchers("/encheres", "/encheres/connexion", "/encheres/inscription","/encheres/logout","/encheres/error").permitAll();
             auth.anyRequest().denyAll();
         });
+        http.cors().disable();
+        http.csrf().disable();
 
         http.formLogin(form -> form
                 .loginPage("/encheres/connexion")
@@ -71,6 +73,7 @@ public class SecurityConfiguration {
 
         return http.build();
     }
+
 
 
     @Bean
