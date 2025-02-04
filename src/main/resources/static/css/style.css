@@ -1,12 +1,28 @@
 header {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;background-color: aliceblue;
+   background-color: aliceblue;border-radius: 10px;
+}
+body{
+    background-color: #ffffff;
+}
+nav{
+    display: flex;flex-direction: row;justify-content: space-between;
+}
+nav a {
+    text-decoration: none;color: black;
+}
+.Login{
+    border: solid;height: 5vh;border-radius: 10px;
+}
+.containermt_4{
+    margin: auto;
+}
+.Login :hover{
+   color: #9b59b6;
 }
 footer {
     display: flex;
     flex-direction: row;
-    justify-content: space-between;background-color: aliceblue;
+    justify-content: space-around;background-color: aliceblue;border-radius: 10px;
 }
 
 h1 {

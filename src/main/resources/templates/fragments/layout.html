@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html  xmlns:th="http://www.thymeleaf.org" lang="fr" data-th-fragment="layout(title,main)" >
+<html xmlns:th="http://www.thymeleaf.org" lang="fr" data-th-fragment="layout(title,main)">
 
 <head>
     <meta charset="UTF-8">
@@ -7,31 +7,37 @@
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title data-th-replace="${title}"></title>
-    <link rel="shortcut icon" type="image/x-icon" data-th-href="@{/img/logo.webp}" />
+    <link rel="shortcut icon" type="image/x-icon" data-th-href="@{/img/logo.webp}"/>
     <link rel="stylesheet" href="/css/style.css">
 </head>
 
 <body>
-    <header>
-        <nav>
-            <div>
-                <button class="imageLogo"><a th:href="@{/encheres/connexion}"> <img th:src="@{/img/logo.webp}" alt="logo enchères" height="150" width="150"/></a></button>
-               <a th:href="@{/encheres/connexion}">S'inscrire - Se connecter</a>
-            </div>
-        </nav>
-    </header>
+<header>
+    <nav>
+        <button class="imageLogo"><a th:href="@{/encheres/connexion}"> <img th:src="@{/img/logo.webp}"
+                                                                            alt="logo enchères" height="150"
+                                                                            width="150"/></a></button>
+        <div class="Login"><a th:href="@{/encheres/connexion}">Connexion/Inscription</a></div>
 
-    <main data-th-replace="${main}"></main>
-    <footer>
-            <div>
+    </nav>
+</header>
 
-              <p>© Eni</p>
-            </div>
-        <div>
+<main data-th-replace="${main}"></main>
+<footer>
+    <div>
 
-            <p>2025</p>
-        </div>
-    </footer>
+        <p>© Eni 2025-...</p>
+    </div>
+    <div><p>Mentions Legales</p>
+        <p>Politique de confidentialité</p>
+        <p>CGV</p>
+    </div>
+    <div><p>Nos reseaux:</p>
+        <p>Instagram</p>
+        <p>Facebook</p>
+        <p>Linkedin</p></div>
+
+</footer>
 </body>
 
 
