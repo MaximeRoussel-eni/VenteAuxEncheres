@@ -1,10 +1,10 @@
 package application.service;
 
 import application.bo.*;
-import application.dal.ArticleVenduDao;
+import application.dal.*;
 import application.dal.CategorieDao;
-import application.dal.CategorieDao;
-import application.dal.RetraitDao;
+import jakarta.persistence.Access;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
@@ -17,6 +17,7 @@ public class ArticleVenduServiceImpl implements ArticleVenduService {
     private RetraitDao retraitDao;
     private ArticleVenduDao articleVenduDao;
     private CategorieDao categorieDao;
+
 
     public ArticleVenduServiceImpl(ArticleVenduDao articleVenduDao, UtilisateurService utilisateurService, RetraitDao retraitDao, CategorieDao categorieDao) {
         this.articleVenduDao = articleVenduDao;
