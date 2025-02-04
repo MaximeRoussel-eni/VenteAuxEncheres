@@ -7,7 +7,7 @@ import java.util.List;
 
 public interface EnchereDao {
 
-    void createEnchere(Enchere enchere);
+    void create(Enchere enchere);
 
     void update(Enchere enchere);
 
@@ -18,4 +18,5 @@ public interface EnchereDao {
     List<Enchere> readAllByUtilisateur(int noUtilisateur);
 
     List<Enchere> readAllByArticleVendu(int noArticleVendu);
+
 }

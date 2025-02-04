@@ -1,11 +1,7 @@
 package application.controller;
 
-import application.bo.ArticleVendu;
-import application.bo.Categorie;
-import application.bo.Retrait;
-import application.bo.Utilisateur;
-import application.service.CategorieService;
-import application.service.UtilisateurService;
+import application.bo.*;
+import application.service.*;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContext;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -14,7 +10,6 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-import application.service.ArticleVenduService;
 
 import java.security.Principal;
 import java.time.LocalDate;
@@ -29,14 +24,17 @@ public class ArticleVenduController {
     private final ArticleVenduService articleVenduService;
     private final CategorieService categorieService;
     private final UtilisateurService utilisateurService;
+    private final EnchereService enchereService;
 
     // Constructor injection
     public ArticleVenduController(ArticleVenduService articleVenduService,
                                   CategorieService categorieService,
-                                  UtilisateurService utilisateurService) {
+                                  UtilisateurService utilisateurService,
+                                  EnchereService enchereService) {
         this.articleVenduService = articleVenduService;
         this.categorieService = categorieService;
         this.utilisateurService = utilisateurService;
+        this.enchereService = enchereService;
     }
 
     @ModelAttribute("utilisateurEnSession")
@@ -97,11 +95,11 @@ public class ArticleVenduController {
         model.addAttribute("articleVendu", articleVendu);
         model.addAttribute("retrait", articleVendu.getRetrait());
         model.addAttribute("listeCategories", listCategories);
-
+        model.addAttribute("enchere", new Enchere());
         return "auction-detail";
     }
 
-    @PostMapping("/detail")
+    @PostMapping("/detail/modifier")
     public String updateArticleVendu(@ModelAttribute (name = "articleVendu") ArticleVendu articleVendu,
                                      @ModelAttribute("retrait") Retrait retrait,
                                      @RequestParam(name="noCategorie") String noCategorie,
@@ -115,6 +113,21 @@ public class ArticleVenduController {
         articleVendu.setCategorie(categorie);
         articleVendu.setUtilisateurVendeur(utilisateurEnSession);
         articleVenduService.updateArticleVendu(articleVendu);
+        return "redirect:/encheres";
+    }
+
+    @PostMapping("/detail/offre")
+    public String nouvelleOffre(@RequestParam (name = "noArticleVendu") int noArticleVendu,
+                                @ModelAttribute (name = "enchere") Enchere enchere,
+                                @SessionAttribute(name="utilisateurEnSession") Utilisateur utilisateurEnSession){
+
+        var article = new ArticleVendu();
+        article.setNoArticle(noArticleVendu);
+        enchere.setDateEnchere(LocalDate.now());
+        enchere.setArticleVendu(article);
+        enchere.setUtilisateur(utilisateurEnSession);
+        enchereService.addEnchere(enchere);
+
         return "redirect:/encheres";
     }
 }
