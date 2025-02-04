@@ -89,17 +89,25 @@ public class ArticleVenduController {
         model.addAttribute("articleVendu", articleVendu);
         model.addAttribute("retrait", articleVendu.getRetrait());
         model.addAttribute("listeCategories", listCategories);
+        System.out.println(articleVendu);
         return "auction-detail";
     }
 
-    @PostMapping("/encheres/detail")
-    public String updateArticleVendu(@ModelAttribute("articleVendu") ArticleVendu articleVendu,
+    @PostMapping("/detail")
+    public String updateArticleVendu(@ModelAttribute (name = "articleVendu") ArticleVendu articleVendu,
                                      @ModelAttribute("retrait") Retrait retrait,
-                                     @RequestParam(name="noCategorie") String noCategorie){
+                                     @RequestParam(name="noCategorie") String noCategorie,
+                                     @RequestParam(name="noArticleVendu") int noArticleVendu,
+                                     @SessionAttribute(name="utilisateurEnSession") Utilisateur utilisateurEnSession) {
+        articleVendu.setNoArticle(noArticleVendu);
+        System.out.println(retrait);
         articleVendu.setRetrait(retrait);
-        articleVendu.getCategorie().setNoCategorie(Integer.parseInt(noCategorie));
+        var categorie = new Categorie();
+        categorie.setNoCategorie(Integer.parseInt(noCategorie));
+        articleVendu.setCategorie(categorie);
+        articleVendu.setUtilisateurVendeur(utilisateurEnSession);
+        System.out.println(articleVendu);
         articleVenduService.updateArticleVendu(articleVendu);
-        System.out.println("coucou");
         return "redirect:/encheres";
     }
 }

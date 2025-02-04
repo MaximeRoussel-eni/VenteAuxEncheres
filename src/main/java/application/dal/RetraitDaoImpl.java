@@ -43,6 +43,7 @@ public class RetraitDaoImpl implements RetraitDao {
     @Override
     public void updateRetrait(Retrait retrait) {
         MapSqlParameterSource namedParameters = new MapSqlParameterSource();
+        namedParameters.addValue("no_retrait", retrait.getNoRetrait());
         namedParameters.addValue("rue", retrait.getRue());
         namedParameters.addValue("code_postal", retrait.getCodePostal());
         namedParameters.addValue("ville", retrait.getVille());
