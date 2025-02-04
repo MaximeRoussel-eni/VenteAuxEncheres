@@ -15,14 +15,23 @@
     <header>
         <nav>
             <div>
-                <button><a th:href="@{/encheres/connexion}"> <img th:src="@{/img/logo.webp}" alt="logo enchères" height="150" width="150"/></a></button>
+                <button class="imageLogo"><a th:href="@{/encheres/connexion}"> <img th:src="@{/img/logo.webp}" alt="logo enchères" height="150" width="150"/></a></button>
                <a th:href="@{/encheres/connexion}">S'inscrire - Se connecter</a>
             </div>
         </nav>
     </header>
 
     <main data-th-replace="${main}"></main>
+    <footer>
+            <div>
 
+              <p>© Eni</p>
+            </div>
+        <div>
+
+            <p>2025</p>
+        </div>
+    </footer>
 </body>
 
 
