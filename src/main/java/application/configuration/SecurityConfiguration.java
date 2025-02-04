@@ -51,6 +51,9 @@ public class SecurityConfiguration {
             auth.requestMatchers("/encheres", "/encheres/connexion", "/encheres/inscription","/encheres/logout","/encheres/error").permitAll();
             auth.anyRequest().denyAll();
         });
+        http.csrf().disable();
+        http.cors().disable();
+
 
         http.formLogin(form -> form
                 .loginPage("/encheres/connexion")

@@ -9,7 +9,7 @@
             <h1>Detail Vente</h1>
         </section>
     </div>
-    <div data-th-if="${utilisateurEnSession!=articleVendu.utilisateurVendeur}">
+    <div data-th-if="${utilisateurEnSession.noUtilisateur!=articleVendu.utilisateurVendeur.noUtilisateur}">
         <form method="post" class="formulaireVente">
             <p>Article <input type="text" data-th-value="${articleVendu.nomArticle}"  readonly></p>
             <p>Description <input type="text" data-th-value="${articleVendu.description}" readonly></p>
@@ -24,11 +24,13 @@
         <p>Vendeur <a th:text="${articleVendu.utilisateurVendeur.pseudo}" th:href="@{/encheres/profilUtilisateur(noUtilisateur=${articleVendu.utilisateurVendeur.noUtilisateur})}"></a> </p>
     </div>
 
-    <div data-th-if="${utilisateurEnSession==articleVendu.utilisateurVendeur}">
+    <div data-th-if="${utilisateurEnSession.noUtilisateur==articleVendu.utilisateurVendeur.noUtilisateur}">
         <form method="post" data-th-object="${articleVendu}">
             <p>Article <input type="text" data-th-value="*{nomArticle}"></p>
             <p>Description <input type="text" data-th-value="*{description}"></p>
-            <p>Catégorie <input type="text" data-th-value="*{categorie.getLibelle()}"></p>
+            <p>Catégorie <select name="noCategorie">
+                <option  data-th-each="c : ${listeCategories}" data-th-text="${c.libelle}" data-th-value="${c.noCategorie}"></option>
+            </select></p>
             <p>Meilleure offre <input type="text" data-th-value="*{prixVente}"></p>
             <p>Mise à prix <input type="text" data-th-value="*{prixInitial}"></p>
             <p>Fin de l'enchère <input type="text" data-th-value="*{dateFinEncheres}"></p>

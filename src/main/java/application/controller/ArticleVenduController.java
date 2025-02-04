@@ -60,11 +60,6 @@ public class ArticleVenduController {
         return "auctions";
     }
 
-    @ModelAttribute("utilisateurEnSession")
-    public Utilisateur getUtilisateurEnSession() {
-        return utilisateurService.getUtilisateur(1);
-    }
-
     @GetMapping("/creer")
     public String afficherCreerArticleVendu(Model model, @ModelAttribute("utilisateurEnSession") Utilisateur utilisateurEnSession) {
         LocalDate date = LocalDate.now();
@@ -90,20 +85,21 @@ public class ArticleVenduController {
     @GetMapping("/detail")
     public String detailArticleVendu(Model model, @RequestParam(name = "noArticleVendu") int noArticleVendu) {
         ArticleVendu articleVendu = articleVenduService.getArticleVendu(noArticleVendu);
-        //Utilisateur utilisateurEnSession = utilisateurService.getUtilisateurByPseudo(principal.getName());
+        List<Categorie> listCategories = categorieService.getAllCategories();
         model.addAttribute("articleVendu", articleVendu);
         model.addAttribute("retrait", articleVendu.getRetrait());
-        //model.addAttribute("utilisateurEnSession", utilisateurEnSession);
+        model.addAttribute("listeCategories", listCategories);
         return "auction-detail";
     }
 
-    @PostMapping("/detail")
+    @PostMapping("/encheres/detail")
     public String updateArticleVendu(@ModelAttribute("articleVendu") ArticleVendu articleVendu,
                                      @ModelAttribute("retrait") Retrait retrait,
-                                     @RequestParam(name="noCategorie") String categorie){
+                                     @RequestParam(name="noCategorie") String noCategorie){
         articleVendu.setRetrait(retrait);
-        articleVendu.getCategorie().setNoCategorie(Integer.parseInt(categorie));
+        articleVendu.getCategorie().setNoCategorie(Integer.parseInt(noCategorie));
         articleVenduService.updateArticleVendu(articleVendu);
+        System.out.println("coucou");
         return "redirect:/encheres";
     }
 }
