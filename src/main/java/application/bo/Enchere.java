@@ -30,7 +30,7 @@ public class Enchere {
     }
 
     public void setDateEnchere(LocalDate dateEnchère) {
-        this.dateEnchere = dateEnchère;
+        this.dateEnchere = dateEnchere;
     }
 
     public int getMontantEnchere() {
