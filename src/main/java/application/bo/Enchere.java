@@ -29,8 +29,8 @@ public class Enchere {
         return dateEnchere;
     }
 
-    public void setDateEnchere(LocalDate dateEnchère) {
-        this.dateEnchere = dateEnchère;
+    public void setDateEnchere(LocalDate dateEnchere) {
+        this.dateEnchere = dateEnchere;
     }
 
     public int getMontantEnchere() {

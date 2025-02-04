@@ -6,6 +6,7 @@ import application.bo.Retrait;
 import application.bo.Utilisateur;
 import application.service.CategorieService;
 import application.service.UtilisateurService;
+import org.springframework.data.jdbc.repository.query.Query;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContext;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -50,6 +51,8 @@ public class ArticleVenduController {
         return null;
     }
 
+
+
     @GetMapping()
     public String afficherEncheres(@RequestParam(name = "nomArticle", required = false) String nomArticle,
                                    @RequestParam(name = "categorie", required = false) Integer noCategorie,
@@ -60,13 +63,12 @@ public class ArticleVenduController {
        if ((nomArticle != null && !nomArticle.isEmpty()) || noCategorie != null) {
             articleVenduList = articleVenduService.getArticlesFiltres(nomArticle, noCategorie);
         } else {
-            // Aucun filtre -> afficher tous les articles
          articleVenduList = articleVenduService.getAllArticleVendu();
        }
-
         model.addAttribute("articleVenduList", articleVenduList);
         return "auctions";
     }
+
 
     @GetMapping("/creer")
     public String afficherCreerArticleVendu(Model model, @ModelAttribute("utilisateurEnSession") Utilisateur utilisateurEnSession) {
@@ -86,7 +88,6 @@ public class ArticleVenduController {
                                     @RequestParam(name = "noCategorie") String categorie) {
         int noCategorie = Integer.parseInt(categorie);
         articleVenduService.addArticleVendu(articleVendu, utilisateurEnSession, retrait, noCategorie);
-
         return "redirect:/encheres";
     }
 
@@ -97,7 +98,6 @@ public class ArticleVenduController {
         model.addAttribute("articleVendu", articleVendu);
         model.addAttribute("retrait", articleVendu.getRetrait());
         model.addAttribute("listeCategories", listCategories);
-
         return "auction-detail";
     }
 
