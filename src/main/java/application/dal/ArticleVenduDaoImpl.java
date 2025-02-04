@@ -27,10 +27,10 @@ public class ArticleVenduDaoImpl implements ArticleVenduDao {
     private final String INSERT_ARTICLE ="INSERT INTO ARTICLES_VENDUS (nom_article, description, date_debut_encheres, date_fin_encheres, prix_initial, prix_vente, no_utilisateur, no_categorie, no_retrait) " +
             "VALUES (:nom_article, :description, :date_debut_encheres, :date_fin_encheres, :prix_initial,:prix_vente,:no_utilisateur, :no_categorie, :no_retrait)";
     private final String UPDATE_ARTICLE = "UPDATE ARTICLES_VENDUS SET nom_article = :nom_article, description =:description, " +
-            "date_debut_encheres=:date_debut_encheres, date_fin_encheres=:date_fin_encheres, prix_initial=:prix_initial, no_categorie=:no_categorie WHERE no_article = :no_article";
+            "date_debut_encheres=:date_debut_encheres, date_fin_encheres=:date_fin_encheres, prix_initial=:prix_initial, no_utilisateur=:no_utilisateur, no_categorie=:no_categorie, no_retrait=:no_retrait WHERE no_article = :no_article";
     private final String DELETE_ARTICLE = "DELETE FROM ARTICLES_VENDUS WHERE no_article = :no_article";
-    private final String READ_ARTICLE_BY_NOARTICLE = "SELECT *, r.rue as rue_retrait, r.code_postal as code_postal_retrait, r.ville as ville_utilisateur, u.rue as rue_utilisateur, u.code_postal as code_postal_utilisateur, u.ville as ville_utilisateur FROM ARTICLES_VENDUS a INNER JOIN RETRAITS r ON r.no_retrait = a.no_retrait INNER JOIN CATEGORIES c " +
-            "ON c.no_categorie = a.no_categorie WHERE no_article = :no_article";
+    private final String READ_ARTICLE_BY_NOARTICLE = "SELECT * FROM ARTICLES_VENDUS a INNER JOIN RETRAITS r ON r.no_retrait = a.no_retrait INNER JOIN CATEGORIES c " +
+            "ON c.no_categorie = a.no_categorie INNER JOIN UTILISATEURS as u on u.no_utilisateur = a.no_utilisateur WHERE no_article = :no_article";
     private final String READ_ALL_ARTICLES ="SELECT * FROM ARTICLES_VENDUS";
 
     private final String READ_BY_NO_CATEGORIE_AND_NOM_ARTICLE = "SELECT * FROM ARTICLES_VENDUS WHERE nom_article=:nom_article AND no_categorie=:no_categorie";
@@ -59,18 +59,27 @@ public class ArticleVenduDaoImpl implements ArticleVenduDao {
 
         // Récupérer les informations du retrait
         int noRetrait = rs.getInt("no_retrait");
-        String rueRetrait = rs.getString("rue_retrait");
-        String codePostalRetrait = rs.getString("code_postal_retrait");
-        String villeRetrait = rs.getString("ville_retrait");
+        String rue = rs.getString("rue");
+        String codePostal = rs.getString("code_postal");
+        String ville = rs.getString("ville");
+
+        //Recuperer le numero et le pseudo du vendeur
+        int noUtilisateur = rs.getInt("no_utilisateur");
+        String pseudo = rs.getString("pseudo");
 
         //Créer l'objet Catégorie
         Categorie categorie = new Categorie(noCategorie, libelle);
 
         // Créer l'objet Retrait
-        Retrait retrait = new Retrait(noRetrait, rueRetrait, codePostalRetrait, villeRetrait);
+        Retrait retrait = new Retrait(noRetrait, rue, codePostal, ville);
+
+        //Créer un objet incomplet Utilisateur
+        Utilisateur utilisateur = new Utilisateur();
+        utilisateur.setNoUtilisateur(noUtilisateur);
+        utilisateur.setPseudo(pseudo);
 
         // Créer l'objet Article avec la catégorie et le retrait
-        return new ArticleVendu(noArticle,nomArticle, description,dateDebutEncheres,dateFinEncheres, prixInitial, prixVente, null,categorie, retrait,null,null,null);
+        return new ArticleVendu(noArticle,nomArticle, description,dateDebutEncheres,dateFinEncheres, prixInitial, prixVente, utilisateur,categorie, retrait,null,null,null);
     };
 
 
@@ -82,7 +91,7 @@ public class ArticleVenduDaoImpl implements ArticleVenduDao {
         namedParameters.addValue("date_debut_encheres", articleVendu.getDateDebutEncheres());
         namedParameters.addValue("date_fin_encheres", articleVendu.getDateFinEncheres());
         namedParameters.addValue("prix_initial", articleVendu.getPrixInitial());
-        namedParameters.addValue("prix_vente", articleVendu.getPrixVente());
+        namedParameters.addValue("prix_vente", articleVendu.getPrixInitial());
         namedParameters.addValue("no_utilisateur", articleVendu.getUtilisateurVendeur().getNoUtilisateur());
         namedParameters.addValue("no_categorie",noCategorie);
         namedParameters.addValue("no_retrait",noRetrait);
@@ -93,12 +102,15 @@ public class ArticleVenduDaoImpl implements ArticleVenduDao {
     @Override
     public void update(ArticleVendu articleVendu) {
         MapSqlParameterSource namedParameters = new MapSqlParameterSource();
+        namedParameters.addValue("no_article", articleVendu.getNoArticle());
         namedParameters.addValue("nom_article", articleVendu.getNomArticle());
         namedParameters.addValue("description", articleVendu.getDescription());
         namedParameters.addValue("date_debut_encheres", articleVendu.getDateDebutEncheres());
         namedParameters.addValue("date_fin_encheres", articleVendu.getDateFinEncheres());
         namedParameters.addValue("prix_initial", articleVendu.getPrixInitial());
+        namedParameters.addValue("no_utilisateur", articleVendu.getUtilisateurVendeur().getNoUtilisateur());
         namedParameters.addValue("no_categorie", articleVendu.getCategorie().getNoCategorie());
+        namedParameters.addValue("no_retrait", articleVendu.getRetrait().getNoRetrait());
         namedParameterJdbcTemplate.update(UPDATE_ARTICLE, namedParameters);
 
     }

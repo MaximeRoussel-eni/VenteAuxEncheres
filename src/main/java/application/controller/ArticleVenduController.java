@@ -7,12 +7,16 @@ import application.bo.Utilisateur;
 import application.service.CategorieService;
 import application.service.UtilisateurService;
 import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContext;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import application.service.ArticleVenduService;
 
+import java.security.Principal;
 import java.time.LocalDate;
 import java.util.List;
 
@@ -26,7 +30,7 @@ public class ArticleVenduController {
     private final CategorieService categorieService;
     private final UtilisateurService utilisateurService;
 
-
+    // Constructor injection
     public ArticleVenduController(ArticleVenduService articleVenduService,
                                   CategorieService categorieService,
                                   UtilisateurService utilisateurService) {
@@ -89,8 +93,29 @@ public class ArticleVenduController {
     @GetMapping("/detail")
     public String detailArticleVendu(Model model, @RequestParam(name = "noArticleVendu") int noArticleVendu) {
         ArticleVendu articleVendu = articleVenduService.getArticleVendu(noArticleVendu);
+        List<Categorie> listCategories = categorieService.getAllCategories();
         model.addAttribute("articleVendu", articleVendu);
+        model.addAttribute("retrait", articleVendu.getRetrait());
+        model.addAttribute("listeCategories", listCategories);
+
         return "auction-detail";
+    }
+
+    @PostMapping("/detail")
+    public String updateArticleVendu(@ModelAttribute (name = "articleVendu") ArticleVendu articleVendu,
+                                     @ModelAttribute("retrait") Retrait retrait,
+                                     @RequestParam(name="noCategorie") String noCategorie,
+                                     @RequestParam(name="noArticleVendu") int noArticleVendu,
+                                     @SessionAttribute(name="utilisateurEnSession") Utilisateur utilisateurEnSession) {
+        articleVendu.setNoArticle(noArticleVendu);
+        System.out.println(retrait);
+        articleVendu.setRetrait(retrait);
+        var categorie = new Categorie();
+        categorie.setNoCategorie(Integer.parseInt(noCategorie));
+        articleVendu.setCategorie(categorie);
+        articleVendu.setUtilisateurVendeur(utilisateurEnSession);
+        articleVenduService.updateArticleVendu(articleVendu);
+        return "redirect:/encheres";
     }
 }
 

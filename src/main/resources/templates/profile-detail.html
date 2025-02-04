@@ -12,8 +12,44 @@
 <button class="theme-toggle">
     <i class="fas fa-moon"></i> <!-- Icône de lune pour le thème sombre -->
 </button>
-<div class="container mt-5">
-    <h2>Profil de l'Utilisateur</h2>
+<div class="container mt-5" data-th-if="${utilisateurEnSession.noUtilisateur!=utilisateur.noUtilisateur}">
+    <h2 th:text="'Profil de : '+ ${utilisateur.pseudo}" ></h2>
+    <div class="card">
+        <div class="card-body">
+            <!-- Pseudo -->
+            <h5 class="card-title">Pseudo : <span th:text="${utilisateur.pseudo}"></span></h5>
+
+            <!-- Nom et Prénom -->
+            <p class="card-text">
+                <strong>Nom :</strong> <span th:text="${utilisateur.nom}"></span><br>
+                <strong>Prénom :</strong> <span th:text="${utilisateur.prenom}"></span>
+            </p>
+
+            <!-- Email -->
+            <p class="card-text">
+                <strong>Email :</strong> <span th:text="${utilisateur.email}"></span>
+            </p>
+
+            <!-- Téléphone -->
+            <p class="card-text">
+                <strong>Téléphone :</strong> <span th:text="${utilisateur.telephone}"></span>
+            </p>
+
+            <!-- Adresse -->
+            <p class="card-text">
+                <strong>Adresse :</strong><br>
+                <span th:text="${utilisateur.rue}"></span><br>
+                <span th:text="${utilisateur.codePostal}"></span> <span th:text="${utilisateur.ville}"></span>
+            </p>
+
+            <!-- Lien pour retourner à l'accueil -->
+            <a th:href="@{/encheres}" class="btn btn-primary">Retour à l'accueil</a>
+        </div>
+    </div>
+</div>
+
+<div class="container mt-5" data-th-if="${utilisateurEnSession.noUtilisateur==utilisateur.noUtilisateur}">
+    <h2>Votre Profil</h2>
     <div class="card">
         <div class="card-body">
             <!-- Pseudo -->
