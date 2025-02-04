@@ -47,9 +47,16 @@ public class ArticleVenduServiceImpl implements ArticleVenduService {
     @Override
     public ArticleVendu getArticleVendu(int noArticle) {
         var article = articleVenduDao.read(noArticle);
-        if (article.getDateFinEncheres().isBefore(LocalDate.now())) article.setEtatVente(EtatVente.TERMINE);
-        if (article.getDateFinEncheres().isAfter(LocalDate.now()) && article.getDateDebutEncheres().isBefore(LocalDate.now())) article.setEtatVente(EtatVente.EN_COURS);
-        if (article.getDateDebutEncheres().isAfter(LocalDate.now())) article.setEtatVente(EtatVente.NON_COMMENCE);
+        if (article.getDateFinEncheres().isBefore(LocalDate.now())) {
+            article.setEtatVente(EtatVente.TERMINE);
+            return article;
+        }
+
+        if (article.getDateDebutEncheres().isAfter(LocalDate.now())) {
+            article.setEtatVente(EtatVente.NON_COMMENCE);
+            return article;
+        }
+        article.setEtatVente(EtatVente.EN_COURS);
         return article;
     }
 

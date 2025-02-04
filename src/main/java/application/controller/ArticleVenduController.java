@@ -30,7 +30,7 @@ public class ArticleVenduController {
     private final CategorieService categorieService;
     private final UtilisateurService utilisateurService;
 
-
+    // Constructor injection
     public ArticleVenduController(ArticleVenduService articleVenduService,
                                   CategorieService categorieService,
                                   UtilisateurService utilisateurService) {
@@ -95,22 +95,26 @@ public class ArticleVenduController {
         ArticleVendu articleVendu = articleVenduService.getArticleVendu(noArticleVendu);
         List<Categorie> listCategories = categorieService.getAllCategories();
         model.addAttribute("articleVendu", articleVendu);
-
-
         model.addAttribute("retrait", articleVendu.getRetrait());
         model.addAttribute("listeCategories", listCategories);
 
         return "auction-detail";
     }
 
-    @PostMapping("/encheres/detail")
-    public String updateArticleVendu(@ModelAttribute("articleVendu") ArticleVendu articleVendu,
+    @PostMapping("/detail")
+    public String updateArticleVendu(@ModelAttribute (name = "articleVendu") ArticleVendu articleVendu,
                                      @ModelAttribute("retrait") Retrait retrait,
-                                     @RequestParam(name="noCategorie") String noCategorie){
+                                     @RequestParam(name="noCategorie") String noCategorie,
+                                     @RequestParam(name="noArticleVendu") int noArticleVendu,
+                                     @SessionAttribute(name="utilisateurEnSession") Utilisateur utilisateurEnSession) {
+        articleVendu.setNoArticle(noArticleVendu);
+        System.out.println(retrait);
         articleVendu.setRetrait(retrait);
-        articleVendu.getCategorie().setNoCategorie(Integer.parseInt(noCategorie));
+        var categorie = new Categorie();
+        categorie.setNoCategorie(Integer.parseInt(noCategorie));
+        articleVendu.setCategorie(categorie);
+        articleVendu.setUtilisateurVendeur(utilisateurEnSession);
         articleVenduService.updateArticleVendu(articleVendu);
-        System.out.println("coucou");
         return "redirect:/encheres";
     }
 }

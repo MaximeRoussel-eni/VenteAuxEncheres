@@ -9,40 +9,69 @@
             <h1>Detail Vente</h1>
         </section>
     </div>
+
+    <!-- Formulaire ssi l'utilisateur connecté n'est pas lié à l'article (lecture seule) -->
     <div data-th-if="${utilisateurEnSession.noUtilisateur!=articleVendu.utilisateurVendeur.noUtilisateur}">
         <form method="post" class="formulaireVente">
+
+            <!-- Infos base article -->
             <p>Article <input type="text" data-th-value="${articleVendu.nomArticle}"  readonly></p>
             <p>Description <input type="text" data-th-value="${articleVendu.description}" readonly></p>
+
+            <!-- Catégorie -->
             <p>Catégorie <input type="text" data-th-value="${articleVendu.categorie.getLibelle()}" readonly></p>
-            <p>Meilleure offre <input type="text" data-th-value="${articleVendu.prixVente}" readonly></p>
+
+            <!-- Infos complémentaires article -->
+            <p>Meilleure offre actuelle <input type="text" data-th-value="${articleVendu.prixVente}" readonly></p>
             <p>Mise à prix <input type="text" data-th-value="${articleVendu.prixInitial}" readonly></p>
+            <p>Début de l'enchère <input type="text" data-th-value="${articleVendu.dateDebutEncheres}" readonly></p>
             <p>Fin de l'enchère <input type="text" data-th-value="${articleVendu.dateFinEncheres}" readonly></p>
+
+            <!-- Infos de retrait -->
             <p>Lieu de retrait  <input type="text" data-th-value="${articleVendu.retrait.rue} + ' ' + ${articleVendu.retrait.codePostal} + ' ' + ${articleVendu.retrait.ville}" readonly></p>
+
+            <!-- Prix de l'article -->
             <p>Prix initial <input type="text" data-th-value="${articleVendu.prixInitial} + ' crédits'"></p>
             <p>Prix actuel <input type="text" data-th-value="${articleVendu.prixVente} + ' crédits'" ></p>
+
+            <p>Etat de la vente :<input type="text" data-th-value="${articleVendu.etatVente}"></p>
         </form>
+
+        <!-- Lien vers les détails de l'utilisateur vendeur -->
         <p>Vendeur <a th:text="${articleVendu.utilisateurVendeur.pseudo}" th:href="@{/encheres/profilUtilisateur(noUtilisateur=${articleVendu.utilisateurVendeur.noUtilisateur})}"></a> </p>
     </div>
 
+    <!-- ////////////////////////////////////////////////////////////////////////// -->
+    <!-- Formulaire modifiable ssi l'utilisateur connecté est l'utilisateur vendeur -->
+
     <div data-th-if="${utilisateurEnSession.noUtilisateur==articleVendu.utilisateurVendeur.noUtilisateur}">
-        <form method="post" data-th-object="${articleVendu}">
-            <p>Article <input type="text" data-th-value="*{nomArticle}"></p>
-            <p>Description <input type="text" data-th-value="*{description}"></p>
+        <form method="post" data-th-object="${articleVendu}" data-th-action="@{/encheres/detail(noArticleVendu=${articleVendu.noArticle})}">
+
+            <!-- Infos base article -->
+            <p>Article <input type="text" data-th-field="*{nomArticle}"></p>
+            <p>Description <input type="text" data-th-field="*{description}"></p>
+
+
+            <!-- Catégorie -->
             <p>Catégorie <select name="noCategorie">
-                <option  data-th-each="c : ${listeCategories}" data-th-text="${c.libelle}" data-th-value="${c.noCategorie}"></option>
+                <option  data-th-each="c : ${listeCategories}" data-th-text="${c.libelle}" data-th-value="${c.noCategorie}" data-th-selected="${articleVendu.categorie.noCategorie==c.noCategorie}"></option>
             </select></p>
-            <p>Meilleure offre <input type="text" data-th-value="*{prixVente}"></p>
-            <p>Mise à prix <input type="text" data-th-value="*{prixInitial}"></p>
-            <p>Fin de l'enchère <input type="text" data-th-value="*{dateFinEncheres}"></p>
-            <div data-th-object="${articleVendu.retrait}">Lieu de retrait
+
+            <!-- Infos complémentaires article -->
+            <p>Mise à prix <input type="text" data-th-field="*{prixInitial}"></p>
+            <p>Début de l'enchère <input type="text" data-th-field="*{dateDebutEncheres}"></p>
+            <p>Fin de l'enchère <input type="text" data-th-field="*{dateFinEncheres}"></p>
+
+            <!-- Infos de retrait -->
+            <div data-th-object="${retrait}">Lieu de retrait
+                <p hidden>noArticleVendu <input type="text" data-th-field="*{noRetrait}"></p>
                 <p>Rue<input data-th-field="*{rue}" type="text"></p>
                 <p>Code Postal<input data-th-field="*{codePostal}" type="text" maxlength="5" ></p>
                 <p>Ville<input data-th-field="*{ville}" type="text"></p>
             </div>
-            <p>Prix initial (crédits)<input type="text" data-th-value="*{prixInitial}"></p>
-            <p>Prix actuel (crédits)<input type="text" data-th-value="*{prixVente}" ></p>
-            <p data-th-text="${#authentication.getName()}"></p>
-            <button><input type="submit">Modifier</button>
+
+            <!-- Bouton de validation -->
+            <button type = "submit">Modifier</button>
         </form>
     </div>
 </main>
