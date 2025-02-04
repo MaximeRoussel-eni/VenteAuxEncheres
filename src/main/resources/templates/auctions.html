@@ -5,7 +5,6 @@
     <title>Les enchères</title>
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="/css/style.css">
-    <script src="../static/js/bouton.js" defer></script>
 </head>
 <body>
 <main>
@@ -15,73 +14,83 @@
         <section class="text-center mb-4">
             <h1>Liste des enchères</h1>
         </section>
+        <form method="GET" action="/encheres">
+            <label for="nomArticle">Nom de l'article :</label>
+            <input type="text" id="nomArticle" name="nomArticle" placeholder="Rechercher un article...">
+
+            <label for="categorie">Catégorie :</label>
+            <select id="categorie" name="categorie">
+                <option value="">Toutes les catégories</option>
+                <!-- Parcours dynamique des catégories -->
+                    <option data-th-each="c : ${listeCategories}" data-th-value="${c.noCategorie}"
+                            data-th-text="${c.libelle}">
+                    </option>
+
+            </select>
+
+            <button type="submit">Filtrer</button>
+        </form>
 
 
-        <div id="mySidenav" class="sidenav">
-            <a id="closeBtn" href="#" class="close">&times;</a>
-            <ul>
+<!--        &lt;!&ndash; Filtres &ndash;&gt;-->
+<!--        <div class="row mb-4">-->
+<!--            <div class="col-md-8">-->
+<!--                <section class="card p-3">-->
+<!--                    <div class="mb-3">-->
+<!--                        <label for="search" class="form-label">Filtres:</label>-->
+<!--                    </div>-->
+<!--                    <input type="search" class="form-control" id="search" placeholder="Le nom de l'article contient">-->
+<!--                </section>-->
+<!--            </div>-->
+<!--            <div class="mb-3">-->
+<!--                <label class="form-label">Catégories</label>-->
+<!--                <select class="form-select">-->
+<!--                    <option data-th-each="c : ${listeCategories}" data-th-text="${c.libelle}"-->
+<!--                            data-th-value="${c.noCategorie}"></option>-->
+<!--                </select>-->
+<!--            </div>-->
+<!--            <button class="btn btn-primary">Rechercher</button>-->
+<!--        </div>-->
+<!--        </section>-->
 
-                <!-- Filtres -->
-
-                <div class="col-md-8">
-                    <section class="card p-3">
-                        <div class="mb-3">
-                            <div id="closeBtn1">
-                                <button>Fermer</button>
-                            </div>
-                            <label for="search" class="form-label">Filtres:</label>
-                        </div>
-                        <input type="search" class="form-control" id="search"
-                               placeholder="Le nom de l'article contient">
-                    </section>
-                </div>
-                <div class="mb-3">
-                    <label class="form-label">Catégories</label>
-                    <select class="form-select">
-                        <option data-th-each="c : ${listeCategories}" data-th-text="${c.libelle}"
-                                data-th-value="${c.noCategorie}"></option>
-                    </select>
-                </div>
-                <button class="btn btn-primary">Rechercher</button>
+        <div class="row">
+            <div class="col-md-6" th:each="article : ${articleVenduList}">
+                <section class="card p-3 mb-3">
+                    <h2 th:text="${article.nomArticle}">Titre de l'article</h2>
+                    <p th:text="${article.description}">Description de l'article</p><br>
+                    <p>Prix du Produit :</p><br>
+                    <p th:text="${article.prixInitial}">Prix du produit</p>
+                </section>
+            </div>
         </div>
-        </section>
-        </ul>
-    </div>
-
-    <a href="#" id="openBtn">
-          <span class="burger-icon">
-              <p>Filtres</p>
-    </a>
-
-
-    <div class="Articles">
-        <div class="dansArticles">
-            <section class="card p-3 mb-3">
-                <h2>Article 1</h2>
-                <p>Description de l'article 1.</p>
-            </section>
-        </div>
-        <div class="dansArticles">
-            <section class="card p-3 mb-3">
-                <h2>Article 2</h2>
-                <p>Description de l'article 2.</p>
-            </section>
-        </div>
-    </div>
-    <div class="Articles">
-        <div class="dansArticles">
-            <section class="card p-3 mb-3">
-                <h2>Article 3</h2>
-                <p>Description de l'article 3.</p>
-            </section>
-        </div>
-        <div class="dansArticles">
-            <section class="card p-3 mb-3">
-                <h2>Article 4</h2>
-                <p>Description de l'article 4.</p>
-            </section>
-        </div>
-    </div>
+<!--        <div class="row">-->
+<!--            <div  class="col-md-6">-->
+<!--                <section class="card p-3 mb-3">-->
+<!--                    <h2>Article 1</h2>-->
+<!--                    <p>Description de l'article 1.</p>-->
+<!--                </section>-->
+<!--            </div>-->
+<!--            <div class="col-md-6">-->
+<!--                <section class="card p-3 mb-3">-->
+<!--                    <h2>Article 2</h2>-->
+<!--                    <p>Description de l'article 2.</p>-->
+<!--                </section>-->
+<!--            </div>-->
+<!--        </div>-->
+<!--        <div class="row">-->
+<!--            <div class="col-md-6">-->
+<!--                <section class="card p-3 mb-3">-->
+<!--                    <h2>Article 3</h2>-->
+<!--                    <p>Description de l'article 3.</p>-->
+<!--                </section>-->
+<!--            </div>-->
+<!--            <div class="col-md-6">-->
+<!--                <section class="card p-3 mb-3">-->
+<!--                    <h2>Article 4</h2>-->
+<!--                    <p>Description de l'article 4.</p>-->
+<!--                </section>-->
+<!--            </div>-->
+<!--        </div>-->
     </div>
 </main>
 </body>
