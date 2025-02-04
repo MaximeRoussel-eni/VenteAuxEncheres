@@ -43,7 +43,6 @@ public class ArticleVenduController {
     public Utilisateur getUtilisateurEnSession() {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 
-        // Vérifie si l'utilisateur est authentifié
         if (authentication != null && authentication.isAuthenticated() && !"anonymousUser".equals(authentication.getName())) {
             String pseudo = authentication.getName();
             return utilisateurService.getUtilisateurByPseudo(pseudo);
@@ -52,10 +51,19 @@ public class ArticleVenduController {
     }
 
     @GetMapping()
-    public String afficherEncheres(Model model) {
+    public String afficherEncheres(@RequestParam(name = "nomArticle", required = false) String nomArticle,
+                                   @RequestParam(name = "categorie", required = false) Integer noCategorie,
+                                   Model model) {
         List<Categorie> listCategories = categorieService.getAllCategories();
         model.addAttribute("listeCategories", listCategories);
         List<ArticleVendu> articleVenduList = articleVenduService.getAllArticleVendu();
+       if ((nomArticle != null && !nomArticle.isEmpty()) || noCategorie != null) {
+            articleVenduList = articleVenduService.getArticlesFiltres(nomArticle, noCategorie);
+        } else {
+            // Aucun filtre -> afficher tous les articles
+         articleVenduList = articleVenduService.getAllArticleVendu();
+       }
+
         model.addAttribute("articleVenduList", articleVenduList);
         return "auctions";
     }
@@ -89,7 +97,7 @@ public class ArticleVenduController {
         model.addAttribute("articleVendu", articleVendu);
         model.addAttribute("retrait", articleVendu.getRetrait());
         model.addAttribute("listeCategories", listCategories);
-        System.out.println(articleVendu);
+
         return "auction-detail";
     }
 
@@ -106,7 +114,6 @@ public class ArticleVenduController {
         categorie.setNoCategorie(Integer.parseInt(noCategorie));
         articleVendu.setCategorie(categorie);
         articleVendu.setUtilisateurVendeur(utilisateurEnSession);
-        System.out.println(articleVendu);
         articleVenduService.updateArticleVendu(articleVendu);
         return "redirect:/encheres";
     }

@@ -33,6 +33,10 @@ public class ArticleVenduDaoImpl implements ArticleVenduDao {
             "ON c.no_categorie = a.no_categorie INNER JOIN UTILISATEURS as u on u.no_utilisateur = a.no_utilisateur WHERE no_article = :no_article";
     private final String READ_ALL_ARTICLES ="SELECT * FROM ARTICLES_VENDUS";
 
+    private final String READ_BY_NO_CATEGORIE_AND_NOM_ARTICLE = "SELECT * FROM ARTICLES_VENDUS WHERE nom_article=:nom_article AND no_categorie=:no_categorie";
+    private final String READ_BY_NO_CATEGORIE = "SELECT * FROM ARTICLES_VENDUS WHERE no_categorie=:no_categorie";
+    private final String READ_BY_NOM_ARTICLE = "SELECT * FROM ARTICLES_VENDUS WHERE nom_article=:nom_article";
+
 
 
     private final String INSERT_RETRAIT = "INSERT INTO RETRAIT (no_article, rue, code_postal, ville)" +
@@ -127,6 +131,28 @@ public class ArticleVenduDaoImpl implements ArticleVenduDao {
 
     @Override
     public List<ArticleVendu> readAll() {
-        return  jdbcTemplate.query(READ_ALL_ARTICLES, BeanPropertyRowMapper.newInstance(ArticleVendu.class));
+        return jdbcTemplate.query(READ_ALL_ARTICLES, BeanPropertyRowMapper.newInstance(ArticleVendu.class));
+    }
+
+    @Override
+    public List<ArticleVendu> readByNoCategorieAndNomArticle(String nomArticle, int noCategorie) {
+        MapSqlParameterSource namedParameters = new MapSqlParameterSource();
+        namedParameters.addValue("nom_article", nomArticle);
+        namedParameters.addValue("no_categorie", noCategorie);
+        return namedParameterJdbcTemplate.query(READ_BY_NO_CATEGORIE_AND_NOM_ARTICLE, namedParameters, BeanPropertyRowMapper.newInstance(ArticleVendu.class));
+    }
+
+    @Override
+    public List<ArticleVendu> readByNoCategorie(int noCategorie) {
+        MapSqlParameterSource namedParameters = new MapSqlParameterSource();
+        namedParameters.addValue("no_categorie", noCategorie);
+        return namedParameterJdbcTemplate.query(READ_BY_NO_CATEGORIE, namedParameters, BeanPropertyRowMapper.newInstance(ArticleVendu.class));
+    }
+
+    @Override
+    public List<ArticleVendu> readByNomArticle(String nomArticle) {
+        MapSqlParameterSource namedParameters = new MapSqlParameterSource();
+        namedParameters.addValue("nom_article", nomArticle);
+        return namedParameterJdbcTemplate.query(READ_BY_NOM_ARTICLE, namedParameters, BeanPropertyRowMapper.newInstance(ArticleVendu.class));
     }
 }

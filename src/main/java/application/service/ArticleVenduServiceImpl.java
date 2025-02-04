@@ -65,4 +65,22 @@ public class ArticleVenduServiceImpl implements ArticleVenduService {
         retraitDao.updateRetrait(articleVendu.getRetrait());
         articleVenduDao.update(articleVendu);
     }
+
+    @Override
+    public List<ArticleVendu> getArticlesFiltres(String nomArticle, Integer noCategorie) {
+        if ((nomArticle == null || nomArticle.isEmpty()) && noCategorie == null) {
+            // Aucun filtre
+            return articleVenduDao.readAll();
+        } else if (nomArticle != null && !nomArticle.isEmpty() && noCategorie != null) {
+            // Filtre par nom + catégorie
+            return articleVenduDao.readByNoCategorieAndNomArticle(nomArticle, noCategorie);
+        }else if (nomArticle != null && !nomArticle.isEmpty()) {
+            // Filtre par nom uniquement
+            return articleVenduDao.readByNomArticle(nomArticle);
+        } else {
+            // Filtre par catégorie uniquement
+            return articleVenduDao.readByNoCategorie(noCategorie);
+        }
+
+    }
 }
