@@ -15,14 +15,13 @@ import java.util.Date;
 import java.util.List;
 
 @Repository
-public class ArticleVenduDaoImpl implements ArticleVenduDao {
+public class ArticleVenduDaoImpl implements ArticleVenduDao  {
 
     @Autowired
     private NamedParameterJdbcTemplate namedParameterJdbcTemplate;
 
     @Autowired
     private JdbcTemplate jdbcTemplate;
-
 
     private final String INSERT_ARTICLE ="INSERT INTO ARTICLES_VENDUS (nom_article, description, date_debut_encheres, date_fin_encheres, prix_initial, prix_vente, no_utilisateur, no_categorie, no_retrait) " +
             "VALUES (:nom_article, :description, :date_debut_encheres, :date_fin_encheres, :prix_initial,:prix_vente,:no_utilisateur, :no_categorie, :no_retrait)";
@@ -33,11 +32,9 @@ public class ArticleVenduDaoImpl implements ArticleVenduDao {
             "ON c.no_categorie = a.no_categorie INNER JOIN UTILISATEURS as u on u.no_utilisateur = a.no_utilisateur WHERE no_article = :no_article";
     private final String READ_ALL_ARTICLES ="SELECT * FROM ARTICLES_VENDUS";
 
-    private final String READ_BY_NO_CATEGORIE_AND_NOM_ARTICLE = "SELECT * FROM ARTICLES_VENDUS WHERE nom_article=:nom_article AND no_categorie=:no_categorie";
+    private final String READ_BY_NO_CATEGORIE_AND_NOM_ARTICLE = "SELECT * FROM ARTICLES_VENDUS WHERE nom_article LIKE :nom_article AND no_categorie=:no_categorie";
     private final String READ_BY_NO_CATEGORIE = "SELECT * FROM ARTICLES_VENDUS WHERE no_categorie=:no_categorie";
-    private final String READ_BY_NOM_ARTICLE = "SELECT * FROM ARTICLES_VENDUS WHERE nom_article=:nom_article";
-
-
+    private final String READ_BY_NOM_ARTICLE = "SELECT * FROM ARTICLES_VENDUS WHERE nom_article LIKE :nom_article";
 
     private final String INSERT_RETRAIT = "INSERT INTO RETRAIT (no_article, rue, code_postal, ville)" +
             "VALUES (:no_article, :rue, :code_postal, :ville)";
@@ -138,7 +135,7 @@ public class ArticleVenduDaoImpl implements ArticleVenduDao {
     @Override
     public List<ArticleVendu> readByNoCategorieAndNomArticle(String nomArticle, int noCategorie) {
         MapSqlParameterSource namedParameters = new MapSqlParameterSource();
-        namedParameters.addValue("nom_article", nomArticle);
+        namedParameters.addValue("nom_article", "%"+nomArticle+"%");
         namedParameters.addValue("no_categorie", noCategorie);
         return namedParameterJdbcTemplate.query(READ_BY_NO_CATEGORIE_AND_NOM_ARTICLE, namedParameters, BeanPropertyRowMapper.newInstance(ArticleVendu.class));
     }
@@ -153,7 +150,7 @@ public class ArticleVenduDaoImpl implements ArticleVenduDao {
     @Override
     public List<ArticleVendu> readByNomArticle(String nomArticle) {
         MapSqlParameterSource namedParameters = new MapSqlParameterSource();
-        namedParameters.addValue("nom_article", nomArticle);
+        namedParameters.addValue("nom_article", "%"+nomArticle+"%");
         return namedParameterJdbcTemplate.query(READ_BY_NOM_ARTICLE, namedParameters, BeanPropertyRowMapper.newInstance(ArticleVendu.class));
     }
 }

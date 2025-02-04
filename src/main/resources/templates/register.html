@@ -3,75 +3,87 @@
 <head>
     <meta charset="UTF-8">
     <title>Formulaire d'Inscription</title>
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- CSS personnalisé -->
     <link rel="stylesheet" th:href="@{/css/styles.css}">
+    <!-- Icônes FontAwesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-    <script th:src="@{/js/script.js}"></script>
 </head>
 <body>
+<!-- Bouton de bascule du thème -->
 <button class="theme-toggle">
     <i class="fas fa-moon"></i> <!-- Icône de lune pour le thème sombre -->
 </button>
+
+<!-- Conteneur principal -->
 <div class="container mt-5">
-    <h2>Formulaire d'Inscription</h2>
-    <form method="post" th:action="@{/encheres/inscription}" th:object="${utilisateur}">
-        <!-- Pseudo -->
-        <div class="form-group">
-            <label for="pseudo">Pseudo :</label>
-            <input type="text" class="form-control" id="pseudo" th:field="*{pseudo}" required>
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <div class="card shadow-sm">
+                <div class="card-body">
+                    <h2 class="card-title text-center mb-4">Formulaire d'Inscription</h2>
+                    <!-- Formulaire d'inscription -->
+                    <form method="post" th:action="@{/encheres/inscription}" th:object="${utilisateur}">
+                        <!-- Pseudo -->
+                        <div class="mb-3">
+                            <label for="pseudo" class="form-label">Pseudo :</label>
+                            <input type="text" class="form-control" id="pseudo" th:field="*{pseudo}" required>
+                        </div>
+                        <!-- Nom -->
+                        <div class="mb-3">
+                            <label for="nom" class="form-label">Nom :</label>
+                            <input type="text" class="form-control" id="nom" th:field="*{nom}" required>
+                        </div>
+                        <!-- Prénom -->
+                        <div class="mb-3">
+                            <label for="prenom" class="form-label">Prénom :</label>
+                            <input type="text" class="form-control" id="prenom" th:field="*{prenom}" required>
+                        </div>
+                        <!-- Email -->
+                        <div class="mb-3">
+                            <label for="email" class="form-label">Email :</label>
+                            <input type="email" class="form-control" id="email" th:field="*{email}" required>
+                        </div>
+                        <!-- Téléphone -->
+                        <div class="mb-3">
+                            <label for="telephone" class="form-label">Téléphone :</label>
+                            <input type="tel" class="form-control" id="telephone" th:field="*{telephone}" required>
+                        </div>
+                        <!-- Rue -->
+                        <div class="mb-3">
+                            <label for="rue" class="form-label">Rue :</label>
+                            <input type="text" class="form-control" id="rue" th:field="*{rue}" required>
+                        </div>
+                        <!-- Code Postal -->
+                        <div class="mb-3">
+                            <label for="codePostal" class="form-label">Code Postal :</label>
+                            <input type="text" class="form-control" id="codePostal" th:field="*{codePostal}" required>
+                        </div>
+                        <!-- Ville -->
+                        <div class="mb-3">
+                            <label for="ville" class="form-label">Ville :</label>
+                            <input type="text" class="form-control" id="ville" th:field="*{ville}" required>
+                        </div>
+                        <!-- Mot de passe -->
+                        <div class="mb-3">
+                            <label for="motDePasse" class="form-label">Mot de passe :</label>
+                            <input type="password" class="form-control" id="motDePasse" th:field="*{motDePasse}" required>
+                        </div>
+                        <!-- Bouton de soumission -->
+                        <div class="d-grid">
+                            <button type="submit" class="btn btn-primary">S'inscrire</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
         </div>
-
-        <!-- Nom -->
-        <div class="form-group">
-            <label for="nom">Nom :</label>
-            <input type="text" class="form-control" id="nom" th:field="*{nom}" required>
-        </div>
-
-        <!-- Prénom -->
-        <div class="form-group">
-            <label for="prenom">Prénom :</label>
-            <input type="text" class="form-control" id="prenom" th:field="*{prenom}" required>
-        </div>
-
-        <!-- Email -->
-        <div class="form-group">
-            <label for="email">Email :</label>
-            <input type="email" class="form-control" id="email" th:field="*{email}" required>
-        </div>
-
-        <!-- Téléphone -->
-        <div class="form-group">
-            <label for="telephone">Téléphone :</label>
-            <input type="tel" class="form-control" id="telephone" minlength="3" th:field="*{telephone}" required>
-        </div>
-
-        <!-- Rue -->
-        <div class="form-group">
-            <label for="rue">Rue :</label>
-            <input type="text" class="form-control" id="rue" th:field="*{rue}" required>
-        </div>
-
-        <!-- Code Postal -->
-        <div class="form-group">
-            <label for="codePostal">Code Postal :</label>
-            <input type="text" class="form-control" id="codePostal" th:field="*{codePostal}" required>
-        </div>
-
-        <!-- Ville -->
-        <div class="form-group">
-            <label for="ville">Ville :</label>
-            <input type="text" class="form-control" id="ville" th:field="*{ville}" required>
-        </div>
-
-        <!-- Mot de passe -->
-        <div class="form-group">
-            <label for="motDePasse">Mot de passe :</label>
-            <input type="password" class="form-control" id="motDePasse" th:field="*{motDePasse}" required>
-        </div>
-
-        <!-- Bouton de soumission -->
-        <button type="submit" class="btn btn-primary">S'inscrire</button>
-    </form>
+    </div>
 </div>
+
+<!-- Bootstrap JS -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+<!-- Script personnalisé -->
+<script th:src="@{/js/script.js}"></script>
 </body>
 </html>
