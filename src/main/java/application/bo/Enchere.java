@@ -29,7 +29,7 @@ public class Enchere {
         return dateEnchere;
     }
 
-    public void setDateEnchere(LocalDate dateEnchère) {
+    public void setDateEnchere(LocalDate dateEnchere) {
         this.dateEnchere = dateEnchere;
     }
 
