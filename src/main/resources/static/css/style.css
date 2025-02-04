@@ -1,6 +1,7 @@
 header {
    background-color: aliceblue;border-radius: 10px;
 }
+.FiltresBtn{display: none}
 body{
     background-color: #ffffff;
 }
@@ -34,13 +35,13 @@ h1 {
     display: flex;
     flex-direction: row;
     justify-content: space-evenly;
-    border: solid;
+    margin-bottom: 20px;
 }
 
 .dansArticles {
     height: 15vh;
     width: 20vw;
-    border: solid;
+    border: solid;border-radius: 10px;gap: 20px;
 }
 
 .Filtres {
@@ -149,4 +150,130 @@ select {
 }
 .imageLogo{
     background-color: transparent;border: none;
+}
+
+
+
+.menu-btn {
+    display: none;
+    flex-direction: column;
+    justify-content: space-between;
+    width: 30px;
+    height: 20px;
+    cursor: pointer;
+}
+
+.sidenav1 {
+    height: 70%;
+    width: 75%;
+    border-radius: 20px;
+    position: fixed;
+    z-index: 1;
+    top: 70px;
+    right: -80%;
+    padding-top: 90px;
+    transition: right 0.5s ease;
+    border-style: solid;border-color: #ffffff;
+    background-color: #000;
+
+}
+
+.sidenav1 ul {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+}
+
+/* Sidenav menu links */
+.sidenav1 a {
+    padding: 8px 8px 8px 32px;
+    text-decoration: none;
+    font-size: 25px;
+    color: #ffffff;
+    display: block;
+    transition: 0.3s;
+    background-color: #000;
+}
+
+.sidenav1 a:hover {
+    color: #f58989;
+}
+
+/* Active class */
+.sidenav1.active {
+    right: 0;
+}
+
+/* Close btn */
+.sidenav1 .close {
+    position: absolute;
+    top: 0;
+    right: 5px;
+    font-size: 36px;
+}
+
+.burger-icon1 span {
+    display: block;
+    width: 30px;
+    height: 3px;
+    text-align: center;
+}
+#openBtn1{
+    height: 35px;width:35px;margin-left: 4px;margin-top: 100px;
+}
+
+
+
+.sidenav {
+    height: 70%;
+    width: 210px;
+    border-radius: 20px;
+    position: fixed;
+    z-index: 1;
+    top: 0;
+    right: -250px;
+    background-color: #171717;
+    padding-top: 60px;
+    transition: right 0.5s ease;
+}
+
+.sidenav ul {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+}
+
+/* Sidenav menu links */
+.sidenav a {
+    padding: 8px 8px 8px 32px;
+    text-decoration: none;
+    font-size: 25px;
+    color: #000000;
+    display: block;
+    transition: 0.3s;
+}
+
+.sidenav a:hover {
+    color: #ffffff;
+}
+
+/* Active class */
+.sidenav.active {
+    right: 0;
+}
+
+/* Close btn */
+.sidenav .close {
+    position: absolute;
+    top: 0;
+    right: 25px;
+    font-size: 36px;
+}
+
+.burger-icon span {
+    display: block;
+    width: 35px;
+    height: 5px;
+    background-color: rgb(255, 255, 255);
+    margin: 6px 0;
 }
