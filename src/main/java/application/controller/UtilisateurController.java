@@ -20,7 +20,7 @@ public class UtilisateurController {
 
     @GetMapping("")
     public String index() {
-        return "/encheres";
+        return "encheres";
     }
 
 
