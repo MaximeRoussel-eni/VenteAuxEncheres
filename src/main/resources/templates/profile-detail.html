@@ -80,6 +80,10 @@
 
             <!-- Lien pour retourner à l'accueil -->
             <a th:href="@{/encheres}" class="btn btn-primary">Retour à l'accueil</a>
+            <form th:action="@{/encheres/profilUtilisateur/supprimer}" th:method="post">
+                <input type="hidden" name="id" th:value="${utilisateur.getNoUtilisateur()}" />
+                <button type="submit" class="alert-danger">Supprimer</button>
+            </form>
         </div>
     </div>
 </div>

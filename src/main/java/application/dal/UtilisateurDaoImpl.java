@@ -27,7 +27,7 @@ public class UtilisateurDaoImpl implements UtilisateurDao {
     private final String UPDATE_UTILISATEUR = "UPDATE UTILISATEURS SET pseudo = :pseudo, nom = :nom, prenom = :prenom, email= :email, " +
             "telephone=:telephone, rue=:rue, code_postal=:code_postal, ville=:ville, motDePasse= :motDePasse WHERE no_utilisateur = :no_utilisateur";
 
-    private final String DELETE_UTILISATEUR = "DELETE FROM UTILISATEURS WHERE pseudo = :pseudo";
+    private final String DELETE_UTILISATEUR = "UPDATE UTILISATEURS SET enabled = 0 WHERE no_utilisateur = :noUtilisateur";
 
     private final String READ_UTILISATEUR_BY_NOUTILISATEUR = "SELECT * FROM UTILISATEURS WHERE no_utilisateur = :no_utilisateur";
 
@@ -73,13 +73,17 @@ public class UtilisateurDaoImpl implements UtilisateurDao {
 
     @Override
     public void delete(int noUtilisateur) {
+        MapSqlParameterSource namedParameters = new MapSqlParameterSource();
+        namedParameters.addValue("no_utilisateur", noUtilisateur);
+
         jdbcTemplate.update(DELETE_UTILISATEUR, noUtilisateur);
 
     }
 
     @Override
     public void deleteByPseudo(Utilisateur utilisateur) {
-        jdbcTemplate.update(DELETE_UTILISATEUR, utilisateur.getPseudo());
+
+        jdbcTemplate.update(DELETE_UTILISATEUR, utilisateur.getNoUtilisateur());
     }
 
     @Override

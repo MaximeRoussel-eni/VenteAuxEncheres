@@ -7,6 +7,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import application.service.UtilisateurService;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 @Controller
 @RequestMapping("/encheres")
@@ -18,10 +19,6 @@ public class UtilisateurController {
 
     public UtilisateurController(UtilisateurService utilisateurService) {this.utilisateurService = utilisateurService;}
 
-    @GetMapping("")
-    public String index() {
-        return "encheres";
-    }
 
 
     @ModelAttribute("utilisateurEnSession")
@@ -71,5 +68,11 @@ public class UtilisateurController {
 
         System.out.println(utilisateur);
         return "auctions";
+    }
+
+    @PostMapping("/profilUtilisateur/supprimer")
+    public String supprimerUtilisateur(@SessionAttribute ("utilisateurEnSession") Utilisateur utilisateur) {
+        utilisateurService.deleteUtilisateur(utilisateur.getNoUtilisateur());
+        return "redirect:/encheres";
     }
 }
