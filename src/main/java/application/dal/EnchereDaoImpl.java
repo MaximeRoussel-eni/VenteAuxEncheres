@@ -31,7 +31,7 @@ public class EnchereDaoImpl implements EnchereDao {
 
 
     @Override
-    public void createEnchere(Enchere enchere) {
+    public void create(Enchere enchere) {
         MapSqlParameterSource namedParameters = new MapSqlParameterSource();
         namedParameters.addValue("no_utilisateur", enchere.getUtilisateur().getNoUtilisateur());
         namedParameters.addValue("no_article", enchere.getArticleVendu().getNoArticle());
