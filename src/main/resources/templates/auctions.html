@@ -35,8 +35,8 @@
 
         <!-- Liste des articles -->
         <div class="row">
-            <div class="col-md-6 mb-4" th:each="article : ${articleVenduList}">
-                <a th:href="@{/encheres/detail(noArticleVendu=${article.getNoArticle()})}">
+            <div  class="col-md-6 mb-4" th:each="article : ${articleVenduList}">
+                <a style="text-decoration: none;" th:href="@{/encheres/detail(noArticleVendu=${article.getNoArticle()})}">
                 <div  class="card h-100 shadow-sm">
                     <div class="card-body">
                         <h2 class="card-title" th:text="${article.nomArticle}">Titre de l'article</h2>

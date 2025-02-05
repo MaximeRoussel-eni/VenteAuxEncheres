@@ -18,6 +18,12 @@ public class UtilisateurController {
 
     public UtilisateurController(UtilisateurService utilisateurService) {this.utilisateurService = utilisateurService;}
 
+    @GetMapping("")
+    public String index() {
+        return "/encheres";
+    }
+
+
     @ModelAttribute("utilisateurEnSession")
     public Utilisateur getUtilisateurEnSession() {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();

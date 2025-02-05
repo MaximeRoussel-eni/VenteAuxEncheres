@@ -1,87 +1,155 @@
+<!DOCTYPE html>
 <html data-th-replace="~{fragments/layout::layout(title=~{::title}, main=~{::main})}">
 
-<title>Detail de l'enchère</title>
+<head>
+    <title>Detail de l'enchère</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome pour les icônes -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
+</head>
+
+<body>
+<button class="theme-toggle">
+    <i class="fas fa-moon"></i> <!-- Icône de lune pour le thème sombre -->
+</button>
 
 <main>
-    <div class="detailenchere">
-        <section>Image</section>
-        <section>
-            <h1>Detail Vente</h1>
-        </section>
-    </div>
+    <div class="container mt-5">
+        <h1>Détail de l'enchère</h1>
+        <div class="card">
+            <div class="card-body">
+                <!-- Section Image -->
+                <section class="mb-4">
+                    <h5 class="card-title">Image</h5>
+                    <img src="https://via.placeholder.com/300" alt="Image de l'article" class="img-fluid">
+                </section>
 
-    <!-- Formulaire ssi l'utilisateur connecté n'est pas lié à l'article (lecture seule) -->
-    <div data-th-if="${utilisateurEnSession.noUtilisateur!=articleVendu.utilisateurVendeur.noUtilisateur}">
-        <form method="post" class="formulaireVente">
-
-            <!-- Infos base article -->
-            <p>Article <input type="text" data-th-value="${articleVendu.nomArticle}"  readonly></p>
-            <p>Description <input type="text" data-th-value="${articleVendu.description}" readonly></p>
-
-            <!-- Catégorie -->
-            <p>Catégorie <input type="text" data-th-value="${articleVendu.categorie.getLibelle()}" readonly></p>
-
-            <!-- Infos complémentaires article -->
-            <p data-th-if="${maxEnchere!=null}">Meilleure offre actuelle <input type="text" data-th-value="${articleVendu.prixVente} + ' par ' + ${maxEnchere.getUtilisateur().getPseudo()}" readonly></p>
-            <p>Mise à prix <input type="text" data-th-value="${articleVendu.prixInitial}" readonly></p>
-            <p>Début de l'enchère <input type="text" data-th-value="${articleVendu.dateDebutEncheres}" readonly></p>
-            <p>Fin de l'enchère <input type="text" data-th-value="${articleVendu.dateFinEncheres}" readonly></p>
-
-            <!-- Infos de retrait -->
-            <p>Lieu de retrait  <input type="text" data-th-value="${articleVendu.retrait.rue} + ' ' + ${articleVendu.retrait.codePostal} + ' ' + ${articleVendu.retrait.ville}" readonly></p>
-
-            <!-- Prix de l'article -->
-            <p>Prix initial <input type="text" data-th-value="${articleVendu.prixInitial} + ' crédits'" readonly></p>
-
-            <p>Etat de la vente :<input type="text" data-th-value="${articleVendu.etatVente}" readonly></p>
-        </form>
-
-        <!--Formulaire de création d'offre ssi l'utilisateur connecté n'est pas lié à l'article && etatVente == EN_COURS -->
-        <form method="post" th:if="${articleVendu.etatVente.name() == 'EN_COURS' and utilisateurEnSession.noUtilisateur!=articleVendu.utilisateurVendeur.noUtilisateur}" th:action="@{/encheres/detail/offre(noArticleVendu=${articleVendu.noArticle})}" th:object="${enchere}">
-            <h3>Faire une offre :</h3>
-            <p>Votre prix : <input type="number" data-th-min="${articleVendu.prixVente}" data-th-field="*{montantEnchere}"></p>
-            <button type="submit">Enchérir</button>
-        </form>
-
-        <!-- Lien vers les détails de l'utilisateur vendeur -->
-        <p>Vendeur <a th:text="${articleVendu.utilisateurVendeur.pseudo}" th:href="@{/encheres/profilUtilisateur(noUtilisateur=${articleVendu.utilisateurVendeur.noUtilisateur})}"></a> </p>
-    </div>
-
-    <!-- ////////////////////////////////////////////////////////////////////////// -->
-    <!-- Formulaire modifiable ssi l'utilisateur connecté est l'utilisateur vendeur -->
-
-    <div data-th-if="${utilisateurEnSession.noUtilisateur==articleVendu.utilisateurVendeur.noUtilisateur}">
-        <form method="post" data-th-object="${articleVendu}" data-th-action="@{/encheres/detail/modifier(noArticleVendu=${articleVendu.noArticle})}">
-
-            <!-- Infos base article -->
-            <p>Article <input type="text" data-th-field="*{nomArticle}"></p>
-            <p>Description <input type="text" data-th-field="*{description}"></p>
-
-
-            <!-- Catégorie -->
-            <p>Catégorie <select name="noCategorie">
-                <option  data-th-each="c : ${listeCategories}" data-th-text="${c.libelle}" data-th-value="${c.noCategorie}" data-th-selected="${articleVendu.categorie.noCategorie==c.noCategorie}"></option>
-            </select></p>
-
-            <!-- Infos complémentaires article -->
-            <p data-th-if="${maxEnchere!=null}">Meilleure offre actuelle <input type="text" data-th-value="${articleVendu.prixVente} + ' par ' + ${maxEnchere.getUtilisateur().getPseudo()}" readonly></p>
-            <p>Mise à prix <input type="text" data-th-field="*{prixInitial}"></p>
-            <p>Début de l'enchère <input type="text" data-th-field="*{dateDebutEncheres}"></p>
-            <p>Fin de l'enchère <input type="text" data-th-field="*{dateFinEncheres}"></p>
-
-            <!-- Infos de retrait -->
-            <div data-th-object="${retrait}">Lieu de retrait
-                <p hidden>noArticleVendu <input type="text" data-th-field="*{noRetrait}"></p>
-                <p>Rue<input data-th-field="*{rue}" type="text"></p>
-                <p>Code Postal<input data-th-field="*{codePostal}" type="text" maxlength="5" ></p>
-                <p>Ville<input data-th-field="*{ville}" type="text"></p>
+                <!-- Section Détails de la vente -->
+                <section>
+                    <h5 class="card-title">Détails de la vente</h5>
+                    <form method="post" class="formulaireVente">
+                        <!-- Infos base article -->
+                        <div class="form-group">
+                            <label>Article :</label>
+                            <input type="text" class="form-control" data-th-value="${articleVendu.nomArticle}" readonly>
+                        </div>
+                        <div class="form-group">
+                            <label>Description :</label>
+                            <input type="text" class="form-control" data-th-value="${articleVendu.description}" readonly>
+                        </div>
+                        <div class="form-group">
+                            <label>Catégorie :</label>
+                            <input type="text" class="form-control" data-th-value="${articleVendu.categorie.getLibelle()}" readonly>
+                        </div>
+                        <div class="form-group">
+                            <label>Meilleure offre actuelle :</label>
+                            <input type="text" class="form-control" data-th-value="${articleVendu.prixVente}" readonly>
+                        </div>
+                        <div class="form-group">
+                            <label>Mise à prix :</label>
+                            <input type="text" class="form-control" data-th-value="${articleVendu.prixInitial}" readonly>
+                        </div>
+                        <div class="form-group">
+                            <label>Début de l'enchère :</label>
+                            <input type="text" class="form-control" data-th-value="${articleVendu.dateDebutEncheres}" readonly>
+                        </div>
+                        <div class="form-group">
+                            <label>Fin de l'enchère :</label>
+                            <input type="text" class="form-control" data-th-value="${articleVendu.dateFinEncheres}" readonly>
+                        </div>
+                        <div class="form-group">
+                            <label>Lieu de retrait :</label>
+                            <input type="text" class="form-control" data-th-value="${articleVendu.retrait.rue} + ' ' + ${articleVendu.retrait.codePostal} + ' ' + ${articleVendu.retrait.ville}" readonly>
+                        </div>
+                        <div class="form-group">
+                            <label>Prix initial :</label>
+                            <input type="text" class="form-control" data-th-value="${articleVendu.prixInitial} + ' crédits'" readonly>
+                        </div>
+                        <div class="form-group">
+                            <label>Offre la plus élevée :</label>
+                            <input type="text" class="form-control" data-th-value="${articleVendu.prixVente} + ' crédits'" readonly>
+                        </div>
+                        <div class="form-group">
+                            <label>État de la vente :</label>
+                            <input type="text" class="form-control" data-th-value="${articleVendu.etatVente}" readonly>
+                        </div>
+                    </form>
+                </section>
             </div>
+        </div>
 
-            <!-- Bouton de validation -->
-            <button type = "submit">Modifier</button>
-        </form>
+        <!-- Formulaire d'offre pour les utilisateurs non vendeurs -->
+        <div data-th-if="${utilisateurEnSession.noUtilisateur!=articleVendu.utilisateurVendeur.noUtilisateur}" class="mt-4">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">Faire une offre</h5>
+                    <form method="post" th:if="${articleVendu.etatVente.EN_COURS}" th:action="@{/encheres/detail/offre(noArticleVendu=${articleVendu.noArticle})}" th:object="${enchere}">
+                        <div class="form-group">
+                            <label for="montantEnchere">Votre prix :</label>
+                            <input type="number" class="form-control" data-th-min="${articleVendu.prixVente}" data-th-field="*{montantEnchere}" id="montantEnchere">
+                        </div>
+                        <button type="submit" class="btn btn-primary">Enchérir</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <!-- Formulaire modifiable pour le vendeur -->
+        <div data-th-if="${utilisateurEnSession.noUtilisateur==articleVendu.utilisateurVendeur.noUtilisateur}" class="mt-4">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">Modifier l'article</h5>
+                    <form method="post" data-th-object="${articleVendu}" data-th-action="@{/encheres/detail/modifier(noArticleVendu=${articleVendu.noArticle})}">
+                        <div class="form-group">
+                            <label for="nomArticle">Article :</label>
+                            <input type="text" class="form-control" data-th-field="*{nomArticle}" id="nomArticle">
+                        </div>
+                        <div class="form-group">
+                            <label for="description">Description :</label>
+                            <input type="text" class="form-control" data-th-field="*{description}" id="description">
+                        </div>
+                        <div class="form-group">
+                            <label for="noCategorie">Catégorie :</label>
+                            <select class="form-control" name="noCategorie" id="noCategorie">
+                                <option data-th-each="c : ${listeCategories}" data-th-text="${c.libelle}" data-th-value="${c.noCategorie}" data-th-selected="${articleVendu.categorie.noCategorie==c.noCategorie}"></option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="prixInitial">Mise à prix :</label>
+                            <input type="text" class="form-control" data-th-field="*{prixInitial}" id="prixInitial">
+                        </div>
+                        <div class="form-group">
+                            <label for="dateDebutEncheres">Début de l'enchère :</label>
+                            <input type="text" class="form-control" data-th-field="*{dateDebutEncheres}" id="dateDebutEncheres">
+                        </div>
+                        <div class="form-group">
+                            <label for="dateFinEncheres">Fin de l'enchère :</label>
+                            <input type="text" class="form-control" data-th-field="*{dateFinEncheres}" id="dateFinEncheres">
+                        </div>
+                        <div class="form-group">
+                            <label>Lieu de retrait :</label>
+                            <input type="text" class="form-control" data-th-field="*{retrait.rue}" placeholder="Rue">
+                            <input type="text" class="form-control mt-2" data-th-field="*{retrait.codePostal}" placeholder="Code Postal" maxlength="5">
+                            <input type="text" class="form-control mt-2" data-th-field="*{retrait.ville}" placeholder="Ville">
+                        </div>
+                        <button type="submit" class="btn btn-primary">Modifier</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <!-- Lien vers le profil du vendeur -->
+        <div class="mt-4">
+            <p><strong>Vendeur :</strong> <a th:text="${articleVendu.utilisateurVendeur.pseudo}" th:href="@{/encheres/profilUtilisateur(noUtilisateur=${articleVendu.utilisateurVendeur.noUtilisateur})}" class="btn btn-link"></a></p>
+        </div>
     </div>
-
 </main>
+
+<!-- Bootstrap JS and dependencies -->
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
 
 </html>
