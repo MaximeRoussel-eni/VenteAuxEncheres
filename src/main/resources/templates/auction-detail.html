@@ -22,7 +22,7 @@
             <p>Catégorie <input type="text" data-th-value="${articleVendu.categorie.getLibelle()}" readonly></p>
 
             <!-- Infos complémentaires article -->
-            <p>Meilleure offre actuelle <input type="text" data-th-value="${articleVendu.prixVente} + ' par ' + ${maxEnchere.getUtilisateur().getPseudo()}" readonly></p>
+            <p data-th-if="${maxEnchere!=null}">Meilleure offre actuelle <input type="text" data-th-value="${articleVendu.prixVente} + ' par ' + ${maxEnchere.getUtilisateur().getPseudo()}" readonly></p>
             <p>Mise à prix <input type="text" data-th-value="${articleVendu.prixInitial}" readonly></p>
             <p>Début de l'enchère <input type="text" data-th-value="${articleVendu.dateDebutEncheres}" readonly></p>
             <p>Fin de l'enchère <input type="text" data-th-value="${articleVendu.dateFinEncheres}" readonly></p>
@@ -32,7 +32,6 @@
 
             <!-- Prix de l'article -->
             <p>Prix initial <input type="text" data-th-value="${articleVendu.prixInitial} + ' crédits'" readonly></p>
-            <p>Offre la plus élevée <input type="text" data-th-value="${articleVendu.prixVente} + ' crédits'" readonly></p>
 
             <p>Etat de la vente :<input type="text" data-th-value="${articleVendu.etatVente}" readonly></p>
         </form>
@@ -65,6 +64,7 @@
             </select></p>
 
             <!-- Infos complémentaires article -->
+            <p data-th-if="${maxEnchere!=null}">Meilleure offre actuelle <input type="text" data-th-value="${articleVendu.prixVente} + ' par ' + ${maxEnchere.getUtilisateur().getPseudo()}" readonly></p>
             <p>Mise à prix <input type="text" data-th-field="*{prixInitial}"></p>
             <p>Début de l'enchère <input type="text" data-th-field="*{dateDebutEncheres}"></p>
             <p>Fin de l'enchère <input type="text" data-th-field="*{dateFinEncheres}"></p>
