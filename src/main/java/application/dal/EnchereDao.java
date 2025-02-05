@@ -15,6 +15,8 @@ public interface EnchereDao {
 
     Enchere read(int noUtilisateur, int noArticle);
 
+    Enchere readMaxByArticle(int noArticle);
+
     List<Enchere> readAllByUtilisateur(int noUtilisateur);
 
     List<Enchere> readAllByArticleVendu(int noArticleVendu);

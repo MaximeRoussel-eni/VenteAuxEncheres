@@ -11,6 +11,8 @@ public interface EnchereService {
 
     void removeEnchere(int noUtilisateur, int noArticle);
 
+    Enchere getMaxEnchereByArticleVendu(int noArticle);
+
     Enchere getEnchere(int noUtilisateur, int noArticle);
 
     List<Enchere> getAllByUtilisateur(int noUtilisateur);
