@@ -10,6 +10,7 @@ import application.service.UtilisateurService;
 
 @Controller
 @RequestMapping("/encheres")
+@SessionAttributes("utilisateurEnSession")
 public class UtilisateurController {
 
 
@@ -32,6 +33,7 @@ public class UtilisateurController {
     public String afficherProfilUtilisateur(Model model, @RequestParam(name = "noUtilisateur") int noUtilisateur) {
         Utilisateur utilisateur = utilisateurService.getUtilisateur(noUtilisateur);
         model.addAttribute("utilisateur", utilisateur);
+
         return "profile-detail";
     }
 

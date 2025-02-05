@@ -26,6 +26,7 @@
                 <!-- Formulaire pour "Se déconnecter" -->
                 <li class="mx-2" data-th-if="${#authorization.expression('isAuthenticated()')}">
                     <form th:action="@{/encheres/logout}" method="post" class="d-inline">
+                        <a class="member-name-link" th:href="@{/encheres/profilUtilisateur(noUtilisateur=${utilisateurEnSession.noUtilisateur})} " data-th-text="'Bonjour '+ ${#authentication.getName()}"></a>
                         <button type="submit" class="btn btn-light">Se déconnecter</button>
                     </form>
                 </li>
