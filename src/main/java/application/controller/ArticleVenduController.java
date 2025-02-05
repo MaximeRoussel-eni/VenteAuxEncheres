@@ -99,10 +99,12 @@ public class ArticleVenduController {
     public String detailArticleVendu(Model model, @RequestParam(name = "noArticleVendu") int noArticleVendu) {
         ArticleVendu articleVendu = articleVenduService.getArticleVendu(noArticleVendu);
         List<Categorie> listCategories = categorieService.getAllCategories();
+        Enchere maxEnchere = enchereService.getMaxEnchereByArticleVendu(noArticleVendu);
         model.addAttribute("articleVendu", articleVendu);
         model.addAttribute("retrait", articleVendu.getRetrait());
         model.addAttribute("listeCategories", listCategories);
         model.addAttribute("enchere", new Enchere());
+        model.addAttribute("maxEnchere", maxEnchere);
         return "auction-detail";
     }
 

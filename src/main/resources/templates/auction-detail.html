@@ -22,7 +22,7 @@
             <p>Catégorie <input type="text" data-th-value="${articleVendu.categorie.getLibelle()}" readonly></p>
 
             <!-- Infos complémentaires article -->
-            <p>Meilleure offre actuelle <input type="text" data-th-value="${articleVendu.prixVente}" readonly></p>
+            <p>Meilleure offre actuelle <input type="text" data-th-value="${articleVendu.prixVente} + ' par ' + ${maxEnchere.getUtilisateur().getPseudo()}" readonly></p>
             <p>Mise à prix <input type="text" data-th-value="${articleVendu.prixInitial}" readonly></p>
             <p>Début de l'enchère <input type="text" data-th-value="${articleVendu.dateDebutEncheres}" readonly></p>
             <p>Fin de l'enchère <input type="text" data-th-value="${articleVendu.dateFinEncheres}" readonly></p>
@@ -38,7 +38,7 @@
         </form>
 
         <!--Formulaire de création d'offre ssi l'utilisateur connecté n'est pas lié à l'article && etatVente == EN_COURS -->
-        <form method="post" th:if="${articleVendu.etatVente.EN_COURS}" th:action="@{/encheres/detail/offre(noArticleVendu=${articleVendu.noArticle})}" th:object="${enchere}">
+        <form method="post" th:if="${articleVendu.etatVente.name() == 'EN_COURS' and utilisateurEnSession.noUtilisateur!=articleVendu.utilisateurVendeur.noUtilisateur}" th:action="@{/encheres/detail/offre(noArticleVendu=${articleVendu.noArticle})}" th:object="${enchere}">
             <h3>Faire une offre :</h3>
             <p>Votre prix : <input type="number" data-th-min="${articleVendu.prixVente}" data-th-field="*{montantEnchere}"></p>
             <button type="submit">Enchérir</button>
@@ -81,6 +81,7 @@
             <button type = "submit">Modifier</button>
         </form>
     </div>
+
 </main>
 
 </html>

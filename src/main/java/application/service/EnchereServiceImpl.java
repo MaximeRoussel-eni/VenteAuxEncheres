@@ -20,6 +20,10 @@ public class EnchereServiceImpl implements EnchereService {
 
     @Override
     public void addEnchere(Enchere enchere) {
+
+
+
+
         if (enchereDao.read(enchere.getUtilisateur().getNoUtilisateur(),enchere.getArticleVendu().getNoArticle())!=null){
             enchereDao.update(enchere);
         }
@@ -40,6 +44,11 @@ public class EnchereServiceImpl implements EnchereService {
     @Override
     public void removeEnchere(int noUtilisateur, int noArticle) {
         enchereDao.delete(noUtilisateur, noArticle);
+    }
+
+    @Override
+    public Enchere getMaxEnchereByArticleVendu(int noArticle) {
+        return enchereDao.readMaxByArticle(noArticle);
     }
 
     @Override
