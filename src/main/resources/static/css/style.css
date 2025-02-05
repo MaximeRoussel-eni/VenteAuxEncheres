@@ -84,3 +84,9 @@ footer a {
 footer a:hover {
     color: #2980b9;
 }
+.member-name-link{
+ 
+    margin-right: 20px;
+    text-decoration: none;
+    color: white;
+}

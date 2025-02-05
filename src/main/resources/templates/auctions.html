@@ -36,13 +36,15 @@
         <!-- Liste des articles -->
         <div class="row">
             <div class="col-md-6 mb-4" th:each="article : ${articleVenduList}">
-                <div class="card h-100 shadow-sm">
+                <a th:href="@{/encheres/detail(noArticleVendu=${article.getNoArticle()})}">
+                <div  class="card h-100 shadow-sm">
                     <div class="card-body">
                         <h2 class="card-title" th:text="${article.nomArticle}">Titre de l'article</h2>
                         <p class="card-text" th:text="${article.description}">Description de l'article</p>
                         <p class="text-muted">Prix du produit : <span th:text="${article.prixInitial}">Prix</span></p>
                     </div>
                 </div>
+                </a>
             </div>
         </div>
     </div>
