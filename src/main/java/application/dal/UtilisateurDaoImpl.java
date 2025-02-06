@@ -74,9 +74,8 @@ public class UtilisateurDaoImpl implements UtilisateurDao {
     @Override
     public void delete(int noUtilisateur) {
         MapSqlParameterSource namedParameters = new MapSqlParameterSource();
-        namedParameters.addValue("no_utilisateur", noUtilisateur);
-
-        jdbcTemplate.update(DELETE_UTILISATEUR, noUtilisateur);
+        namedParameters.addValue("noUtilisateur", noUtilisateur);
+        namedParameterJdbcTemplate.update(DELETE_UTILISATEUR, namedParameters);
 
     }
 

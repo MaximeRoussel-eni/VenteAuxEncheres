@@ -73,6 +73,6 @@ public class UtilisateurController {
     @PostMapping("/profilUtilisateur/supprimer")
     public String supprimerUtilisateur(@SessionAttribute ("utilisateurEnSession") Utilisateur utilisateur) {
         utilisateurService.deleteUtilisateur(utilisateur.getNoUtilisateur());
-        return "redirect:/encheres";
+        return "redirect:/encheres/logout";
     }
 }
